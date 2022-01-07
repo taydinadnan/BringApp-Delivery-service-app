@@ -3,7 +3,7 @@ import 'package:sellers_food_app/authentication/login.dart';
 import 'package:sellers_food_app/authentication/register.dart';
 
 class AuthScreen extends StatefulWidget {
-  AuthScreen({Key? key}) : super(key: key);
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
   _AuthScreenState createState() => _AuthScreenState();

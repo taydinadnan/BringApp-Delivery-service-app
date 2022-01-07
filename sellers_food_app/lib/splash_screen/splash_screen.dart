@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 8),
       () async {
         Navigator.push(
-            context, MaterialPageRoute(builder: (c) => AuthScreen()));
+            context, MaterialPageRoute(builder: (c) => const AuthScreen()));
       },
     );
   }
