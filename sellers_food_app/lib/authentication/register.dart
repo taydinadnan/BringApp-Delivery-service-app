@@ -11,6 +11,7 @@ import 'package:sellers_food_app/widgets/custom_text_field.dart';
 import 'package:sellers_food_app/widgets/error_dialog.dart';
 import 'package:sellers_food_app/widgets/loading_dialog.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -180,7 +181,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
     )
         .then((auth) {
       currentUser = auth.user;
-    });
+    }).catchError(
+      (error) {
+        Navigator.pop(context);
+        showDialog(
+          context: context,
+          builder: (c) {
+            return ErrorDialog(
+              message: error.message.toString(),
+            );
+          },
+        );
+      },
+    );
 
     if (currentUser != null) {
       saveDataToFirestore(currentUser!).then((value) {
@@ -210,6 +223,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
 
     // save data locally (to access data easly from phone storage)
+    SharedPreferences? sharedPreferences =
+        await SharedPreferences.getInstance();
+    await sharedPreferences.setString("uid", currentUser.uid);
+    await sharedPreferences.setString("email", currentUser.email.toString());
+    await sharedPreferences.setString("name", nameController.text.trim());
+    await sharedPreferences.setString("photoUrl", sellerImageUrl);
   }
 
   @override
