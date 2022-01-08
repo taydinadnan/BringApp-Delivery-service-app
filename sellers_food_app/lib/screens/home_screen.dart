@@ -3,13 +3,15 @@ import 'package:sellers_food_app/authentication/auth_screen.dart';
 import 'package:sellers_food_app/global/global.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController _controller = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (c) => AuthScreen(),
                 ),
               );
+              _controller.clear();
             });
           },
           child: const Text("Logout"),

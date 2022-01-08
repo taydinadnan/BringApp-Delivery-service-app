@@ -85,7 +85,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         '${pMark.thoroughfare}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea}, ${pMark.country}';
 
     locationController.text = completeAddress;
-    print(completeAddress);
   }
 
 //function for getting image
