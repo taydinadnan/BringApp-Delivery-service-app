@@ -1,11 +1,16 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sellers_food_app/screens/home_screen.dart';
 import 'package:sellers_food_app/widgets/custom_text_field.dart';
+import 'package:sellers_food_app/widgets/error_dialog.dart';
+import 'package:sellers_food_app/widgets/loading_dialog.dart';
+import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -30,6 +35,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 //location
   Position? position;
   List<Placemark>? placeMarks;
+
+//address name variable
+  String completeAddress = "";
+
+//seller image url
+  String sellerImageUrl = "";
 
 //function for getting current location
   Future<Position?> getCurrenLocation() async {
@@ -67,7 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     Placemark pMark = placeMarks![0];
 
-    String completeAddress =
+    completeAddress =
         '${pMark.thoroughfare}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea}, ${pMark.country}';
 
     locationController.text = completeAddress;
@@ -81,6 +92,124 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() {
       imageXFile;
     });
+  }
+
+//Form Validation
+  Future<void> signUpFormValidation() async {
+    //checking if user selected image
+    if (imageXFile == null) {
+      setState(
+        () {
+          // imageXFile == "images/bg.png";
+          showDialog(
+            context: context,
+            builder: (c) {
+              return ErrorDialog(
+                message: "Please select an image",
+              );
+            },
+          );
+        },
+      );
+    } else {
+      if (passwordController.text == confirmpasswordController.text) {
+        //nested if (cheking if controllers empty or not)
+        if (confirmpasswordController.text.isNotEmpty &&
+            emailController.text.isNotEmpty &&
+            nameController.text.isNotEmpty &&
+            phoneController.text.isNotEmpty &&
+            locationController.text.isNotEmpty) {
+          //start uploading image
+          showDialog(
+            context: context,
+            builder: (c) {
+              return LoadingDialog(
+                message: "Registering Account",
+              );
+            },
+          );
+
+          String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+          fStorage.Reference reference = fStorage.FirebaseStorage.instance
+              .ref()
+              .child("sellers")
+              .child(fileName);
+          fStorage.UploadTask uploadTask =
+              reference.putFile(File(imageXFile!.path));
+          fStorage.TaskSnapshot taskSnapshot =
+              await uploadTask.whenComplete(() {});
+          await taskSnapshot.ref.getDownloadURL().then((url) {
+            sellerImageUrl = url;
+
+            // save info to firestore
+            AuthenticateSellerAndSignUp();
+          });
+        }
+        //if there is empty place show this message
+        else {
+          showDialog(
+            context: context,
+            builder: (c) {
+              return ErrorDialog(
+                message: "Please fill the required info for Registration. ",
+              );
+            },
+          );
+        }
+      } else {
+        //show an error if passwords do not match
+        showDialog(
+          context: context,
+          builder: (c) {
+            return ErrorDialog(
+              message: "Password do not match",
+            );
+          },
+        );
+      }
+    }
+  }
+
+  void AuthenticateSellerAndSignUp() async {
+    User? currentUser;
+    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+    await firebaseAuth
+        .createUserWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    )
+        .then((auth) {
+      currentUser = auth.user;
+    });
+
+    if (currentUser != null) {
+      saveDataToFirestore(currentUser!).then((value) {
+        Navigator.pop(context);
+        //send user to Home Screen
+        Route newRoute = MaterialPageRoute(builder: (c) => HomeScreen());
+        Navigator.pushReplacement(context, newRoute);
+      });
+    }
+  }
+
+//saving seller information to firestore
+  Future saveDataToFirestore(User currentUser) async {
+    FirebaseFirestore.instance.collection("sellers").doc(currentUser.uid).set(
+      {
+        "sellerUID": currentUser.uid,
+        "sellerEmail": currentUser.email,
+        "sellerName": nameController.text.trim(),
+        "sellerAvatarUrl": sellerImageUrl,
+        "phone": phoneController.text.trim(),
+        "address": completeAddress,
+        "status": "approved",
+        "earnings": 0.0,
+        "lat": position!.latitude,
+        "lng": position!.longitude,
+      },
+    );
+
+    // save data locally (to access data easly from phone storage)
   }
 
   @override
@@ -198,7 +327,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                signUpFormValidation();
+              },
               child: const Text(
                 'Sign Up',
                 style: TextStyle(
