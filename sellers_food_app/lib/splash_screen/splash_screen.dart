@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:sellers_food_app/authentication/auth_screen.dart';
+import 'package:sellers_food_app/global/global.dart';
+import 'package:sellers_food_app/screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -13,10 +15,22 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   startTimer() {
     Timer(
-      const Duration(seconds: 8),
+      const Duration(seconds: 4),
       () async {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (c) => const AuthScreen()));
+        //if the user is already authenticate send user to home screen
+        if (firebaseAuth.currentUser != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (c) => HomeScreen(),
+            ),
+          );
+        }
+        //if not send to auth screen
+        else {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (c) => const AuthScreen()));
+        }
       },
     );
   }
