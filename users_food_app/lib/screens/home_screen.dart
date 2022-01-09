@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:users_food_app/widgets/my_drawer.dart';
 
-import '../authentication/auth_screen.dart';
 import '../global/global.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,8 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _controller = new TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,22 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: true,
       ),
       drawer: MyDrawer(),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            firebaseAuth.signOut().then((value) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (c) => AuthScreen(),
-                ),
-              );
-              _controller.clear();
-            });
-          },
-          child: const Text("Logout"),
-        ),
-      ),
     );
   }
 }
