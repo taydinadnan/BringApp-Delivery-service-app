@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:users_food_app/widgets/my_drawer.dart';
 
 import '../authentication/auth_screen.dart';
 import '../global/global.dart';
@@ -31,8 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: Text(sharedPreferences!.getString("name")!),
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
       ),
+      drawer: MyDrawer(),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
