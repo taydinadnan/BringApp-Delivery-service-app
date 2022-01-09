@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "38185865524",
+    "project_id": "bring-clone-app",
+    "storage_bucket": "bring-clone-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38185865524:android:87b41ffe0351caec081561",
+        "android_client_info": {
+          "package_name": "com.adnanturgay.ridersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38185865524-la2ce851g9e383kl2nmq0smhtap9p333.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUZuKYClVTabVTlg1hWpKcEXOvgAla5YM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38185865524-la2ce851g9e383kl2nmq0smhtap9p333.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "38185865524-v0aploakdohbft428j7fhpqhj2mps6j1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sellersapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38185865524:android:6d6aa9fcbf471f26081561",
+        "android_client_info": {
+          "package_name": "com.adnanturgay.sellersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38185865524-la2ce851g9e383kl2nmq0smhtap9p333.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUZuKYClVTabVTlg1hWpKcEXOvgAla5YM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38185865524-la2ce851g9e383kl2nmq0smhtap9p333.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "38185865524-v0aploakdohbft428j7fhpqhj2mps6j1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.sellersapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

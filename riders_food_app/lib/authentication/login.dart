@@ -1,0 +1,199 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:riders_food_app/authentication/auth_screen.dart';
+
+import '../global/global.dart';
+import '../screens/home_screen.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/error_dialog.dart';
+import '../widgets/loading_dialog.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+//form validation for login
+  formValidation() {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      //login
+      loginNow();
+    } else {
+      showDialog(
+        context: context,
+        builder: (c) {
+          return const ErrorDialog(
+            message: "Please enter email/password.",
+          );
+        },
+      );
+    }
+  }
+
+//login function
+  loginNow() async {
+    showDialog(
+      context: context,
+      builder: (c) {
+        return const LoadingDialog(
+          message: "Checking Credentials...",
+        );
+      },
+    );
+
+    User? currentUser;
+    await firebaseAuth
+        .signInWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    )
+        .then(
+      (auth) {
+        currentUser = auth.user!;
+      },
+    ).catchError((error) {
+      Navigator.pop(context);
+      showDialog(
+        context: context,
+        builder: (c) {
+          return ErrorDialog(
+            message: error.message.toString(),
+          );
+        },
+      );
+    });
+    if (currentUser != null) {
+      readDataAndSetDataLocally(currentUser!);
+    }
+  }
+
+//read data from firestore and save it locally
+  Future readDataAndSetDataLocally(User currentUser) async {
+    await FirebaseFirestore.instance
+        .collection("riders")
+        .doc(currentUser.uid)
+        .get()
+        .then(
+      (snapshot) async {
+        //check if the user is rider
+        if (snapshot.exists) {
+          await sharedPreferences!.setString("uid", currentUser.uid);
+          await sharedPreferences!
+              .setString("email", snapshot.data()!["riderEmail"]);
+          await sharedPreferences!
+              .setString("name", snapshot.data()!["riderName"]);
+          await sharedPreferences!
+              .setString("photoUrl", snapshot.data()!["riderAvatarUrl"]);
+
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (c) => const HomeScreen(),
+            ),
+          );
+        }
+        //if user is not a rider
+        else {
+          firebaseAuth.signOut();
+          Navigator.pop(context);
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (c) => const AuthScreen(),
+            ),
+          );
+          showDialog(
+            context: context,
+            builder: (c) {
+              return const ErrorDialog(
+                message: "No record exist.",
+              );
+            },
+          );
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Image.asset(
+                'images/signup.png',
+                height: 250,
+              ),
+            ),
+          ),
+          const Center(
+            child: Text(
+              'Riders Login',
+              style: TextStyle(
+                fontSize: 40,
+                color: Colors.orange,
+                fontFamily: "Signatra",
+              ),
+            ),
+          ),
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                CustomTextField(
+                  data: Icons.email,
+                  controller: emailController,
+                  hintText: "Email",
+                  isObsecre: false,
+                ),
+                CustomTextField(
+                  data: Icons.lock,
+                  controller: passwordController,
+                  hintText: "Password",
+                  isObsecre: true,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      formValidation();
+                    },
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.orange,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 50,
+                        vertical: 10,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
