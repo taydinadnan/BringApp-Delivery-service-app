@@ -1,8 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:users_food_app/widgets/my_drawer.dart';
+import 'package:users_food_app/widgets/progress_bar.dart';
 
 import '../global/global.dart';
+import '../models/sellers.dart';
+import '../widgets/info_design.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -70,7 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: SizedBox(
+                //taking %20 height for the device
                 height: MediaQuery.of(context).size.height * .2,
+                //taking max width for the device
                 width: MediaQuery.of(context).size.width,
                 child: CarouselSlider(
                   options: CarouselOptions(
@@ -88,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     enlargeCenterPage: true,
                     scrollDirection: Axis.horizontal,
                   ),
+                  // displayin items
                   items: items.map((index) {
                     return Builder(
                       builder: (BuildContext context) {
@@ -111,6 +119,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream:
+                FirebaseFirestore.instance.collection("sellers").snapshots(),
+            builder: (context, snapshot) {
+              return !snapshot.hasData
+                  ? SliverToBoxAdapter(
+                      child: Center(
+                        child: circularProgress(),
+                      ),
+                    )
+                  : SliverStaggeredGrid.countBuilder(
+                      crossAxisCount: 1,
+                      staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
+                      itemBuilder: (context, index) {
+                        Sellers smodel = Sellers.fromJson(
+                            snapshot.data!.docs[index].data()!
+                                as Map<String, dynamic>);
+                        return InfoDesignWidget(
+                          model: smodel,
+                          context: context,
+                        );
+                      },
+                      itemCount: snapshot.data!.docs.length,
+                    );
+            },
           )
         ],
       ),
