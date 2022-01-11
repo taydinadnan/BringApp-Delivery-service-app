@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sellers_food_app/authentication/auth_screen.dart';
 import 'package:sellers_food_app/global/global.dart';
+import 'package:sellers_food_app/widgets/my_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -30,24 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         title: Text(sharedPreferences!.getString("name")!),
         centerTitle: true,
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            firebaseAuth.signOut().then((value) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (c) => AuthScreen(),
-                ),
-              );
-              _controller.clear();
-            });
-          },
-          child: const Text("Logout"),
-        ),
-      ),
+      body: Center(),
+      drawer: MyDrawer(),
     );
   }
 }
