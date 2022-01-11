@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sellers_food_app/global/global.dart';
+import 'package:sellers_food_app/upload_screens/menus_upload_screen.dart';
 import 'package:sellers_food_app/widgets/my_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,11 +11,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _controller = new TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: MyDrawer(),
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -28,12 +28,33 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        title: Text(sharedPreferences!.getString("name")!),
+        title: Text(
+          sharedPreferences!.getString("name")!,
+          style: const TextStyle(
+            fontSize: 30,
+            color: Colors.white,
+            fontFamily: "Lobster",
+          ),
+        ),
         centerTitle: true,
         automaticallyImplyLeading: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (c) => MenusUploadScreen(),
+                ),
+              );
+            },
+            icon: const Icon(
+              Icons.post_add,
+              color: Colors.orange,
+            ),
+          )
+        ],
       ),
-      body: Center(),
-      drawer: MyDrawer(),
     );
   }
 }
