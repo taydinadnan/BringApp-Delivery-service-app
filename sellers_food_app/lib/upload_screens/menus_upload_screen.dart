@@ -11,7 +11,7 @@ import 'package:firebase_storage/firebase_storage.dart' as storageRef;
 import '../widgets/error_dialog.dart';
 
 class MenusUploadScreen extends StatefulWidget {
-  MenusUploadScreen({Key? key}) : super(key: key);
+  const MenusUploadScreen({Key? key}) : super(key: key);
 
   @override
   _MenusUploadScreenState createState() => _MenusUploadScreenState();
