@@ -9,8 +9,6 @@ import 'package:sellers_food_app/widgets/text_widget_header.dart';
 
 import '../global/global.dart';
 import '../models/menus.dart';
-import '../upload_screens/menus_upload_screen.dart';
-import '../widgets/info_design.dart';
 import '../widgets/progress_bar.dart';
 
 class ItemsScreen extends StatefulWidget {
@@ -81,6 +79,8 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 .collection("menus")
                 .doc(widget.model!.menuID)
                 .collection("items")
+                //ordering menus and items by publishing date (descending)
+                .orderBy("publishedDate", descending: true)
                 .snapshots(),
             builder: (context, snapshot) {
               return !snapshot.hasData
