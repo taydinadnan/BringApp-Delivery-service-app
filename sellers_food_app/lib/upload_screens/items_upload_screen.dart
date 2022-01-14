@@ -349,6 +349,8 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
     setState(() {
       shortInfoController.clear();
       titleController.clear();
+      priceController.clear();
+      descriptionController.clear();
       imageXFile = null;
     });
   }
@@ -356,7 +358,9 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
   validateUploadForm() async {
     if (imageXFile != null) {
       if (shortInfoController.text.isNotEmpty &&
-          titleController.text.isNotEmpty) {
+          titleController.text.isNotEmpty &&
+          descriptionController.text.isNotEmpty &&
+          priceController.text.isNotEmpty) {
         // if its true set uploading to true and start process indicator
         setState(() {
           uploading = true;
@@ -394,7 +398,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
   uploadImage(mImageFile) async {
     //we are creating seperate folder in firebase
     storageRef.Reference reference =
-        storageRef.FirebaseStorage.instance.ref().child("menus");
+        storageRef.FirebaseStorage.instance.ref().child("items");
 
     storageRef.UploadTask uploadTask =
         reference.child(uniqueIdName + ".jpg").putFile(mImageFile);
@@ -414,27 +418,55 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
         //for every unique seller
         .doc(sharedPreferences!.getString("uid"))
         //menus
-        .collection("menus");
+        .collection("menus")
+        //sub collection for items
+        .doc(widget.model!.menuID)
+        .collection("items");
 
 //information pass to firebase
     ref.doc(uniqueIdName).set(
       {
-        "menuID": uniqueIdName,
+        "itemID": uniqueIdName,
+        "menuID": widget.model!.menuID,
         "sellerUID": sharedPreferences!.getString("uid"),
-        "menuInfo": shortInfoController.text.toString(),
-        "menuTitle": titleController.text.toString(),
+        "sellerName": sharedPreferences!.getString("name"),
+        "shortInfo": shortInfoController.text.toString(),
+        "longDescription": descriptionController.text.toString(),
+        "price": int.parse(priceController.text),
+        "title": titleController.text.toString(),
         "publishedDate": DateTime.now(),
         "status": "available",
         "thumbnailUrl": downloadUrl,
       },
+    ).then((value) {
+      final itemsref = FirebaseFirestore.instance.collection("items");
+      itemsref.doc(uniqueIdName).set(
+        {
+          "itemID": uniqueIdName,
+          "menuID": widget.model!.menuID,
+          "sellerUID": sharedPreferences!.getString("uid"),
+          "sellerName": sharedPreferences!.getString("name"),
+          "shortInfo": shortInfoController.text.toString(),
+          "longDescription": descriptionController.text.toString(),
+          "price": int.parse(priceController.text),
+          "title": titleController.text.toString(),
+          "publishedDate": DateTime.now(),
+          "status": "available",
+          "thumbnailUrl": downloadUrl,
+        },
+      );
+    }).then(
+      (value) {
+        clearMenuUploadFrom();
+
+        setState(
+          () {
+            uniqueIdName = DateTime.now().millisecondsSinceEpoch.toString();
+            uploading = false;
+          },
+        );
+      },
     );
-
-    clearMenuUploadFrom();
-
-    setState(() {
-      uniqueIdName = DateTime.now().millisecondsSinceEpoch.toString();
-      uploading = false;
-    });
   }
 
   @override

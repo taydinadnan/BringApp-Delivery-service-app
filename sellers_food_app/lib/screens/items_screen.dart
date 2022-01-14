@@ -1,11 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:sellers_food_app/models/items.dart';
 import 'package:sellers_food_app/upload_screens/items_upload_screen.dart';
+import 'package:sellers_food_app/widgets/items_design.dart';
 import 'package:sellers_food_app/widgets/my_drawer.dart';
 import 'package:sellers_food_app/widgets/text_widget_header.dart';
 
 import '../global/global.dart';
 import '../models/menus.dart';
 import '../upload_screens/menus_upload_screen.dart';
+import '../widgets/info_design.dart';
+import '../widgets/progress_bar.dart';
 
 class ItemsScreen extends StatefulWidget {
   final Menus? model;
@@ -67,7 +73,37 @@ class _ItemsScreenState extends State<ItemsScreen> {
             pinned: true,
             delegate: TextWidgetHeader(
                 title: "My " + widget.model!.menuTitle.toString() + "'s Items"),
-          )
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection("sellers")
+                .doc(sharedPreferences!.getString("uid"))
+                .collection("menus")
+                .doc(widget.model!.menuID)
+                .collection("items")
+                .snapshots(),
+            builder: (context, snapshot) {
+              return !snapshot.hasData
+                  ? SliverToBoxAdapter(
+                      child: Center(
+                        child: circularProgress(),
+                      ),
+                    )
+                  : SliverStaggeredGrid.countBuilder(
+                      crossAxisCount: 1,
+                      staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
+                      itemBuilder: (context, index) {
+                        Items model = Items.fromJson(snapshot.data!.docs[index]
+                            .data()! as Map<String, dynamic>);
+                        return ItemsDesign(
+                          model: model,
+                          context: context,
+                        );
+                      },
+                      itemCount: snapshot.data!.docs.length,
+                    );
+            },
+          ),
         ],
       ),
     );
