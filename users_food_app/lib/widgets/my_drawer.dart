@@ -4,7 +4,9 @@ import 'package:users_food_app/global/global.dart';
 import '../authentication/auth_screen.dart';
 
 class MyDrawer extends StatelessWidget {
-  final TextEditingController _controller = new TextEditingController();
+  final TextEditingController _controller = TextEditingController();
+
+  MyDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +146,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (c) => AuthScreen(),
+                          builder: (c) => const AuthScreen(),
                         ),
                       );
                       _controller.clear();

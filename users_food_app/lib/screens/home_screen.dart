@@ -1,13 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:users_food_app/widgets/my_drawer.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 
-import '../global/global.dart';
 import '../models/sellers.dart';
-import '../widgets/info_design.dart';
+import '../widgets/sellers_design.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -17,6 +17,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
   final items = [
     "slider/0.jpg",
     "slider/1.jpg",
@@ -57,6 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
             gradient: LinearGradient(
               begin: FractionalOffset(0.0, 0.0),
               end: FractionalOffset(3.0, -1.0),
+              stops: [0.0, 1.0],
+              tileMode: TileMode.clamp,
               colors: [
                 Color(0xFF004B8D),
                 Color(0xFFffffff),
@@ -64,7 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        title: Text(sharedPreferences!.getString("name")!),
+        title: const Text(
+          "iFood",
+          style: TextStyle(fontSize: 45, fontFamily: "Signatra"),
+        ),
         centerTitle: true,
         automaticallyImplyLeading: true,
       ),
@@ -73,10 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10.0),
               child: SizedBox(
                 //taking %20 height for the device
-                height: MediaQuery.of(context).size.height * .2,
+                height: MediaQuery.of(context).size.height * .3,
                 //taking max width for the device
                 width: MediaQuery.of(context).size.width,
                 child: CarouselSlider(
@@ -96,26 +103,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                   ),
                   // displayin items
-                  items: items.map((index) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: const EdgeInsets.symmetric(horizontal: 1),
-                          decoration: const BoxDecoration(
-                            color: Colors.black,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4),
-                            child: Image.asset(
-                              index,
-                              fit: BoxFit.fill,
+                  items: items.map(
+                    (index) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: const EdgeInsets.symmetric(horizontal: 1),
+                            decoration: const BoxDecoration(
+                              color: Colors.black,
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Image.asset(
+                                index,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ).toList(),
                 ),
               ),
             ),
@@ -137,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Sellers smodel = Sellers.fromJson(
                             snapshot.data!.docs[index].data()!
                                 as Map<String, dynamic>);
-                        return InfoDesignWidget(
+                        return SellersDesignWidget(
                           model: smodel,
                           context: context,
                         );

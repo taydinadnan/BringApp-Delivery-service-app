@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
+// ignore: library_prefixes
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -55,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           showDialog(
             context: context,
             builder: (c) {
-              return ErrorDialog(
+              return const ErrorDialog(
                 message: "Please select an image",
               );
             },
@@ -72,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           showDialog(
             context: context,
             builder: (c) {
-              return LoadingDialog(
+              return const LoadingDialog(
                 message: "Registering Account",
               );
             },
@@ -99,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           showDialog(
             context: context,
             builder: (c) {
-              return ErrorDialog(
+              return const ErrorDialog(
                 message: "Please fill the required info for Registration. ",
               );
             },
@@ -110,7 +109,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         showDialog(
           context: context,
           builder: (c) {
-            return ErrorDialog(
+            return const ErrorDialog(
               message: "Password do not match",
             );
           },
@@ -119,6 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
   }
 
+  // ignore: non_constant_identifier_names
   void AuthenticateSellerAndSignUp() async {
     User? currentUser;
     await firebaseAuth
@@ -146,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       saveDataToFirestore(currentUser!).then((value) {
         Navigator.pop(context);
         //send user to Home Screen
-        Route newRoute = MaterialPageRoute(builder: (c) => HomeScreen());
+        Route newRoute = MaterialPageRoute(builder: (c) => const HomeScreen());
         Navigator.pushReplacement(context, newRoute);
       });
     }

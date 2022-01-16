@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:users_food_app/models/menus.dart';
+import 'package:users_food_app/screens/items_screen.dart';
 
-import '../models/sellers.dart';
-
-class InfoDesignWidget extends StatefulWidget {
-  Sellers? model;
+// ignore: must_be_immutable
+class MenusDesignWidget extends StatefulWidget {
+  Menus? model;
   BuildContext? context;
 
-  InfoDesignWidget({this.context, this.model});
+  MenusDesignWidget({Key? key, this.context, this.model}) : super(key: key);
 
   @override
-  _InfoDesignWidgetState createState() => _InfoDesignWidgetState();
+  _MenusDesignWidgetState createState() => _MenusDesignWidgetState();
 }
 
-class _InfoDesignWidgetState extends State<InfoDesignWidget> {
+class _MenusDesignWidgetState extends State<MenusDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -30,13 +31,13 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                 color: Colors.grey[300],
               ),
               Image.network(
-                widget.model!.sellerAvatarUrl!,
+                widget.model!.thumbnailUrl!,
                 height: 210,
                 fit: BoxFit.cover,
               ),
               const SizedBox(height: 1),
               Text(
-                widget.model!.sellerName!,
+                widget.model!.menuTitle!,
                 style: const TextStyle(
                   color: Colors.orange,
                   fontSize: 20,
@@ -44,7 +45,7 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                 ),
               ),
               Text(
-                widget.model!.sellerEmail!,
+                widget.model!.menuInfo!,
                 style: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
@@ -60,6 +61,14 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
           ),
         ),
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (c) => ItemsScreen(model: widget.model),
+          ),
+        );
+      },
     );
   }
 }

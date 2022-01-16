@@ -19,11 +19,11 @@ class Sellers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data["sellerUID"] = this.sellerUID;
-    data["sellerName"] = this.sellerName;
-    data["sellerAvatarUrl"] = this.sellerAvatarUrl;
-    data["sellerEmail"] = this.sellerEmail;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["sellerUID"] = sellerUID;
+    data["sellerName"] = sellerName;
+    data["sellerAvatarUrl"] = sellerAvatarUrl;
+    data["sellerEmail"] = sellerEmail;
     return data;
   }
 }
