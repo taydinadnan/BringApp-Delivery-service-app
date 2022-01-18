@@ -37,12 +37,56 @@ class _ItemsScreenState extends State<ItemsScreen> {
             ),
           ),
         ),
+        actions: [
+          Stack(
+            children: [
+              IconButton(
+                onPressed: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (c) => MenusUploadScreen(),
+                  //   ),
+                  // );
+                },
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  color: Colors.orange,
+                ),
+              ),
+              Positioned(
+                child: Stack(
+                  children: const [
+                    Icon(
+                      Icons.brightness_1,
+                      size: 20,
+                      color: Colors.green,
+                    ),
+                    Positioned(
+                      top: 3,
+                      right: 4,
+                      child: Center(
+                        child: Text(
+                          "0",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )
+        ],
         title: const Text(
-          "iFoodssss",
+          "iFood",
           style: TextStyle(
-            fontSize: 30,
+            fontSize: 50,
             color: Colors.white,
-            fontFamily: "Lobster",
+            fontFamily: "Signatra",
           ),
         ),
         centerTitle: true,
@@ -74,13 +118,16 @@ class _ItemsScreenState extends State<ItemsScreen> {
                       ),
                     )
                   : SliverStaggeredGrid.countBuilder(
-                      crossAxisCount: 1,
+                      crossAxisCount: 2,
                       staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
                       itemBuilder: (context, index) {
                         Items model = Items.fromJson(snapshot.data!.docs[index]
                             .data()! as Map<String, dynamic>);
-                        return ItemsDesignWidget(
-                          model: model,
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: ItemsDesignWidget(
+                            model: model,
+                          ),
                         );
                       },
                       itemCount: snapshot.data!.docs.length,

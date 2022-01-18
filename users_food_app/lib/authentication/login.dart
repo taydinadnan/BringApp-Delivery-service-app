@@ -165,6 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: "Password",
                   isObsecre: true,
                 ),
+                const SizedBox(height: 15),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 30),
                   child: ElevatedButton(
@@ -176,13 +177,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
+                        fontSize: 20,
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 50,
-                        vertical: 10,
+                        horizontal: 40,
+                        vertical: 20,
                       ),
                     ),
                   ),

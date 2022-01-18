@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     : SliverStaggeredGrid.countBuilder(
                         crossAxisCount: 1,
-                        staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
+                        staggeredTileBuilder: (c) => const StaggeredTile.fit(2),
                         itemBuilder: (context, index) {
                           Menus model = Menus.fromJson(
                               snapshot.data!.docs[index].data()!

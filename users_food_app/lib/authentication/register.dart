@@ -232,7 +232,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 15),
           Padding(
             padding: const EdgeInsets.only(bottom: 30),
             child: ElevatedButton(
@@ -244,13 +244,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontSize: 20,
                 ),
               ),
               style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
                 primary: Colors.orange,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 50,
-                  vertical: 10,
+                  horizontal: 40,
+                  vertical: 20,
                 ),
               ),
             ),

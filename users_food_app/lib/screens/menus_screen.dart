@@ -72,14 +72,17 @@ class _MenusScreenState extends State<MenusScreen> {
                       ),
                     )
                   : SliverStaggeredGrid.countBuilder(
-                      crossAxisCount: 1,
+                      crossAxisCount: 2,
                       staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
                       itemBuilder: (context, index) {
                         Menus model = Menus.fromJson(snapshot.data!.docs[index]
                             .data()! as Map<String, dynamic>);
-                        return MenusDesignWidget(
-                          model: model,
-                          context: context,
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: MenusDesignWidget(
+                            model: model,
+                            context: context,
+                          ),
                         );
                       },
                       itemCount: snapshot.data!.docs.length,

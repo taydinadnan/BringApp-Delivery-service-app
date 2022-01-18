@@ -15,59 +15,64 @@ class MenusDesignWidget extends StatefulWidget {
 class _MenusDesignWidgetState extends State<MenusDesignWidget> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.orange,
-      child: Padding(
-        padding: const EdgeInsets.all(1),
-        child: SizedBox(
-          height: 280,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
-              ),
-              Image.network(
-                widget.model!.thumbnailUrl!,
-                height: 210,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(height: 1),
-              Text(
-                widget.model!.menuTitle!,
-                style: const TextStyle(
-                  color: Colors.orange,
-                  fontSize: 20,
-                  fontFamily: "Acme",
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.symmetric(horizontal: 1),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 3,
+            offset: Offset(2, 2),
+          )
+        ],
+      ),
+      child: InkWell(
+        splashColor: Colors.orange,
+        child: Padding(
+          padding: const EdgeInsets.all(5),
+          child: SizedBox(
+            height: 270,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              children: [
+                Image.network(
+                  widget.model!.thumbnailUrl!,
+                  height: 210,
+                  fit: BoxFit.cover,
                 ),
-              ),
-              Text(
-                widget.model!.menuInfo!,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                  fontFamily: "Acme",
+                const SizedBox(height: 1),
+                Text(
+                  widget.model!.menuTitle!,
+                  style: const TextStyle(
+                    color: Colors.orange,
+                    fontSize: 20,
+                    fontFamily: "Acme",
+                  ),
                 ),
-              ),
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
-              )
-            ],
+                Text(
+                  widget.model!.menuInfo!,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                    fontFamily: "Acme",
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (c) => ItemsScreen(model: widget.model),
+            ),
+          );
+        },
       ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (c) => ItemsScreen(model: widget.model),
-          ),
-        );
-      },
     );
   }
 }

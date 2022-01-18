@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:users_food_app/widgets/my_drawer.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
+import 'package:users_food_app/widgets/text_widget_header.dart';
 
 import '../models/sellers.dart';
 import '../widgets/sellers_design.dart';
@@ -51,7 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -67,8 +70,12 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         title: const Text(
-          "iFood",
-          style: TextStyle(fontSize: 45, fontFamily: "Signatra"),
+          "Restourants",
+          style: TextStyle(
+            fontSize: 45,
+            fontFamily: "Signatra",
+            letterSpacing: 3,
+          ),
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
@@ -78,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(5.0),
               child: SizedBox(
                 //taking %20 height for the device
                 height: MediaQuery.of(context).size.height * .3,
@@ -88,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   options: CarouselOptions(
                     height: MediaQuery.of(context).size.height * .2,
                     aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
+                    viewportFraction: 0.9,
                     initialPage: 0,
                     enableInfiniteScroll: true,
                     reverse: false,
@@ -98,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const Duration(milliseconds: 500),
                     autoPlayCurve: Curves.decelerate,
                     enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
+                    scrollDirection: Axis.vertical,
                   ),
                   // displayin items
                   items: items.map(
@@ -108,8 +115,24 @@ class _HomeScreenState extends State<HomeScreen> {
                           return Container(
                             width: MediaQuery.of(context).size.width,
                             margin: const EdgeInsets.symmetric(horizontal: 1),
-                            decoration: const BoxDecoration(
-                              color: Colors.black,
+                            decoration: BoxDecoration(
+                              color: Colors.orange,
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: const LinearGradient(
+                                begin: FractionalOffset(0.0, 0.0),
+                                end: FractionalOffset(3.0, -1.0),
+                                colors: [
+                                  Color(0xFF004B8D),
+                                  Color(0xFFffffff),
+                                ],
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  blurRadius: 3,
+                                  offset: Offset(2, 2),
+                                )
+                              ],
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(4),
@@ -144,9 +167,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         Sellers smodel = Sellers.fromJson(
                             snapshot.data!.docs[index].data()!
                                 as Map<String, dynamic>);
-                        return SellersDesignWidget(
-                          model: smodel,
-                          context: context,
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: SellersDesignWidget(
+                            model: smodel,
+                            context: context,
+                          ),
                         );
                       },
                       itemCount: snapshot.data!.docs.length,

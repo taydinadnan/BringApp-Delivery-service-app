@@ -34,9 +34,10 @@ class _AuthScreenState extends State<AuthScreen> {
           title: const Text(
             'iFood',
             style: TextStyle(
-              fontSize: 50,
+              fontSize: 60,
               color: Colors.orange,
-              fontFamily: "Kiwi",
+              fontFamily: "Signatra",
+              letterSpacing: 3,
             ),
           ),
           centerTitle: true,
