@@ -146,7 +146,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       saveDataToFirestore(currentUser!).then((value) {
         Navigator.pop(context);
         //send user to Home Screen
-        Route newRoute = MaterialPageRoute(builder: (c) => const HomeScreen());
+        Route newRoute = MaterialPageRoute(builder: (c) => HomeScreen());
         Navigator.pushReplacement(context, newRoute);
       });
     }

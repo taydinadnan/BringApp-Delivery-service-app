@@ -13,12 +13,12 @@ class Items {
   int? price;
 
   Items({
+    this.menuID,
+    this.sellerUID,
     this.itemID,
     this.longDescription,
-    this.menuID,
     this.price,
     this.publishedDate,
-    this.sellerUID,
     this.shortInfo,
     this.status,
     this.thumbnailUrl,

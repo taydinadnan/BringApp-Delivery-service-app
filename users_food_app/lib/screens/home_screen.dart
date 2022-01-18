@@ -10,8 +10,6 @@ import '../models/sellers.dart';
 import '../widgets/sellers_design.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }

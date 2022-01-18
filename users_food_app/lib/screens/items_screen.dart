@@ -1,26 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:users_food_app/models/items.dart';
-import 'package:users_food_app/models/menus.dart';
+import 'package:users_food_app/widgets/items_design.dart';
 
-import '../widgets/items_design.dart';
+import '../models/items.dart';
+import '../models/menus.dart';
 import '../widgets/my_drawer.dart';
 import '../widgets/progress_bar.dart';
 import '../widgets/text_widget_header.dart';
 
-// ignore: must_be_immutable
 class ItemsScreen extends StatefulWidget {
   final Menus? model;
-  BuildContext? context;
-
-  ItemsScreen({Key? key, this.model}) : super(key: key);
+  ItemsScreen({this.model});
 
   @override
   _ItemsScreenState createState() => _ItemsScreenState();
 }
 
 class _ItemsScreenState extends State<ItemsScreen> {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +38,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
           ),
         ),
         title: const Text(
-          "iFood",
+          "iFoodssss",
           style: TextStyle(
             fontSize: 30,
             color: Colors.white,
@@ -48,46 +47,6 @@ class _ItemsScreenState extends State<ItemsScreen> {
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (c) => MenusUploadScreen(),
-              //   ),
-              // );
-            },
-            icon: const Icon(
-              Icons.shopping_cart,
-              color: Colors.orange,
-            ),
-          ),
-          Positioned(
-            child: Stack(
-              children: const [
-                Icon(
-                  Icons.brightness_1,
-                  size: 20,
-                  color: Colors.green,
-                ),
-                Positioned(
-                  top: 3,
-                  right: 4,
-                  child: Center(
-                    child: Text(
-                      "0",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
         elevation: 0,
       ),
       body: CustomScrollView(
@@ -105,7 +64,6 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 .collection("menus")
                 .doc(widget.model!.menuID)
                 .collection("items")
-                //ordering menus and items by publishing date (descending)
                 .orderBy("publishedDate", descending: true)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -123,7 +81,6 @@ class _ItemsScreenState extends State<ItemsScreen> {
                             .data()! as Map<String, dynamic>);
                         return ItemsDesignWidget(
                           model: model,
-                          context: context,
                         );
                       },
                       itemCount: snapshot.data!.docs.length,

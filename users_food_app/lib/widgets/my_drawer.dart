@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:users_food_app/global/global.dart';
+import 'package:users_food_app/screens/home_screen.dart';
 
 import '../authentication/auth_screen.dart';
 
 class MyDrawer extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
-
-  MyDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +70,14 @@ class MyDrawer extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => HomeScreen()),
+                      ),
+                    );
+                  },
                 ),
                 const Divider(height: 10, color: Colors.grey),
                 ListTile(

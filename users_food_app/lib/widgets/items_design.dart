@@ -4,9 +4,8 @@ import 'package:users_food_app/models/items.dart';
 // ignore: must_be_immutable
 class ItemsDesignWidget extends StatefulWidget {
   Items? model;
-  BuildContext? context;
 
-  ItemsDesignWidget({Key? key, this.context, this.model}) : super(key: key);
+  ItemsDesignWidget({this.model});
 
   @override
   _ItemsDesignWidgetState createState() => _ItemsDesignWidgetState();

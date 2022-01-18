@@ -3,12 +3,11 @@ import 'package:users_food_app/screens/menus_screen.dart';
 
 import '../models/sellers.dart';
 
-// ignore: must_be_immutable
 class SellersDesignWidget extends StatefulWidget {
   Sellers? model;
   BuildContext? context;
 
-  SellersDesignWidget({Key? key, this.context, this.model}) : super(key: key);
+  SellersDesignWidget({this.context, this.model});
 
   @override
   _SellersDesignWidgetState createState() => _SellersDesignWidgetState();

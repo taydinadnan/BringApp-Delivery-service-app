@@ -4,7 +4,7 @@ import 'package:users_food_app/widgets/progress_bar.dart';
 class LoadingDialog extends StatelessWidget {
   final String? message;
 
-  const LoadingDialog({Key? key, this.message}) : super(key: key);
+  const LoadingDialog({this.message});
 
   @override
   Widget build(BuildContext context) {

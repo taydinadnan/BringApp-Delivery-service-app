@@ -12,7 +12,7 @@ import '../widgets/text_widget_header.dart';
 
 class MenusScreen extends StatefulWidget {
   final Sellers? model;
-  const MenusScreen({Key? key, this.model}) : super(key: key);
+  MenusScreen({this.model});
 
   @override
   _MenusScreenState createState() => _MenusScreenState();
@@ -49,58 +49,44 @@ class _MenusScreenState extends State<MenusScreen> {
         automaticallyImplyLeading: true,
         elevation: 0,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
-            colors: [
-              Color(0xFF004B8D),
-              Color(0xFFffffff),
-            ],
+      body: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: TextWidgetHeader(
+                title: widget.model!.sellerName.toString() + " Menus"),
           ),
-        ),
-        child: CustomScrollView(
-          shrinkWrap: true,
-          slivers: [
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: TextWidgetHeader(
-                  title: widget.model!.sellerName.toString() + " Menus"),
-            ),
-            StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection("sellers")
-                  .doc(widget.model!.sellerUID)
-                  .collection("menus")
-                  //ordering menus and items by publishing date (descending)
-                  .orderBy("publishedDate", descending: true)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                return !snapshot.hasData
-                    ? SliverToBoxAdapter(
-                        child: Center(
-                          child: circularProgress(),
-                        ),
-                      )
-                    : SliverStaggeredGrid.countBuilder(
-                        crossAxisCount: 1,
-                        staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
-                        itemBuilder: (context, index) {
-                          Menus model = Menus.fromJson(
-                              snapshot.data!.docs[index].data()!
-                                  as Map<String, dynamic>);
-                          return MenusDesignWidget(
-                            model: model,
-                            context: context,
-                          );
-                        },
-                        itemCount: snapshot.data!.docs.length,
-                      );
-              },
-            ),
-          ],
-        ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection("sellers")
+                .doc(widget.model!.sellerUID)
+                .collection("menus")
+                //ordering menus and items by publishing date (descending)
+                .orderBy("publishedDate", descending: true)
+                .snapshots(),
+            builder: (context, snapshot) {
+              return !snapshot.hasData
+                  ? SliverToBoxAdapter(
+                      child: Center(
+                        child: circularProgress(),
+                      ),
+                    )
+                  : SliverStaggeredGrid.countBuilder(
+                      crossAxisCount: 1,
+                      staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
+                      itemBuilder: (context, index) {
+                        Menus model = Menus.fromJson(snapshot.data!.docs[index]
+                            .data()! as Map<String, dynamic>);
+                        return MenusDesignWidget(
+                          model: model,
+                          context: context,
+                        );
+                      },
+                      itemCount: snapshot.data!.docs.length,
+                    );
+            },
+          ),
+        ],
       ),
     );
   }

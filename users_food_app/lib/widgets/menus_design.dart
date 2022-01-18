@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:users_food_app/models/menus.dart';
 import 'package:users_food_app/screens/items_screen.dart';
 
-// ignore: must_be_immutable
 class MenusDesignWidget extends StatefulWidget {
   Menus? model;
   BuildContext? context;
 
-  MenusDesignWidget({Key? key, this.context, this.model}) : super(key: key);
+  MenusDesignWidget({this.context, this.model});
 
   @override
   _MenusDesignWidgetState createState() => _MenusDesignWidgetState();
