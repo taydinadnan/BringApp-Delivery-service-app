@@ -13,12 +13,12 @@ class Items {
   int? price;
 
   Items({
-    this.menuID,
-    this.sellerUID,
     this.itemID,
     this.longDescription,
+    this.menuID,
     this.price,
     this.publishedDate,
+    this.sellerUID,
     this.shortInfo,
     this.status,
     this.thumbnailUrl,
@@ -39,7 +39,7 @@ class Items {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = Map<String, dynamic>();
     data["menuID"] = menuID;
     data["sellerUID"] = sellerUID;
     data["itemID"] = itemID;

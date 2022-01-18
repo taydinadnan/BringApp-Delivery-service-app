@@ -24,7 +24,7 @@ class Menus {
     menuInfo = json["menuInfo"];
     menuTitle = json["menuTitle"];
     publishDate = json["publishDate"];
-    sellerUID = json["sellerID"];
+    sellerUID = json["sellerUID"];
     status = json["status"];
     thumbnailUrl = json["thumbnailUrl"];
   }
@@ -35,7 +35,7 @@ class Menus {
     data["menuInfo"] = menuInfo;
     data["menuTitle"] = menuTitle;
     data["publishDate"] = publishDate;
-    data["sellerID"] = sellerUID;
+    data["sellerUID"] = sellerUID;
     data["status"] = status;
     data["thumbnailUrl"] = thumbnailUrl;
     return data;
