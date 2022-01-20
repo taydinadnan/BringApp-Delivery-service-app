@@ -63,56 +63,48 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         elevation: 0,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
-            colors: [
-              Color(0xFF004B8D),
-              Color(0xFFffffff),
-            ],
+      body: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: TextWidgetHeader(title: "Menus"),
           ),
-        ),
-        child: CustomScrollView(
-          slivers: [
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: TextWidgetHeader(title: "Menus"),
-            ),
-            StreamBuilder<QuerySnapshot>(
-              stream: FirebaseFirestore.instance
-                  .collection("sellers")
-                  .doc(sharedPreferences!.getString("uid"))
-                  .collection("menus")
-                  //ordering menus and items by publishing date (descending)
-                  .orderBy("publishedDate", descending: true)
-                  .snapshots(),
-              builder: (context, snapshot) {
-                return !snapshot.hasData
-                    ? SliverToBoxAdapter(
-                        child: Center(
-                          child: circularProgress(),
-                        ),
-                      )
-                    : SliverStaggeredGrid.countBuilder(
-                        crossAxisCount: 1,
-                        staggeredTileBuilder: (c) => const StaggeredTile.fit(2),
-                        itemBuilder: (context, index) {
-                          Menus model = Menus.fromJson(
-                              snapshot.data!.docs[index].data()!
-                                  as Map<String, dynamic>);
-                          return InfoDesignWidget(
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection("sellers")
+                .doc(sharedPreferences!.getString("uid"))
+                .collection("menus")
+                //ordering menus and items by publishing date (descending)
+                .orderBy("publishedDate", descending: true)
+                .snapshots(),
+            builder: (context, snapshot) {
+              return !snapshot.hasData
+                  ? SliverToBoxAdapter(
+                      child: Center(
+                        child: circularProgress(),
+                      ),
+                    )
+                  : SliverStaggeredGrid.countBuilder(
+                      staggeredTileBuilder: (c) => const StaggeredTile.fit(2),
+                      crossAxisCount: 4,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 4,
+                      itemBuilder: (context, index) {
+                        Menus model = Menus.fromJson(snapshot.data!.docs[index]
+                            .data()! as Map<String, dynamic>);
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InfoDesignWidget(
                             model: model,
                             context: context,
-                          );
-                        },
-                        itemCount: snapshot.data!.docs.length,
-                      );
-              },
-            ),
-          ],
-        ),
+                          ),
+                        );
+                      },
+                      itemCount: snapshot.data!.docs.length,
+                    );
+            },
+          ),
+        ],
       ),
     );
   }

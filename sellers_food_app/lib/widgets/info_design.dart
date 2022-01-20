@@ -17,7 +17,21 @@ class InfoDesignWidget extends StatefulWidget {
 class _InfoDesignWidgetState extends State<InfoDesignWidget> {
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.symmetric(horizontal: 1),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.grey,
+            blurRadius: 3,
+            offset: Offset(2, 2),
+          )
+        ],
+      ),
+      child: InkWell(
         splashColor: Colors.orange,
         child: Padding(
           padding: const EdgeInsets.all(1),
@@ -26,11 +40,6 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
             width: MediaQuery.of(context).size.width,
             child: Column(
               children: [
-                Divider(
-                  height: 4,
-                  thickness: 3,
-                  color: Colors.grey[300],
-                ),
                 Image.network(
                   widget.model!.thumbnailUrl!,
                   height: 210,
@@ -53,11 +62,6 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                     fontFamily: "Acme",
                   ),
                 ),
-                Divider(
-                  height: 4,
-                  thickness: 3,
-                  color: Colors.grey[300],
-                )
               ],
             ),
           ),
@@ -69,6 +73,8 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
               builder: (c) => ItemsScreen(model: widget.model),
             ),
           );
-        });
+        },
+      ),
+    );
   }
 }

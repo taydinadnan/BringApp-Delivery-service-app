@@ -90,8 +90,10 @@ class _ItemsScreenState extends State<ItemsScreen> {
                       ),
                     )
                   : SliverStaggeredGrid.countBuilder(
-                      crossAxisCount: 2,
-                      staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
+                      staggeredTileBuilder: (c) => const StaggeredTile.fit(2),
+                      crossAxisCount: 4,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 4,
                       itemBuilder: (context, index) {
                         Items model = Items.fromJson(snapshot.data!.docs[index]
                             .data()! as Map<String, dynamic>);

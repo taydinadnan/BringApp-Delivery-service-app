@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:users_food_app/widgets/my_drawer.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
-import 'package:users_food_app/widgets/text_widget_header.dart';
 
 import '../models/sellers.dart';
 import '../widgets/sellers_design.dart';
@@ -161,14 +160,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   : SliverStaggeredGrid.countBuilder(
-                      crossAxisCount: 1,
-                      staggeredTileBuilder: (c) => const StaggeredTile.fit(1),
+                      staggeredTileBuilder: (c) => const StaggeredTile.fit(2),
+                      crossAxisCount: 4,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 4,
                       itemBuilder: (context, index) {
                         Sellers smodel = Sellers.fromJson(
                             snapshot.data!.docs[index].data()!
                                 as Map<String, dynamic>);
                         return Padding(
-                          padding: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(8),
                           child: SellersDesignWidget(
                             model: smodel,
                             context: context,
