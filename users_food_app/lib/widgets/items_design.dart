@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:users_food_app/models/items.dart';
+import 'package:users_food_app/screens/item_detail_screen.dart';
 
 // ignore: must_be_immutable
 class ItemsDesignWidget extends StatefulWidget {
@@ -29,6 +30,14 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
         ],
       ),
       child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: ((c) => ItemDetailsScreen(model: widget.model)),
+            ),
+          );
+        },
         splashColor: Colors.orange,
         child: Container(
           width: MediaQuery.of(context).size.width,
