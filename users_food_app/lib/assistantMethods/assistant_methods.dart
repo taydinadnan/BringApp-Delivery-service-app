@@ -10,8 +10,11 @@ separateItemIDs() {
   defaultItemList = sharedPreferences!.getStringList("userCart")!;
 
   for (i; i < defaultItemList.length; i++) {
+    //this format => 34567654:7
     String item = defaultItemList[i].toString();
     var pos = item.lastIndexOf(":");
+
+    //to this format => 34567654
     String getItemId = (pos != -1) ? item.substring(0, pos) : item;
 
     print("\nThis is itemID now = " + getItemId);

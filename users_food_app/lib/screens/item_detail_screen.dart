@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import 'package:users_food_app/widgets/app_bar.dart';
 
@@ -133,14 +134,12 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
             child: InkWell(
               onTap: () {
                 int itemCounter = int.parse(counterTextEditingController.text);
+                List<String> separateItemIDsList = separateItemIDs();
                 //1.check if item exist already in cart
-
-                // add to cart
-                addItemToCart(
-                  widget.model!.itemID,
-                  context,
-                  itemCounter,
-                );
+                separateItemIDsList.contains(widget.model!.itemID)
+                    ? Fluttertoast.showToast(msg: "Item is already in Cart")
+                    //2.if not add item to cart
+                    : addItemToCart(widget.model!.itemID, context, itemCounter);
               },
               child: Container(
                 decoration: const BoxDecoration(
