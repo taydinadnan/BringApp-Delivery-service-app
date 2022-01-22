@@ -41,6 +41,7 @@ dependencies:
   shared_preferences: ^2.0.11
   carousel_slider: ^4.0.0
   number_inc_dec: ^0.8.0
+  fluttertoast: ^8.0.8
 
   image_picker: ^0.8.4+4
   geolocator: ^8.0.1

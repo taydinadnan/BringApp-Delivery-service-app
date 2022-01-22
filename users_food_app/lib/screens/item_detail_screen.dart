@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import 'package:users_food_app/widgets/app_bar.dart';
 
+import '../assistantMethods/assistant_methods.dart';
 import '../models/items.dart';
 
 class ItemDetailsScreen extends StatefulWidget {
@@ -62,11 +63,12 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                     border: InputBorder.none,
                   ),
                   widgetContainerDecoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      border: Border.all(
-                        color: Colors.orange,
-                        width: 2,
-                      )),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    border: Border.all(
+                      color: Colors.orange,
+                      width: 2,
+                    ),
+                  ),
                   incIconDecoration: const BoxDecoration(
                     color: Colors.orange,
                     borderRadius: BorderRadius.only(
@@ -130,7 +132,15 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
           Center(
             child: InkWell(
               onTap: () {
+                int itemCounter = int.parse(counterTextEditingController.text);
+                //1.check if item exist already in cart
+
                 // add to cart
+                addItemToCart(
+                  widget.model!.itemID,
+                  context,
+                  itemCounter,
+                );
               },
               child: Container(
                 decoration: const BoxDecoration(
@@ -141,6 +151,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                       Color(0xFF004B8D),
                       Color(0xFFffffff),
                     ],
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
                   ),
                 ),
                 width: MediaQuery.of(context).size.width - 13,

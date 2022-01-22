@@ -91,6 +91,12 @@ class _LoginScreenState extends State<LoginScreen> {
           await sharedPreferences!.setString("name", snapshot.data()!["name"]);
           await sharedPreferences!
               .setString("photoUrl", snapshot.data()!["photoUrl"]);
+
+          //get cart list from firebase
+          List<String> userCartList =
+              snapshot.data()!["userCart"].cast<String>();
+          await sharedPreferences!.setStringList("userCart", userCartList);
+
           Navigator.pop(context);
           Navigator.push(
             context,
