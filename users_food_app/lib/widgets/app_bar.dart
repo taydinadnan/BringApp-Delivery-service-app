@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/cart_item_counter.dart';
+import 'package:users_food_app/screens/cart_screen.dart';
 
 class MyAppBar extends StatefulWidget with PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
-  MyAppBar({this.bottom});
+  final String? sellerUID;
+  MyAppBar({this.bottom, this.sellerUID});
 
   @override
   _MyAppBarState createState() => _MyAppBarState();
@@ -36,12 +38,12 @@ class _MyAppBarState extends State<MyAppBar> {
           children: [
             IconButton(
               onPressed: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (c) => MenusUploadScreen(),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (c) => CartScreen(sellerUID: widget.sellerUID),
+                  ),
+                );
               },
               icon: const Icon(
                 Icons.shopping_cart,
