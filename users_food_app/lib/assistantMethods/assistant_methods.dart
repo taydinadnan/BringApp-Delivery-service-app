@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/cart_item_counter.dart';
 import 'package:users_food_app/global/global.dart';
-import 'package:users_food_app/splash_screen/splash_screen.dart';
 
 //returns items id(specific keys without quantity)
 separateItemIDs() {
@@ -87,25 +86,39 @@ addItemToCart(String? foodItemId, BuildContext context, int itemCounter) {
   );
 }
 
-//Clear Cart
+// //Clear Cart
+// clearCartNow(context) {
+//   sharedPreferences!.setStringList("userCart", ['garbageValue']);
+
+//   List<String>? emptyList = sharedPreferences!.getStringList("userCart");
+
+//   //first we update it in firestore
+//   FirebaseFirestore.instance
+//       .collection("users")
+//       .doc(firebaseAuth.currentUser!.uid)
+//       .update({"userCart": emptyList}).then(
+//     (value) {
+//       //then in local
+//       sharedPreferences!.setStringList(
+//         "userCart",
+//         emptyList!,
+//       );
+//       Provider.of<CartItemCounter>(context, listen: false)
+//           .displayCartListItemsNumber();
+//     },
+//   );
+// }
+
 clearCartNow(context) {
   sharedPreferences!.setStringList("userCart", ['garbageValue']);
-
   List<String>? emptyList = sharedPreferences!.getStringList("userCart");
 
-  //first we update it in firestore
   FirebaseFirestore.instance
       .collection("users")
       .doc(firebaseAuth.currentUser!.uid)
-      .update({"userCart": emptyList}).then(
-    (value) {
-      //then in local
-      sharedPreferences!.setStringList(
-        "userCart",
-        emptyList!,
-      );
-      Provider.of<CartItemCounter>(context, listen: false)
-          .displayCartListItemsNumber();
-    },
-  );
+      .update({"userCart": emptyList}).then((value) {
+    sharedPreferences!.setStringList("userCart", emptyList!);
+    Provider.of<CartItemCounter>(context, listen: false)
+        .displayCartListItemsNumber();
+  });
 }

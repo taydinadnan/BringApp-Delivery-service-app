@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:users_food_app/assistantMethods/cart_item_counter.dart';
+import 'package:users_food_app/assistantMethods/total_amount.dart';
 
 import 'global/global.dart';
 import 'splash_screen/splash_screen.dart';
@@ -25,6 +26,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: ((c) => CartItemCounter()),
+        ),
+        ChangeNotifierProvider(
+          create: ((c) => TotalAmount()),
         )
       ],
       child: MaterialApp(

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/assistant_methods.dart';
+import 'package:users_food_app/assistantMethods/total_amount.dart';
 import 'package:users_food_app/splash_screen/splash_screen.dart';
 import 'package:users_food_app/widgets/cart_item_design.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 
 import '../assistantMethods/cart_item_counter.dart';
+import '../assistantMethods/total_amount.dart';
 import '../models/items.dart';
 import '../widgets/text_widget_header.dart';
 
@@ -23,9 +25,14 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   List<int>? separateItemQuantityList;
 
+  num totalAmount = 0;
+
   @override
   void initState() {
     super.initState();
+
+    totalAmount = 0;
+    Provider.of<TotalAmount>(context, listen: false).displayTotalAmount(0);
 
     separateItemQuantityList = separateItemQuantities();
   }
@@ -161,7 +168,29 @@ class _CartScreenState extends State<CartScreen> {
         slivers: [
           //overall total price
           SliverPersistentHeader(
-              pinned: true, delegate: TextWidgetHeader(title: "My Cart List")),
+            pinned: true,
+            delegate: TextWidgetHeader(title: "My Cart List"),
+          ),
+
+          SliverToBoxAdapter(
+            child: Consumer2<TotalAmount, CartItemCounter>(
+                builder: (context, amountProvider, cartProvider, c) {
+              return Padding(
+                padding: const EdgeInsets.all(8),
+                child: Center(
+                  child: cartProvider.count == 0
+                      ? Container()
+                      : Text(
+                          "Total Price: ${"\$" + amountProvider.tAmount.toString()}",
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
+                        ),
+                ),
+              );
+            }),
+          ),
 
           //display cart items with quantity numbers
           StreamBuilder<QuerySnapshot>(
@@ -177,7 +206,7 @@ class _CartScreenState extends State<CartScreen> {
                         child: circularProgress(),
                       ),
                     )
-                  : snapshot.data!.docs.length == 0
+                  : snapshot.data!.docs.length == 1
                       ? Container()
                       : SliverList(
                           delegate: SliverChildBuilderDelegate(
@@ -186,6 +215,30 @@ class _CartScreenState extends State<CartScreen> {
                                 snapshot.data!.docs[index].data()!
                                     as Map<String, dynamic>,
                               );
+
+                              //calculating total price in cart list
+                              if (index == 0) {
+                                totalAmount = 0;
+                                totalAmount = totalAmount +
+                                    (model.price! *
+                                        separateItemQuantityList![index]);
+                              } else {
+                                totalAmount = totalAmount +
+                                    (model.price! *
+                                        separateItemQuantityList![index]);
+                              }
+                              //update in real time
+                              if (snapshot.data!.docs.length - 1 == index) {
+                                WidgetsBinding.instance!.addPostFrameCallback(
+                                  (timeStamp) {
+                                    Provider.of<TotalAmount>(context,
+                                            listen: false)
+                                        .displayTotalAmount(
+                                            totalAmount.toDouble());
+                                  },
+                                );
+                              }
+
                               return CartItemDesign(
                                 model: model,
                                 context: context,
