@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:users_food_app/assistantMethods/assistant_methods.dart';
 import 'package:users_food_app/widgets/my_drawer.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 
@@ -47,6 +48,13 @@ class _HomeScreenState extends State<HomeScreen> {
     "slider/26.jpg",
     "slider/27.jpg",
   ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    clearCartNow(context);
+  }
 
   @override
   Widget build(BuildContext context) {
