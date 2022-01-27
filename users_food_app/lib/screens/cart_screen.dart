@@ -58,9 +58,7 @@ class _CartScreenState extends State<CartScreen> {
           Stack(
             children: [
               IconButton(
-                onPressed: () {
-                  print("clicked");
-                },
+                onPressed: () {},
                 icon: const Icon(
                   Icons.shopping_cart,
                   color: Colors.orange,
@@ -207,50 +205,48 @@ class _CartScreenState extends State<CartScreen> {
                         child: circularProgress(),
                       ),
                     )
-                  : snapshot.data!.docs.length == 0
-                      ? Container()
-                      : SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              Items model = Items.fromJson(
-                                snapshot.data!.docs[index].data()!
-                                    as Map<String, dynamic>,
-                              );
+                  //if length = 0 no data
+                  // : snapshot.data!.docs.length == 1
+                  //     ? Container()
+                  : SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          Items model = Items.fromJson(
+                            snapshot.data!.docs[index].data()!
+                                as Map<String, dynamic>,
+                          );
 
-                              //calculating total price in cart list
-                              if (index == 0) {
-                                totalAmount = 0;
-                                totalAmount = totalAmount +
-                                    (model.price! *
-                                        separateItemQuantityList![index]);
-                              } else {
-                                totalAmount = totalAmount +
-                                    (model.price! *
-                                        separateItemQuantityList![index]);
-                              }
-                              //update in real time
-                              if (snapshot.data!.docs.length - 1 == index) {
-                                WidgetsBinding.instance!.addPostFrameCallback(
-                                  (timeStamp) {
-                                    Provider.of<TotalAmount>(context,
-                                            listen: false)
-                                        .displayTotalAmount(
-                                            totalAmount.toDouble());
-                                  },
-                                );
-                              }
+                          //calculating total price in cart list
+                          if (index == 0) {
+                            totalAmount = 0;
+                            totalAmount = totalAmount +
+                                (model.price! *
+                                    separateItemQuantityList![index]);
+                          } else {
+                            totalAmount = totalAmount +
+                                (model.price! *
+                                    separateItemQuantityList![index]);
+                          }
+                          //update in real time
+                          if (snapshot.data!.docs.length - 1 == index) {
+                            WidgetsBinding.instance!.addPostFrameCallback(
+                              (timeStamp) {
+                                Provider.of<TotalAmount>(context, listen: false)
+                                    .displayTotalAmount(totalAmount.toDouble());
+                              },
+                            );
+                          }
 
-                              return CartItemDesign(
-                                model: model,
-                                context: context,
-                                quanNumber: separateItemQuantityList![index],
-                              );
-                            },
-                            childCount: snapshot.hasData
-                                ? snapshot.data!.docs.length
-                                : 0,
-                          ),
-                        );
+                          return CartItemDesign(
+                            model: model,
+                            context: context,
+                            quanNumber: separateItemQuantityList![index],
+                          );
+                        },
+                        childCount:
+                            snapshot.hasData ? snapshot.data!.docs.length : 0,
+                      ),
+                    );
             },
           ),
         ],

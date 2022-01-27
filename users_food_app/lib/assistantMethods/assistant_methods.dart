@@ -20,13 +20,8 @@ separateItemIDs() {
     //to this format => 34567654
     String getItemId = (pos != -1) ? item.substring(0, pos) : item;
 
-    print("\nThis is itemID now = " + getItemId);
-
     separateItemIDsList.add(getItemId);
   }
-
-  print("\nThis is Items List now = ");
-  print(separateItemIDsList);
 
   return separateItemIDsList;
 }
@@ -50,13 +45,8 @@ separateItemQuantities() {
     //converting to int
     var quanNumber = int.parse(listItemCharacters[1].toString());
 
-    print("\nThis is Quantity Number = " + quanNumber.toString());
-
     separateItemQuantityList.add(quanNumber);
   }
-
-  print("\nThis is Items Quantity List now = ");
-  print(separateItemQuantityList);
 
   return separateItemQuantityList;
 }
