@@ -86,37 +86,17 @@ addItemToCart(String? foodItemId, BuildContext context, int itemCounter) {
   );
 }
 
-// //Clear Cart
-// clearCartNow(context) {
-//   sharedPreferences!.setStringList("userCart", ['garbageValue']);
-
-//   List<String>? emptyList = sharedPreferences!.getStringList("userCart");
-
-//   //first we update it in firestore
-//   FirebaseFirestore.instance
-//       .collection("users")
-//       .doc(firebaseAuth.currentUser!.uid)
-//       .update({"userCart": emptyList}).then(
-//     (value) {
-//       //then in local
-//       sharedPreferences!.setStringList(
-//         "userCart",
-//         emptyList!,
-//       );
-//       Provider.of<CartItemCounter>(context, listen: false)
-//           .displayCartListItemsNumber();
-//     },
-//   );
-// }
-
+//Clear Cart
 clearCartNow(context) {
   sharedPreferences!.setStringList("userCart", ['garbageValue']);
   List<String>? emptyList = sharedPreferences!.getStringList("userCart");
 
+  //first we update it in firestore
   FirebaseFirestore.instance
       .collection("users")
       .doc(firebaseAuth.currentUser!.uid)
       .update({"userCart": emptyList}).then((value) {
+    //then in local
     sharedPreferences!.setStringList("userCart", emptyList!);
     Provider.of<CartItemCounter>(context, listen: false)
         .displayCartListItemsNumber();

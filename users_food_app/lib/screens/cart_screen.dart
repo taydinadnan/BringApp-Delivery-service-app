@@ -12,6 +12,7 @@ import '../assistantMethods/cart_item_counter.dart';
 import '../assistantMethods/total_amount.dart';
 import '../models/items.dart';
 import '../widgets/text_widget_header.dart';
+import 'address_screen.dart';
 
 class CartScreen extends StatefulWidget {
   final String? sellerUID;
@@ -150,15 +151,15 @@ class _CartScreenState extends State<CartScreen> {
               backgroundColor: Colors.cyan,
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (c)=> AddressScreen(
-                //           totalAmount: totalAmount.toDouble(),
-                //           sellerUID: widget.sellerUID,
-                //         ),
-                //     ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (c) => AddressScreen(
+                      totalAmount: totalAmount.toDouble(),
+                      sellerUID: widget.sellerUID,
+                    ),
+                  ),
+                );
               },
             ),
           ),
