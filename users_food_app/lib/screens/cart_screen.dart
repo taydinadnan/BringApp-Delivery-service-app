@@ -207,7 +207,7 @@ class _CartScreenState extends State<CartScreen> {
                         child: circularProgress(),
                       ),
                     )
-                  : snapshot.data!.docs.length == 1
+                  : snapshot.data!.docs.length == 0
                       ? Container()
                       : SliverList(
                           delegate: SliverChildBuilderDelegate(

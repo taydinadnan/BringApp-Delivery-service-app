@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:users_food_app/widgets/simple_app_bar.dart';
 import 'package:users_food_app/widgets/text_field.dart';
 
@@ -11,6 +13,34 @@ class SaveAddressScreen extends StatelessWidget {
   final _completeAddress = TextEditingController();
   final _locationController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  List<Placemark>? placemarks;
+
+  getUserLocationAddress() async {
+    //get current location
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high,
+    );
+
+    placemarks = await placemarkFromCoordinates(
+      position.latitude,
+      position.longitude,
+    );
+
+    Placemark pMark = placemarks![0];
+
+    String fullAddress =
+        '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}, ${pMark.country}';
+    _locationController.text = fullAddress;
+
+    _flatNumber.text =
+        '${pMark.subThoroughfare} ${pMark.thoroughfare}, ${pMark.subLocality} ${pMark.locality}';
+
+    _city.text =
+        '${pMark.subAdministrativeArea}, ${pMark.administrativeArea} ${pMark.postalCode}';
+    _state.text = '${pMark.country}';
+
+    _completeAddress.text = fullAddress;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +112,8 @@ class SaveAddressScreen extends StatelessWidget {
               ),
               onPressed: () {
                 //get current location
+
+                getUserLocationAddress();
               },
             ),
             Form(
