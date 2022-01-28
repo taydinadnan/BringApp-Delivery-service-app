@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:users_food_app/screens/menus_screen.dart';
 
-import '../models/sellers.dart';
+import '../../models/sellers.dart';
 
 class SellersDesignWidget extends StatefulWidget {
   Sellers? model;

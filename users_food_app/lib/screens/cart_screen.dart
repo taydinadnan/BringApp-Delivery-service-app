@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/assistant_methods.dart';
 import 'package:users_food_app/assistantMethods/total_amount.dart';
 import 'package:users_food_app/splash_screen/splash_screen.dart';
-import 'package:users_food_app/widgets/cart_item_design.dart';
+import 'package:users_food_app/widgets/design/cart_item_design.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 
 import '../assistantMethods/cart_item_counter.dart';
@@ -126,7 +126,7 @@ class _CartScreenState extends State<CartScreen> {
                 "Clear Cart",
                 style: TextStyle(fontSize: 16),
               ),
-              backgroundColor: Colors.cyan,
+              backgroundColor: Colors.orangeAccent,
               icon: const Icon(Icons.clear_all),
               onPressed: () {
                 clearCartNow(context);
@@ -146,7 +146,7 @@ class _CartScreenState extends State<CartScreen> {
                 "Check Out",
                 style: TextStyle(fontSize: 16),
               ),
-              backgroundColor: Colors.cyan,
+              backgroundColor: Colors.orangeAccent,
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
                 Navigator.push(

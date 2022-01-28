@@ -8,7 +8,7 @@ import 'package:users_food_app/widgets/my_drawer.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 
 import '../models/sellers.dart';
-import '../widgets/sellers_design.dart';
+import '../widgets/design/sellers_design.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

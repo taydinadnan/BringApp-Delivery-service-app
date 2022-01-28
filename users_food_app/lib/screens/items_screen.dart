@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:users_food_app/widgets/app_bar.dart';
-import 'package:users_food_app/widgets/items_design.dart';
+import 'package:users_food_app/widgets/design/items_design.dart';
 
 import '../models/items.dart';
 import '../models/menus.dart';

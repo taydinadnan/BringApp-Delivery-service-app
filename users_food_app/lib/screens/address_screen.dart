@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/address_changer.dart';
 import 'package:users_food_app/screens/save_address_screen.dart';
-import 'package:users_food_app/widgets/address_design.dart';
+import 'package:users_food_app/widgets/design/address_design.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 import 'package:users_food_app/widgets/simple_app_bar.dart';
 
