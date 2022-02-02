@@ -44,6 +44,7 @@ dependencies:
   fluttertoast: ^8.0.8
   provider: ^6.0.2
   flutter_carousel_slider: ^1.0.8
+  url_launcher: ^6.0.18
   
 
   image_picker: ^0.8.4+4

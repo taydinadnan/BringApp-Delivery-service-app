@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/address_changer.dart';
+import 'package:users_food_app/maps/maps.dart';
 import 'package:users_food_app/models/address.dart';
 
 class AddressDesign extends StatefulWidget {
@@ -182,6 +183,10 @@ class _AddressDesignState extends State<AddressDesign> {
                     ? ElevatedButton(
                         onPressed: () {
                           //check
+                          MapsUtils.openMapWithPosition(
+                              widget.model!.lat!, widget.model!.lng!);
+                          // MapsUtils.openMapWithAddress(
+                          //     widget.model!.fullAddress!);
                         },
                         child: const Text("Proceed"),
                         style: ElevatedButton.styleFrom(
