@@ -18,37 +18,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  final items = [
-    "slider/0.jpg",
-    "slider/1.jpg",
-    "slider/2.jpg",
-    "slider/3.jpg",
-    "slider/4.jpg",
-    "slider/5.jpg",
-    "slider/6.jpg",
-    "slider/7.jpg",
-    "slider/8.jpg",
-    "slider/9.jpg",
-    "slider/10.jpg",
-    "slider/11.jpg",
-    "slider/12.jpg",
-    "slider/13.jpg",
-    "slider/14.jpg",
-    "slider/15.jpg",
-    "slider/16.jpg",
-    "slider/17.jpg",
-    "slider/18.jpg",
-    "slider/19.jpg",
-    "slider/20.jpg",
-    "slider/21.jpg",
-    "slider/22.jpg",
-    "slider/23.jpg",
-    "slider/24.jpg",
-    "slider/25.jpg",
-    "slider/26.jpg",
-    "slider/27.jpg",
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -98,29 +67,38 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: MediaQuery.of(context).size.height * .3,
                 //taking max width for the device
                 width: MediaQuery.of(context).size.width,
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    height: MediaQuery.of(context).size.height * .2,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.9,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 500),
-                    autoPlayCurve: Curves.decelerate,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.vertical,
-                  ),
-                  // displayin items
-                  items: items.map(
-                    (index) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return Container(
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection("items")
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: circularProgress(),
+                      );
+                    }
+                    return CarouselSlider(
+                      options: CarouselOptions(
+                        height: MediaQuery.of(context).size.height * .2,
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 0.9,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 3),
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 500),
+                        autoPlayCurve: Curves.decelerate,
+                        enlargeCenterPage: true,
+                        scrollDirection: Axis.vertical,
+                      ),
+                      items: snapshot.data!.docs.map((document) {
+                        return Center(
+                          child: Container(
                             width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height / 4,
                             margin: const EdgeInsets.symmetric(horizontal: 1),
                             decoration: BoxDecoration(
                               color: Colors.orange,
@@ -142,17 +120,20 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(4),
-                              child: Image.asset(
-                                index,
-                                fit: BoxFit.fill,
+                              padding: const EdgeInsets.all(2.0),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  document['thumbnailUrl'],
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
-                          );
-                        },
-                      );
-                    },
-                  ).toList(),
+                          ),
+                        );
+                      }).toList(),
+                    );
+                  },
                 ),
               ),
             ),
