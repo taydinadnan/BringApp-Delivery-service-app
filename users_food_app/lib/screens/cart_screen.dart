@@ -206,7 +206,7 @@ class _CartScreenState extends State<CartScreen> {
                       ),
                     )
                   //if length = 0 no data
-                  // : snapshot.data!.docs.length == 1
+                  // : snapshot.data!.docs.length == 0
                   //     ? Container()
                   : SliverList(
                       delegate: SliverChildBuilderDelegate(

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/address_changer.dart';
 import 'package:users_food_app/maps/maps.dart';
 import 'package:users_food_app/models/address.dart';
+import 'package:users_food_app/screens/placed_order_screen.dart';
 
 class AddressDesign extends StatefulWidget {
   final Address? model;
@@ -171,6 +172,11 @@ class _AddressDesignState extends State<AddressDesign> {
                 ElevatedButton(
                   onPressed: () {
                     //check
+                    MapsUtils.openMapWithPosition(
+                        widget.model!.lat!, widget.model!.lng!);
+
+                    // MapsUtils.openMapWithAddress(
+                    //     widget.model!.fullAddress!);
                   },
                   child: const Text("Check on Maps"),
                   style: ElevatedButton.styleFrom(
@@ -183,10 +189,16 @@ class _AddressDesignState extends State<AddressDesign> {
                     ? ElevatedButton(
                         onPressed: () {
                           //check
-                          MapsUtils.openMapWithPosition(
-                              widget.model!.lat!, widget.model!.lng!);
-                          // MapsUtils.openMapWithAddress(
-                          //     widget.model!.fullAddress!);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (c) => PlacedOrderScreen(
+                                addressID: widget.addressID,
+                                totalAmount: widget.totalAmount,
+                                sellerUID: widget.sellerUID,
+                              ),
+                            ),
+                          );
                         },
                         child: const Text("Proceed"),
                         style: ElevatedButton.styleFrom(
