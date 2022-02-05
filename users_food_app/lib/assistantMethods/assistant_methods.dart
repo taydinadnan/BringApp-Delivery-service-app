@@ -5,6 +5,27 @@ import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/cart_item_counter.dart';
 import 'package:users_food_app/global/global.dart';
 
+//productIDs
+separateOrdesItemIDs(orderIDs) {
+  List<String> separateItemIDsList = [], defaultItemList = [];
+  int i = 0;
+
+  defaultItemList = List<String>.from(orderIDs);
+
+  for (i; i < defaultItemList.length; i++) {
+    //this format => 34567654:7
+    String item = defaultItemList[i].toString();
+    var pos = item.lastIndexOf(":");
+
+    //to this format => 34567654
+    String getItemId = (pos != -1) ? item.substring(0, pos) : item;
+
+    separateItemIDsList.add(getItemId);
+  }
+
+  return separateItemIDsList;
+}
+
 //returns items id(specific keys without quantity)
 separateItemIDs() {
   List<String> separateItemIDsList = [], defaultItemList = [];
@@ -24,6 +45,29 @@ separateItemIDs() {
   }
 
   return separateItemIDsList;
+}
+
+separateOrderItemQuantities(orderIDs) {
+  List<String> separateItemQuantityList = [];
+  List<String> defaultItemList = [];
+  int i = 1;
+
+  defaultItemList = List<String>.from(orderIDs);
+
+  for (i; i < defaultItemList.length; i++) {
+    //this format => 34567654:7
+    String item = defaultItemList[i].toString();
+
+    //to this format => 7
+    List<String> listItemCharacters = item.split(":").toList();
+
+    //converting to int
+    var quanNumber = int.parse(listItemCharacters[1].toString());
+
+    separateItemQuantityList.add(quanNumber.toString());
+  }
+
+  return separateItemQuantityList;
 }
 
 //returns items quantity without item id(specific keys)

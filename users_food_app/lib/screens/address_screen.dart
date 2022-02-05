@@ -27,7 +27,9 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(),
+      appBar: SimpleAppBar(
+        title: "iFood",
+      ),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Add New Address"),
         backgroundColor: Colors.orangeAccent,

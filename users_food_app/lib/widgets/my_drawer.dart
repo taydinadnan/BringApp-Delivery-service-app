@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:users_food_app/global/global.dart';
 import 'package:users_food_app/screens/home_screen.dart';
+import 'package:users_food_app/screens/my_orders_screen.dart';
 
 import '../authentication/auth_screen.dart';
 
@@ -91,7 +92,14 @@ class MyDrawer extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (c) => MyOrdersScreen(),
+                      ),
+                    );
+                  },
                 ),
                 const Divider(height: 10, color: Colors.grey),
                 ListTile(
