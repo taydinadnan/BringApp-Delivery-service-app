@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:users_food_app/assistantMethods/assistant_methods.dart';
 import 'package:users_food_app/global/global.dart';
-import 'package:users_food_app/widgets/app_bar.dart';
 import 'package:users_food_app/widgets/order_card.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 import 'package:users_food_app/widgets/simple_app_bar.dart';

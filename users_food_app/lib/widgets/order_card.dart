@@ -20,10 +20,14 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
+        // ignore: todo
         //TODO:order details
       },
       child: Container(
         decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(5),
+          ),
           gradient: LinearGradient(
             begin: FractionalOffset(0.0, 0.0),
             end: FractionalOffset(3.0, -1.0),
@@ -33,12 +37,12 @@ class OrderCard extends StatelessWidget {
             ],
           ),
         ),
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(4),
+        margin: const EdgeInsets.all(8),
         height: itemCount! * 125,
         child: ListView.builder(
           itemCount: itemCount,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             Items model =
                 Items.fromJson(data![index].data()! as Map<String, dynamic>);
@@ -58,15 +62,33 @@ Widget placedOrderDesignWidget(
     height: 120,
     color: Colors.grey[200],
     child: Row(children: [
-      Image.network(
-        model.thumbnailUrl!,
-        width: 120,
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xff7c94b6),
+            border: Border.all(
+              color: Colors.black,
+              width: 2,
+            ),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.network(
+              model.thumbnailUrl!,
+              width: 120,
+            ),
+          ),
+        ),
       ),
       const SizedBox(width: 10),
       Expanded(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 20),
+
           Row(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -89,7 +111,7 @@ Widget placedOrderDesignWidget(
                 ),
               ),
               Text(
-                model.price.toString(),
+                model.price.toString() + "   ",
                 style: const TextStyle(
                   color: Colors.blue,
                   fontSize: 18,
@@ -97,6 +119,7 @@ Widget placedOrderDesignWidget(
               )
             ],
           ),
+          const SizedBox(height: 20),
           //total number
           Row(
             children: [
