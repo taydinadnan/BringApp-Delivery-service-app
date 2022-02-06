@@ -304,7 +304,7 @@ packages:
     source: hosted
     version: "2.4.2"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"

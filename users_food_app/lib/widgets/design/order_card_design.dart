@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:users_food_app/screens/order_details_screen.dart';
 
-import '../models/items.dart';
+import '../../models/items.dart';
 
 class OrderCard extends StatelessWidget {
   final int? itemCount;
@@ -20,8 +21,12 @@ class OrderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // ignore: todo
-        //TODO:order details
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: ((context) => OrderDetailsScreen(orderID: orderID)),
+          ),
+        );
       },
       child: Container(
         decoration: const BoxDecoration(
