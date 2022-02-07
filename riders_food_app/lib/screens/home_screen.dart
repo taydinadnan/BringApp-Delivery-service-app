@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riders_food_app/screens/new_orders_screen.dart';
 
 import '../authentication/auth_screen.dart';
 import '../global/global.dart';
@@ -59,6 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: () {
             if (index == 0) {
               //new orders
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => NewOrdersScreen())));
             }
             if (index == 1) {
               //Parcels in progress
