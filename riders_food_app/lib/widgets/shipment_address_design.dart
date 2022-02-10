@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:riders_food_app/assistantMethods/get_current_location.dart';
 
+import '../global/global.dart';
 import '../models/address.dart';
 import '../splash_screen/splash_screen.dart';
 
@@ -8,6 +11,29 @@ class ShipmentAddressDesign extends StatelessWidget {
   final String? orderStatus;
 
   ShipmentAddressDesign({this.model, this.orderStatus});
+
+  confirmedParcelShipment(BuildContext context, String getOrderID,
+      String sellerId, String purchaserId) {
+    FirebaseFirestore.instance.collection("orders").doc(getOrderID).update(
+      {
+        "riderUID": sharedPreferences!.getString("uid"),
+        "riderName": sharedPreferences!.getString("name"),
+        "status": "picking",
+        "lat": position!.latitude,
+        "lng": position!.longitude,
+        "address": completeAddress,
+      },
+    );
+
+    //TODO: send rider to shipment screen
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: ((context) => SplashScreen()),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +96,8 @@ class ShipmentAddressDesign extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => SplashScreen()),
-                        ),
-                      );
+                      UserLocation? uLocation;
+                      uLocation!.getCurrenLocation();
                     },
                     child: Container(
                       decoration: const BoxDecoration(
@@ -139,6 +161,7 @@ class ShipmentAddressDesign extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 20),
       ],
     );
   }
