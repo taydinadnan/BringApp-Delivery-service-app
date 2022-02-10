@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_food_app/assistantMethods/get_current_location.dart';
+import 'package:riders_food_app/screens/shipment_screen.dart';
 
 import '../global/global.dart';
 import '../models/address.dart';
@@ -9,8 +10,17 @@ import '../splash_screen/splash_screen.dart';
 class ShipmentAddressDesign extends StatelessWidget {
   final Address? model;
   final String? orderStatus;
+  final String? orderId;
+  final String? sellerId;
+  final String? orderByUser;
 
-  ShipmentAddressDesign({this.model, this.orderStatus});
+  ShipmentAddressDesign({
+    this.model,
+    this.orderStatus,
+    this.orderId,
+    this.sellerId,
+    this.orderByUser,
+  });
 
   confirmedParcelShipment(BuildContext context, String getOrderID,
       String sellerId, String purchaserId) {
@@ -30,7 +40,14 @@ class ShipmentAddressDesign extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: ((context) => SplashScreen()),
+        builder: ((context) => ShipmentScreen(
+              purchaserId: purchaserId,
+              purchaserAddress: model!.fullAddress,
+              purchaserLat: model!.lat,
+              purchaserLng: model!.lng,
+              sellerId: sellerId,
+              getOrderID: getOrderID,
+            )),
       ),
     );
   }
@@ -96,8 +113,15 @@ class ShipmentAddressDesign extends StatelessWidget {
                 child: Center(
                   child: InkWell(
                     onTap: () {
-                      UserLocation? uLocation;
-                      uLocation!.getCurrenLocation();
+                      UserLocation uLocation = UserLocation();
+                      uLocation.getCurrenLocation();
+
+                      confirmedParcelShipment(
+                        context,
+                        orderId!,
+                        sellerId!,
+                        orderByUser!,
+                      );
                     },
                     child: Container(
                       decoration: const BoxDecoration(

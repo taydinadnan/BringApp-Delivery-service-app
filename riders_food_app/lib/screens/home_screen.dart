@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:riders_food_app/assistantMethods/get_current_location.dart';
 import 'package:riders_food_app/screens/new_orders_screen.dart';
 
 import '../authentication/auth_screen.dart';
@@ -113,6 +114,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    UserLocation uLocation = UserLocation();
+    uLocation.getCurrenLocation();
   }
 
   @override

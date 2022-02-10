@@ -19,6 +19,7 @@ class OrderDetailsScreen extends StatefulWidget {
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   String orderStatus = "";
   String orderByUser = "";
+  String sellerId = "";
 
   getOrderInfo() {
     FirebaseFirestore.instance
@@ -28,6 +29,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         .then((DocumentSnapshot) {
       orderStatus = DocumentSnapshot.data()!["status"].toString();
       orderByUser = DocumentSnapshot.data()!["orderBy"].toString();
+      sellerId = DocumentSnapshot.data()!["sellerUID"].toString();
     });
   }
 
@@ -125,6 +127,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                       model: Address.fromJson(snapshot.data!
                                           .data()! as Map<String, dynamic>),
                                       orderStatus: orderStatus,
+                                      orderId: widget.orderID,
+                                      sellerId: sellerId,
+                                      orderByUser: orderByUser,
                                     )
                                   : Center(
                                       child: circularProgress(),
