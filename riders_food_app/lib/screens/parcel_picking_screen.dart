@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:riders_food_app/assistantMethods/get_current_location.dart';
 import 'package:riders_food_app/global/global.dart';
 import 'package:riders_food_app/maps/map_utils.dart';
+import 'package:riders_food_app/screens/parcel_delivering_screen.dart';
 
-import '../splash_screen/splash_screen.dart';
-
-class ShipmentScreen extends StatefulWidget {
+class ParcelPickingScreen extends StatefulWidget {
   String? purchaserId;
   String? sellerId;
   String? getOrderID;
@@ -13,7 +13,7 @@ class ShipmentScreen extends StatefulWidget {
   double? purchaserLat;
   double? purchaserLng;
 
-  ShipmentScreen({
+  ParcelPickingScreen({
     this.purchaserId,
     this.sellerId,
     this.getOrderID,
@@ -23,11 +23,13 @@ class ShipmentScreen extends StatefulWidget {
   });
 
   @override
-  _ShipmentScreenState createState() => _ShipmentScreenState();
+  _ParcelPickingScreenState createState() => _ParcelPickingScreenState();
 }
 
-class _ShipmentScreenState extends State<ShipmentScreen> {
+class _ParcelPickingScreenState extends State<ParcelPickingScreen> {
   double? sellerLat, sellerLng;
+
+  //we get restaurants location by this method
   getSellerData() async {
     FirebaseFirestore.instance
         .collection("sellers")
@@ -44,6 +46,28 @@ class _ShipmentScreenState extends State<ShipmentScreen> {
     super.initState();
 
     getSellerData();
+  }
+
+// updating status and comfirming order has picked
+  confirmParcelHasBeenPicked(getOrderId, sellerId, purchaserId,
+      purchaserAddress, purchaserLat, purchaserLng) {
+    FirebaseFirestore.instance.collection("orders").doc(getOrderId).update({
+      "status": "delivering",
+      "address": completeAddress,
+      "lat": position!.latitude,
+      "lng": position!.longitude
+    });
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (c) => ParcelDeliveringScreen(
+                  purchaserId: purchaserId,
+                  purchaserAddress: purchaserAddress,
+                  purchaserLat: purchaserLat,
+                  purchaserLng: purchaserLng,
+                  sellerId: sellerId,
+                  getOrderId: getOrderId,
+                )));
   }
 
   @override
@@ -95,6 +119,16 @@ class _ShipmentScreenState extends State<ShipmentScreen> {
               child: InkWell(
                 onTap: () {
                   //TODO: confirm that rider has picked order
+                  UserLocation uLocation = UserLocation();
+                  uLocation.getCurrenLocation();
+
+                  confirmParcelHasBeenPicked(
+                      widget.getOrderID,
+                      widget.sellerId,
+                      widget.purchaserId,
+                      widget.purchaserAddress,
+                      widget.purchaserLat,
+                      widget.purchaserLng);
                 },
                 child: Container(
                   decoration: const BoxDecoration(
