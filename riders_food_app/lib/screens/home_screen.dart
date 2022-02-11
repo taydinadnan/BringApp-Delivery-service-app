@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riders_food_app/assistantMethods/get_current_location.dart';
 import 'package:riders_food_app/screens/new_orders_screen.dart';
+import 'package:riders_food_app/screens/parcel_in_progress_screen.dart';
 
 import '../authentication/auth_screen.dart';
 import '../global/global.dart';
@@ -66,6 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (index == 1) {
               //Parcels in progress
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ParcelInProgressScreen()));
             }
             if (index == 2) {
               //not yet delivered
