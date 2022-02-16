@@ -66,6 +66,18 @@ class _ParcelDeliveringScreenState extends State<ParcelDeliveringScreen> {
         context, MaterialPageRoute(builder: (c) => const SplashScreen()));
   }
 
+//retrieve order total amount
+  getOrderTotalAmount() {
+    FirebaseFirestore.instance
+        .collection("orders")
+        .doc(widget.getOrderId)
+        .get()
+        .then((snap) {
+      snap.data()!["totalAmount"].toString();
+      widget.sellerId = snap.data()!["sellerUID"].toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
