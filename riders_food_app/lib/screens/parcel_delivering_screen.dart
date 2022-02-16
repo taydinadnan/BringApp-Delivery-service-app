@@ -117,8 +117,7 @@ class _ParcelDeliveringScreenState extends State<ParcelDeliveringScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            "images/confirm1.png",
-            width: 350,
+            "images/confirm2.png",
           ),
           const SizedBox(height: 5),
           GestureDetector(
@@ -142,7 +141,7 @@ class _ParcelDeliveringScreenState extends State<ParcelDeliveringScreen> {
                   children: const [
                     SizedBox(height: 12),
                     Text(
-                      "Show Cafe/Restaurant Location",
+                      "Show Drop-off Location",
                       style: TextStyle(
                         fontFamily: "Signatra",
                         fontSize: 20,
