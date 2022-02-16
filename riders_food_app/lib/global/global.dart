@@ -12,4 +12,6 @@ String completeAddress = "";
 
 String perParcelDeliveryAmount = "";
 
-String previousEarnings = "";
+String previousEarnings = ""; //this is previous seller earnings
+
+String previousRiderEarnings = ""; // this is previous rider earnings
