@@ -35,7 +35,7 @@ class _ParcelDeliveringScreenState extends State<ParcelDeliveringScreen> {
       "address": completeAddress,
       "lat": position!.latitude,
       "lng": position!.longitude,
-      "earnings": "", //pay per delivery
+      "earnings": perParcelDeliveryAmount, //pay per delivery
     }).then((value) {
       FirebaseFirestore.instance
           .collection("riders")
