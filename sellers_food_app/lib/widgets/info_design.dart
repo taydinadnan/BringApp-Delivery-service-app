@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sellers_food_app/global/global.dart';
 import 'package:sellers_food_app/models/menus.dart';
 
 import '../screens/items_screen.dart';
@@ -15,6 +18,17 @@ class InfoDesignWidget extends StatefulWidget {
 }
 
 class _InfoDesignWidgetState extends State<InfoDesignWidget> {
+  deleteMenu(String menuID) {
+    FirebaseFirestore.instance
+        .collection("sellers")
+        .doc(sharedPreferences!.getString("uid"))
+        .collection("menus")
+        .doc(menuID)
+        .delete();
+
+    Fluttertoast.showToast(msg: "Menu Deleted");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,13 +60,28 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                   fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 1),
-                Text(
-                  widget.model!.menuTitle!,
-                  style: const TextStyle(
-                    color: Colors.orange,
-                    fontSize: 20,
-                    fontFamily: "Acme",
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      widget.model!.menuTitle!,
+                      style: const TextStyle(
+                        color: Colors.orange,
+                        fontSize: 20,
+                        fontFamily: "Acme",
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        //delete menu
+                        deleteMenu(widget.model!.menuID!);
+                      },
+                      icon: const Icon(
+                        Icons.delete_sweep,
+                        color: Colors.redAccent,
+                      ),
+                    )
+                  ],
                 ),
                 Text(
                   widget.model!.menuInfo!,
