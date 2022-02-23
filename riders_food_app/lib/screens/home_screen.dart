@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_food_app/assistantMethods/get_current_location.dart';
+import 'package:riders_food_app/screens/history_screen.dart';
 import 'package:riders_food_app/screens/new_orders_screen.dart';
 import 'package:riders_food_app/screens/not_yet_delivered_screen.dart';
 import 'package:riders_food_app/screens/parcel_in_progress_screen.dart';
@@ -83,6 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (index == 3) {
               //history
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HistoryScreen()));
             }
             if (index == 4) {
               //total earnings
