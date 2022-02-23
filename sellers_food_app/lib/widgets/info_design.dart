@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sellers_food_app/global/global.dart';
 import 'package:sellers_food_app/models/menus.dart';
 
@@ -18,17 +17,6 @@ class InfoDesignWidget extends StatefulWidget {
 }
 
 class _InfoDesignWidgetState extends State<InfoDesignWidget> {
-  deleteMenu(String menuID) {
-    FirebaseFirestore.instance
-        .collection("sellers")
-        .doc(sharedPreferences!.getString("uid"))
-        .collection("menus")
-        .doc(menuID)
-        .delete();
-
-    Fluttertoast.showToast(msg: "Menu Deleted");
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,7 +62,6 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                     IconButton(
                       onPressed: () {
                         //delete menu
-                        deleteMenu(widget.model!.menuID!);
                       },
                       icon: const Icon(
                         Icons.delete_sweep,
