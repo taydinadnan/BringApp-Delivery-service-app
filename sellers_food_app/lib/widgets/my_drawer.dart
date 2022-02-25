@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sellers_food_app/screens/earnings_screen.dart';
 import 'package:sellers_food_app/screens/history_screen.dart';
 import 'package:sellers_food_app/screens/home_screen.dart';
 import 'package:sellers_food_app/screens/new_orders_screen.dart';
@@ -95,7 +96,14 @@ class MyDrawer extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (c) => EarningsScreen(),
+                      ),
+                    );
+                  },
                 ),
                 const Divider(height: 10, color: Colors.grey),
                 ListTile(
