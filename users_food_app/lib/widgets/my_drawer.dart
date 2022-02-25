@@ -4,6 +4,7 @@ import 'package:users_food_app/screens/address_screen.dart';
 import 'package:users_food_app/screens/history_screen.dart';
 import 'package:users_food_app/screens/home_screen.dart';
 import 'package:users_food_app/screens/my_orders_screen.dart';
+import 'package:users_food_app/screens/search_screen.dart';
 
 import '../authentication/auth_screen.dart';
 
@@ -136,7 +137,14 @@ class MyDrawer extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => SearchScreen()),
+                      ),
+                    );
+                  },
                 ),
                 const Divider(height: 10, color: Colors.grey),
                 ListTile(
