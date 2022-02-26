@@ -53,25 +53,242 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff1b232A),
       appBar: AppBar(
-        title: const Text("Welcome to Admin Web Portal"),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Text(
-                timeText + "\n" + dateText,
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.black,
-                  letterSpacing: 3,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color(0xff1b232A),
+                Colors.white,
+              ],
+              begin: FractionalOffset(0, 0),
+              end: FractionalOffset(6, 0),
+              stops: [0, 1],
+              tileMode: TileMode.clamp,
             ),
-          ],
+          ),
+        ),
+        title: const Text(
+          "Admin Web Portal",
+          style: TextStyle(
+            fontSize: 20,
+            letterSpacing: 3,
+            color: Colors.white,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          dateText,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.white70,
+                            letterSpacing: 2,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          timeText,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white70,
+                            letterSpacing: 3,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 50),
+
+              // user activate and deactivate accounts ui
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //activate user
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.person_add,
+                      color: Color.fromARGB(255, 117, 190, 119),
+                    ),
+                    label: Text(
+                      "Activate".toUpperCase() + "\n  " + "Users".toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        letterSpacing: 3,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30),
+                        primary: Colors.amber),
+                  ),
+                  const SizedBox(width: 10),
+                  //deactivate user
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.block_flipped,
+                      color: Colors.redAccent,
+                    ),
+                    label: Text(
+                      "Deactivate".toUpperCase() +
+                          "\n    " +
+                          "Users".toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        letterSpacing: 3,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30),
+                        primary: Colors.white),
+                  )
+                ],
+              ),
+              const SizedBox(height: 20),
+
+              //sellers activate and deactivate account
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //activate seller
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.person_add,
+                      color: Color.fromARGB(255, 117, 190, 119),
+                    ),
+                    label: Text(
+                      "Activate".toUpperCase() +
+                          "\n " +
+                          "Sellers".toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        letterSpacing: 3,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30),
+                        primary: Colors.white),
+                  ),
+                  const SizedBox(width: 10),
+                  //deactivate user
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.block,
+                      color: Colors.redAccent,
+                    ),
+                    label: Text(
+                      "Deactivate".toUpperCase() +
+                          "\n  " +
+                          "Sellers".toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        letterSpacing: 3,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30),
+                        primary: Colors.amber),
+                  )
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              //riders activate and deactivate account
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  //activate seller
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.person_add,
+                      color: Color.fromARGB(255, 117, 190, 119),
+                    ),
+                    label: Text(
+                      "Activate".toUpperCase() +
+                          "\n  " +
+                          "Riders".toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        letterSpacing: 3,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30),
+                        primary: Colors.amber),
+                  ),
+                  const SizedBox(width: 10),
+                  //deactivate user
+                  ElevatedButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.block,
+                      color: Colors.redAccent,
+                    ),
+                    label: Text(
+                      "Deactivate".toUpperCase() +
+                          "\n   " +
+                          "Riders".toUpperCase(),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black,
+                        letterSpacing: 3,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(30),
+                        primary: Colors.white),
+                  )
+                ],
+              ),
+              const SizedBox(height: 50),
+
+              //Logout
+              ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.exit_to_app,
+                  color: Colors.grey,
+                ),
+                label: Text(
+                  "Logout".toUpperCase(),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                    letterSpacing: 3,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.all(30), primary: Colors.white),
+              )
+            ],
+          ),
         ),
       ),
     );
