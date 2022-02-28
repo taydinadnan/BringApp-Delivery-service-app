@@ -44,92 +44,113 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
       appBar: SimpleAppBar(
         title: sharedPreferences!.getString("name"),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 3,
-                  offset: Offset(2, 2),
-                ),
-              ],
-            ),
-            child: Image.network(
-              widget.model!.thumbnailUrl.toString(),
-            ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.model!.title.toString(),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.model!.longDescription.toString(),
-              textAlign: TextAlign.justify,
-              style: const TextStyle(
-                fontWeight: FontWeight.normal,
-                fontSize: 15,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "\$" + widget.model!.price.toString(),
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 30,
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          Center(
-            child: InkWell(
-              onTap: () {
-                //delete item
-                deleteItem(widget.model!.itemID!);
-              },
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
               child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: FractionalOffset(0.0, 0.0),
-                    end: FractionalOffset(3.0, -1.0),
-                    colors: [
-                      Color(0xFF004B8D),
-                      Color(0xFFffffff),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 3,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                  border: Border.all(
+                    color: Colors.amber,
+                    width: 1.5,
                   ),
                 ),
-                width: MediaQuery.of(context).size.width - 13,
-                height: 50,
-                child: const Center(
-                  child: Text(
-                    "Delete item.",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    widget.model!.thumbnailUrl.toString(),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.model!.title.toString(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                widget.model!.longDescription.toString(),
+                textAlign: TextAlign.justify,
+                style: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "\$" + widget.model!.price.toString(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Center(
+              child: InkWell(
+                onTap: () {
+                  //delete item
+                  deleteItem(widget.model!.itemID!);
+                },
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: FractionalOffset(0.0, 0.0),
+                      end: FractionalOffset(3.0, -1.0),
+                      colors: [
+                        Colors.amber,
+                        Color(0xFFffffff),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30),
+                    ),
+                  ),
+                  width: 190,
+                  height: 50,
+                  child: const Center(
+                    child: Text(
+                      "Delete item.",
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

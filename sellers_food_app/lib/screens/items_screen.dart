@@ -28,10 +28,10 @@ class _ItemsScreenState extends State<ItemsScreen> {
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
@@ -40,12 +40,16 @@ class _ItemsScreenState extends State<ItemsScreen> {
           sharedPreferences!.getString("name")!,
           style: const TextStyle(
             fontSize: 30,
-            color: Colors.white,
+            color: Colors.black,
             fontFamily: "Lobster",
           ),
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
+        iconTheme: const IconThemeData(
+          color: Colors.amber,
+          size: 35,
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -56,9 +60,15 @@ class _ItemsScreenState extends State<ItemsScreen> {
                 ),
               );
             },
-            icon: const Icon(
-              Icons.library_add,
-              color: Colors.orange,
+            icon: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.amber,
+              ),
+              child: const Icon(
+                Icons.add,
+                color: Colors.black,
+              ),
             ),
           )
         ],

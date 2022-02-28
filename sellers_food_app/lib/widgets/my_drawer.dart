@@ -97,12 +97,12 @@ class MyDrawer extends StatelessWidget {
                     ),
                   ),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (c) => EarningsScreen(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (c) => EarningsScreen(),
+                    //   ),
+                    // );
                   },
                 ),
                 const Divider(height: 10, color: Colors.grey),

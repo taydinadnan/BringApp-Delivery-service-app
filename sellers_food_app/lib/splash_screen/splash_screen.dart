@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   startTimer() {
     Timer(
-      const Duration(seconds: 4),
+      const Duration(seconds: 1),
       () async {
         //if the user is already authenticate send user to home screen
         if (firebaseAuth.currentUser != null) {

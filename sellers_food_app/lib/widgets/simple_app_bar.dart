@@ -18,12 +18,10 @@ class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
-            stops: [0.0, 1.0],
-            tileMode: TileMode.clamp,
+            end: FractionalOffset(5.0, -1.0),
             colors: [
-              Color(0xFF004B8D),
-              Color(0xFFffffff),
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
             ],
           ),
         ),
@@ -31,13 +29,17 @@ class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
       title: Text(
         title!,
         style: const TextStyle(
-          fontSize: 45,
-          fontFamily: "Signatra",
-          letterSpacing: 3,
-        ),
+            fontSize: 35,
+            fontFamily: "Signatra",
+            letterSpacing: 3,
+            color: Colors.black),
       ),
       centerTitle: true,
       automaticallyImplyLeading: true,
+      iconTheme: const IconThemeData(
+        color: Colors.amber,
+        size: 35,
+      ),
     );
   }
 }
