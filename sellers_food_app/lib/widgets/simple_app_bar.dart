@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
@@ -16,28 +17,30 @@ class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
       elevation: 0,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(5.0, -1.0),
-            colors: [
-              Color(0xFFFFFFFF),
-              Color(0xFFFAC898),
-            ],
-          ),
-        ),
+            // gradient: LinearGradient(
+            //   begin: FractionalOffset(-1.0, 0.0),
+            //   end: FractionalOffset(5.0, -1.0),
+            //   colors: [
+            //     Color(0xFFFFFFFF),
+            //     Color(0xFFFAC898),
+            //   ],
+            // ),
+            color: Colors.white),
       ),
       title: Text(
-        title!,
-        style: const TextStyle(
-            fontSize: 35,
-            fontFamily: "Signatra",
-            letterSpacing: 3,
-            color: Colors.black),
+        "Item Details",
+        style: GoogleFonts.lato(
+          textStyle: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
       ),
       centerTitle: true,
       automaticallyImplyLeading: true,
       iconTheme: const IconThemeData(
-        color: Colors.amber,
+        color: Colors.black,
         size: 35,
       ),
     );

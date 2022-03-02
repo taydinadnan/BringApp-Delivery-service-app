@@ -23,100 +23,115 @@ class _ItemsScreenState extends State<ItemsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(5.0, -1.0),
-              colors: [
-                Color(0xFFFFFFFF),
-                Color(0xFFFAC898),
+      drawer: MyDrawer(),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
+        child: CustomScrollView(
+          slivers: [
+            //appbar
+            SliverAppBar(
+              elevation: 1,
+              pinned: true,
+              backgroundColor: const Color(0xFFFAC898),
+              foregroundColor: Colors.black,
+              expandedHeight: 50,
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: FractionalOffset(-1.0, 0.0),
+                    end: FractionalOffset(4.0, -1.0),
+                    colors: [
+                      Color(0xFFFFFFFF),
+                      Color(0xFFFAC898),
+                    ],
+                  ),
+                ),
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: GestureDetector(
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.amber,
+                      ),
+                      child: const Icon(Icons.add),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (c) => ItemsUploadScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
-          ),
-        ),
-        title: Text(
-          sharedPreferences!.getString("name")!,
-          style: const TextStyle(
-            fontSize: 30,
-            color: Colors.black,
-            fontFamily: "Lobster",
-          ),
-        ),
-        centerTitle: true,
-        automaticallyImplyLeading: true,
-        iconTheme: const IconThemeData(
-          color: Colors.amber,
-          size: 35,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (c) => ItemsUploadScreen(model: widget.model),
-                ),
-              );
-            },
-            icon: Container(
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.amber,
-              ),
-              child: const Icon(
-                Icons.add,
-                color: Colors.black,
-              ),
+
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: TextWidgetHeader(
+                  title: widget.model!.menuTitle.toString().toUpperCase() +
+                      "'s Menu Items".toUpperCase()),
             ),
-          )
-        ],
-        elevation: 0,
-      ),
-      drawer: MyDrawer(),
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: TextWidgetHeader(
-                title: "My " + widget.model!.menuTitle.toString() + "'s Items"),
-          ),
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection("sellers")
-                .doc(sharedPreferences!.getString("uid"))
-                .collection("menus")
-                .doc(widget.model!.menuID)
-                .collection("items")
-                //ordering menus and items by publishing date (descending)
-                .orderBy("publishedDate", descending: true)
-                .snapshots(),
-            builder: (context, snapshot) {
-              return !snapshot.hasData
-                  ? SliverToBoxAdapter(
-                      child: Center(
-                        child: circularProgress(),
-                      ),
-                    )
-                  : SliverStaggeredGrid.countBuilder(
-                      staggeredTileBuilder: (c) => const StaggeredTile.fit(2),
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 4,
-                      itemBuilder: (context, index) {
-                        Items model = Items.fromJson(snapshot.data!.docs[index]
-                            .data()! as Map<String, dynamic>);
-                        return ItemsDesign(
-                          model: model,
-                          context: context,
-                        );
-                      },
-                      itemCount: snapshot.data!.docs.length,
-                    );
-            },
-          ),
-        ],
+            //divider
+            const SliverToBoxAdapter(
+              child: Divider(color: Colors.white, thickness: 2),
+            ),
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection("sellers")
+                  .doc(sharedPreferences!.getString("uid"))
+                  .collection("menus")
+                  .doc(widget.model!.menuID)
+                  .collection("items")
+                  //ordering menus and items by publishing date (descending)
+                  .orderBy("publishedDate", descending: true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                return !snapshot.hasData
+                    ? SliverToBoxAdapter(
+                        child: Center(
+                          child: circularProgress(),
+                        ),
+                      )
+                    : SliverStaggeredGrid.countBuilder(
+                        staggeredTileBuilder: (c) =>
+                            const StaggeredTile.count(1, 1.5),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 1,
+                        crossAxisSpacing: 0,
+                        itemBuilder: (context, index) {
+                          Items model = Items.fromJson(
+                              snapshot.data!.docs[index].data()!
+                                  as Map<String, dynamic>);
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ItemsDesign(
+                              model: model,
+                              context: context,
+                            ),
+                          );
+                        },
+                        itemCount: snapshot.data!.docs.length,
+                      );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

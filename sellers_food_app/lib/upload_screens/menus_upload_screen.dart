@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sellers_food_app/global/global.dart';
 import 'package:sellers_food_app/screens/home_screen.dart';
@@ -35,29 +36,31 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              begin: FractionalOffset(-2.0, 0.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
         ),
-        title: const Text(
-          "Add New Menu",
-          style: TextStyle(
-            fontSize: 30,
-            color: Colors.white,
-            fontFamily: "Lobster",
+        title: Text(
+          "Add New Menu".toUpperCase(),
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
+            Icons.home,
+            color: Colors.black,
           ),
           onPressed: () {
             Navigator.push(
@@ -68,15 +71,16 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
             );
           },
         ),
+        elevation: 0,
       ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(4.0, -1.0),
             colors: [
-              Color(0xFF004B8D),
-              Color(0xFFffffff),
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
             ],
           ),
         ),
@@ -86,8 +90,8 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
             children: [
               const Icon(
                 Icons.shop_two,
-                color: Colors.white,
-                size: 200,
+                color: Colors.black,
+                size: 150,
               ),
               ElevatedButton(
                 onPressed: () {
@@ -189,21 +193,23 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              begin: FractionalOffset(-2.0, 0.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           "New Menu Form",
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.white,
-            fontFamily: "Lobster",
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
         centerTitle: true,
@@ -211,7 +217,7 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: Colors.black,
           ),
           onPressed: () {
             clearMenuUploadFrom();
@@ -222,17 +228,19 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
             onPressed:
                 //we check if uploading is null (otherwise if user clicks more than 1 time it will upload more than 1 time)
                 uploading ? null : () => validateUploadForm(),
-            child: const Text(
-              "Add",
-              style: TextStyle(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  fontFamily: "Bebas",
-                  letterSpacing: 3),
+            child: Text(
+              "Add".toUpperCase(),
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
             ),
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              backgroundColor: MaterialStateProperty.all<Color>(
+                Colors.amber,
+              ),
               shape: MaterialStateProperty.all<CircleBorder>(
                 const CircleBorder(),
               ),
@@ -240,65 +248,104 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          uploading == true ? linearProgress() : const Text(""),
-          SizedBox(
-            height: 230,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Center(
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
+        child: ListView(
+          children: [
+            uploading == true ? linearProgress() : const Text(""),
+            SizedBox(
+              height: 220,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: 16 / 10,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
                         image: FileImage(
                           File(imageXFile!.path),
                         ),
-                        fit: BoxFit.cover),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          offset: const Offset(-1, 10),
+                          blurRadius: 10,
+                        )
+                      ],
+                      gradient: const LinearGradient(
+                        begin: FractionalOffset(-2.0, 0.0),
+                        end: FractionalOffset(5.0, -1.0),
+                        colors: [
+                          Color(0xFFFFFFFF),
+                          Color(0xFFFAC898),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          const Divider(color: Colors.blue),
-          ListTile(
-            leading: const Icon(
-              Icons.perm_device_information,
-              color: Colors.orange,
+            const SizedBox(height: 15),
+            const Divider(
+              color: Colors.white,
+              thickness: 2,
             ),
-            title: Container(
-              width: 250,
-              child: TextField(
-                controller: shortInfoController,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                    hintText: "Menu Info",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none),
+            ListTile(
+              leading: const Icon(
+                Icons.perm_device_information,
+                color: Colors.black,
+              ),
+              title: SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: shortInfoController,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                      hintText: "Menu Info",
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: InputBorder.none),
+                ),
               ),
             ),
-          ),
-          const Divider(color: Colors.blue),
-          ListTile(
-            leading: const Icon(
-              Icons.title,
-              color: Colors.orange,
+            const Divider(
+              color: Colors.white,
+              thickness: 2,
             ),
-            title: Container(
-              width: 250,
-              child: TextField(
-                controller: titleController,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                    hintText: "Menu Title",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none),
+            ListTile(
+              leading: const Icon(
+                Icons.title,
+                color: Colors.black,
+              ),
+              title: SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: titleController,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                      hintText: "Menu Title",
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: InputBorder.none),
+                ),
               ),
             ),
-          ),
-          const Divider(color: Colors.blue),
-        ],
+            const Divider(
+              color: Colors.white,
+              thickness: 2,
+            ),
+          ],
+        ),
       ),
     );
   }

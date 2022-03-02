@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sellers_food_app/global/global.dart';
-import 'package:sellers_food_app/screens/home_screen.dart';
 import 'package:sellers_food_app/widgets/progress_bar.dart';
 import 'package:firebase_storage/firebase_storage.dart' as storageRef;
 
@@ -37,51 +37,43 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
   defaultScreen() {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              begin: FractionalOffset(-2.0, 0.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           "Add New Items",
-          style: TextStyle(
-            fontSize: 30,
-            color: Colors.white,
-            fontFamily: "Lobster",
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (c) => const HomeScreen(),
-              ),
-            );
-          },
+        iconTheme: const IconThemeData(
+          color: Colors.black,
         ),
       ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(4.0, -1.0),
             colors: [
-              Color(0xFF004B8D),
-              Color(0xFFffffff),
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
             ],
           ),
         ),
@@ -91,18 +83,20 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
             children: [
               const Icon(
                 Icons.shop_two,
-                color: Colors.white,
-                size: 200,
+                color: Colors.black,
+                size: 150,
               ),
               ElevatedButton(
                 onPressed: () {
                   takeImage(context);
                 },
-                child: const Text(
+                child: Text(
                   "Add New Item",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
+                  style: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 style: ButtonStyle(
@@ -194,21 +188,23 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              begin: FractionalOffset(-2.0, 0.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
         ),
-        title: const Text(
+        title: Text(
           "New Item Form",
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.white,
-            fontFamily: "Lobster",
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
         centerTitle: true,
@@ -216,7 +212,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: Colors.black,
           ),
           onPressed: () {
             clearMenuUploadFrom();
@@ -227,14 +223,14 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
             onPressed:
                 //we check if uploading is null (otherwise if user clicks more than 1 time it will upload more than 1 time)
                 uploading ? null : () => validateUploadForm(),
-            child: const Text(
+            child: Text(
               "Add",
-              style: TextStyle(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  fontFamily: "Bebas",
-                  letterSpacing: 3),
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+              ),
             ),
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -245,101 +241,142 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          uploading == true ? linearProgress() : const Text(""),
-          SizedBox(
-            height: 230,
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: Center(
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
+        child: ListView(
+          children: [
+            uploading == true ? linearProgress() : const Text(""),
+            SizedBox(
+              height: 230,
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: Center(
+                child: AspectRatio(
+                  aspectRatio: 16 / 10,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
                         image: FileImage(
                           File(imageXFile!.path),
                         ),
-                        fit: BoxFit.cover),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          offset: const Offset(-1, 10),
+                          blurRadius: 10,
+                        )
+                      ],
+                      gradient: const LinearGradient(
+                        begin: FractionalOffset(-2.0, 0.0),
+                        end: FractionalOffset(5.0, -1.0),
+                        colors: [
+                          Color(0xFFFFFFFF),
+                          Color(0xFFFAC898),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          const Divider(color: Colors.blue),
-          ListTile(
-            leading: const Icon(
-              Icons.perm_device_information,
-              color: Colors.orange,
+            const Divider(
+              color: Colors.white,
+              thickness: 2,
             ),
-            title: Container(
-              width: 250,
-              child: TextField(
-                controller: shortInfoController,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                    hintText: "Info",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none),
+            ListTile(
+              leading: const Icon(
+                Icons.perm_device_information,
+                color: Colors.black,
+              ),
+              title: SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: shortInfoController,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                      hintText: "Info",
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: InputBorder.none),
+                ),
               ),
             ),
-          ),
-          const Divider(color: Colors.blue),
-          ListTile(
-            leading: const Icon(
-              Icons.title,
-              color: Colors.orange,
+            const Divider(
+              color: Colors.white,
+              thickness: 2,
             ),
-            title: SizedBox(
-              width: 250,
-              child: TextField(
-                controller: titleController,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                    hintText: "Title",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none),
+            ListTile(
+              leading: const Icon(
+                Icons.title,
+                color: Colors.black,
+              ),
+              title: SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: titleController,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                      hintText: "Title",
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: InputBorder.none),
+                ),
               ),
             ),
-          ),
-          const Divider(color: Colors.blue),
-          ListTile(
-            leading: const Icon(
-              Icons.description,
-              color: Colors.orange,
+            const Divider(
+              color: Colors.white,
+              thickness: 2,
             ),
-            title: SizedBox(
-              width: 250,
-              child: TextField(
-                controller: descriptionController,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                    hintText: "Description",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none),
+            ListTile(
+              leading: const Icon(
+                Icons.description,
+                color: Colors.black,
+              ),
+              title: SizedBox(
+                width: 250,
+                child: TextField(
+                  controller: descriptionController,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                      hintText: "Description",
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: InputBorder.none),
+                ),
               ),
             ),
-          ),
-          const Divider(color: Colors.blue),
-          ListTile(
-            leading: const Icon(
-              Icons.monetization_on,
-              color: Colors.orange,
+            const Divider(
+              color: Colors.white,
+              thickness: 2,
             ),
-            title: SizedBox(
-              width: 250,
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: priceController,
-                style: const TextStyle(color: Colors.black),
-                decoration: const InputDecoration(
-                    hintText: "Price",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none),
+            ListTile(
+              leading: const Icon(
+                Icons.monetization_on,
+                color: Colors.black,
+              ),
+              title: SizedBox(
+                width: 250,
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  controller: priceController,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
+                      hintText: "Price",
+                      hintStyle: TextStyle(color: Colors.grey),
+                      border: InputBorder.none),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

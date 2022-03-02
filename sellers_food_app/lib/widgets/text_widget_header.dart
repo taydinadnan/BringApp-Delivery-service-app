@@ -18,7 +18,7 @@ class TextWidgetHeader extends SliverPersistentHeaderDelegate {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: FractionalOffset(-1.0, 0.0),
-            end: FractionalOffset(5.0, -1.0),
+            end: FractionalOffset(4.0, -1.0),
             colors: [
               Color(0xFFFFFFFF),
               Color(0xFFFAC898),

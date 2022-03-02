@@ -33,7 +33,6 @@ class _SellerInfoState extends State<SellerInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 40),
       padding: const EdgeInsets.symmetric(horizontal: 25),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -47,12 +46,15 @@ class _SellerInfoState extends State<SellerInfo> {
       ),
       child: Column(
         children: [
-          Text(
-            "Restaurant Info".toUpperCase(),
-            style: GoogleFonts.lato(
-              textStyle: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Restaurant Info".toUpperCase(),
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
