@@ -100,5 +100,29 @@
       loadMainDartJs();
     }
   </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="main.dart.js" type="application/javascript"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtGaTDbPdubsl1yTh_Hapq7RzAwWERTKs",
+      authDomain: "bring-clone-app.firebaseapp.com",
+      projectId: "bring-clone-app",
+      storageBucket: "bring-clone-app.appspot.com",
+      messagingSenderId: "38185865524",
+      appId: "1:38185865524:web:72f58859dfcc9743081561"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
 </body>
 </html>
