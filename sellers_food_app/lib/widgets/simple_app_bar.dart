@@ -17,15 +17,15 @@ class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
       elevation: 0,
       flexibleSpace: Container(
         decoration: const BoxDecoration(
-            // gradient: LinearGradient(
-            //   begin: FractionalOffset(-1.0, 0.0),
-            //   end: FractionalOffset(5.0, -1.0),
-            //   colors: [
-            //     Color(0xFFFFFFFF),
-            //     Color(0xFFFAC898),
-            //   ],
-            // ),
-            color: Colors.white),
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
       ),
       title: Text(
         "Item Details",

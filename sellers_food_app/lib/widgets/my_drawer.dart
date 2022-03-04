@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sellers_food_app/authentication/login.dart';
 import 'package:sellers_food_app/screens/history_screen.dart';
 import 'package:sellers_food_app/screens/home_screen.dart';
 import 'package:sellers_food_app/screens/new_orders_screen.dart';
 
-import '../authentication/auth_screen.dart';
 import '../global/global.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -198,7 +198,7 @@ class MyDrawer extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (c) => AuthScreen(),
+                            builder: (c) => const LoginScreen(),
                           ),
                         );
                         _controller.clear();

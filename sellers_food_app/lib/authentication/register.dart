@@ -14,6 +14,7 @@ import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../global/global.dart';
+import '../widgets/header_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -199,7 +200,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       saveDataToFirestore(currentUser!).then((value) {
         Navigator.pop(context);
         //send user to Home Screen
-        Route newRoute = MaterialPageRoute(builder: (c) => HomeScreen());
+        Route newRoute = MaterialPageRoute(builder: (c) => const HomeScreen());
         Navigator.pushReplacement(context, newRoute);
       });
     }
@@ -232,139 +233,189 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const SizedBox(height: 10),
-          InkWell(
-            onTap: () {
-              _getImage();
-            },
-            child: CircleAvatar(
-              radius: MediaQuery.of(context).size.width * 0.20,
-              backgroundColor: Colors.white,
-              backgroundImage: imageXFile == null
-                  ? null
-                  : FileImage(
-                      File(imageXFile!.path),
-                    ),
-              child: imageXFile == null
-                  ? Icon(
-                      Icons.add_photo_alternate,
-                      size: MediaQuery.of(context).size.width * 0.20,
-                      color: Colors.grey,
-                    )
-                  : null,
-            ),
+    return Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
           ),
-          const SizedBox(height: 10),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                CustomTextField(
-                  data: Icons.person,
-                  controller: nameController,
-                  hintText: "Name",
-                  isObsecre: false,
-                ),
-                CustomTextField(
-                  data: Icons.email,
-                  controller: emailController,
-                  hintText: "Email",
-                  isObsecre: false,
-                ),
-                CustomTextField(
-                  data: Icons.lock,
-                  controller: passwordController,
-                  hintText: "Password",
-                  isObsecre: true,
-                ),
-                CustomTextField(
-                  data: Icons.lock,
-                  controller: confirmpasswordController,
-                  hintText: "Confirm password",
-                  isObsecre: true,
-                ),
-                CustomTextField(
-                  data: Icons.phone_android_outlined,
-                  controller: phoneController,
-                  hintText: "Phone nummber",
-                  isObsecre: false,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 300,
-                      child: CustomTextField(
-                        data: Icons.my_location,
-                        controller: locationController,
-                        hintText: "Cafe/Restorant Address",
-                        isObsecre: false,
-                        enabled: false,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    height: 150,
+                    child: const HeaderWidget(
+                      150,
+                      false,
+                      Icons.add,
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 20,
+                          offset: const Offset(0, 5),
+                        )
+                      ],
+                    ),
+                    margin: const EdgeInsets.fromLTRB(25, 50, 25, 10),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    alignment: Alignment.center,
+                    child: InkWell(
+                      onTap: () {
+                        _getImage();
+                      },
+                      child: CircleAvatar(
+                        radius: MediaQuery.of(context).size.width * 0.20,
+                        backgroundColor: Colors.white,
+                        backgroundImage: imageXFile == null
+                            ? null
+                            : FileImage(
+                                File(imageXFile!.path),
+                              ),
+                        child: imageXFile == null
+                            ? Icon(
+                                Icons.person_add_alt_1,
+                                size: MediaQuery.of(context).size.width * 0.20,
+                                color: Colors.grey,
+                              )
+                            : null,
                       ),
                     ),
-                    Center(
-                      child: IconButton(
-                        onPressed: () {
-                          getCurrenLocation();
-                        },
-                        icon: const Icon(
-                          Icons.location_on,
-                          size: 40,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      data: Icons.person,
+                      controller: nameController,
+                      hintText: "Name",
+                      isObsecre: false,
+                    ),
+                    CustomTextField(
+                      data: Icons.email,
+                      controller: emailController,
+                      hintText: "Email",
+                      isObsecre: false,
+                    ),
+                    CustomTextField(
+                      data: Icons.lock,
+                      controller: passwordController,
+                      hintText: "Password",
+                      isObsecre: true,
+                    ),
+                    CustomTextField(
+                      data: Icons.lock,
+                      controller: confirmpasswordController,
+                      hintText: "Confirm password",
+                      isObsecre: true,
+                    ),
+                    CustomTextField(
+                      data: Icons.phone_android_outlined,
+                      controller: phoneController,
+                      hintText: "Phone nummber",
+                      isObsecre: false,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomTextField(
+                          data: Icons.my_location,
+                          controller: locationController,
+                          hintText: "Cafe/Restorant Address",
+                          isObsecre: false,
+                          enabled: false,
                         ),
-                        color: Colors.red,
-                      ),
-                    )
+                        Center(
+                          child: IconButton(
+                            onPressed: () {
+                              getCurrenLocation();
+                            },
+                            icon: const Icon(
+                              Icons.location_on,
+                              size: 40,
+                            ),
+                            color: Colors.red,
+                          ),
+                        )
+                      ],
+                    ),
                   ],
                 ),
-                // Container(
-                //   width: 60,
-                //   height: 50,
-                //   alignment: Alignment.center,
-                //   child: ElevatedButton.icon(
-                //     onPressed: () {},
-                //     icon: const Icon(Icons.location_history),
-                //     label: const Text(
-                //       "",
-                //       style: TextStyle(color: Colors.white),
-                //     ),
-                //     style: ElevatedButton.styleFrom(
-                //       primary: Colors.orange,
-                //       shape: RoundedRectangleBorder(
-                //         borderRadius: BorderRadius.circular(30),
-                //       ),
-                //     ),
-                //   ),
-                // )
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: ElevatedButton(
-              onPressed: () {
-                signUpFormValidation();
-              },
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
+              ),
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(0, 4),
+                          blurRadius: 5.0)
+                    ],
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [0.0, 1.0],
+                      colors: [
+                        Colors.amber,
+                        Colors.black,
+                      ],
+                    ),
+                    color: Colors.deepPurple.shade300,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(50, 50)),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      shadowColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                      child: Text(
+                        'Sign Up'.toUpperCase(),
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                    onPressed: () {
+                      signUpFormValidation();
+                    },
+                  ),
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.orange,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 50,
-                  vertical: 10,
-                ),
-              ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
