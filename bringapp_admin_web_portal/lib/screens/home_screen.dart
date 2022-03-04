@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:bringapp_admin_web_portal/authentication/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -271,7 +273,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
               //Logout
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => LoginScreen())));
+                },
                 icon: const Icon(
                   Icons.exit_to_app,
                   color: Colors.grey,
