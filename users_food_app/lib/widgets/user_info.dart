@@ -117,17 +117,32 @@ class _UserInformationState extends State<UserInformation> {
             thickness: 2,
             color: Colors.white,
           ),
-          Center(
-            child: Text(
-              "Restaurants".toUpperCase(),
-              style: GoogleFonts.lato(
-                textStyle: const TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                "Restaurants".toUpperCase(),
+                style: GoogleFonts.lato(
+                  textStyle: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
               ),
-            ),
+              Center(
+                child: Text(
+                  "Meals".toUpperCase(),
+                  style: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           )
         ],
       ),

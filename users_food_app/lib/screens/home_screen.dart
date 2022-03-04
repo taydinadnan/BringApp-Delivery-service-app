@@ -1,14 +1,16 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:users_food_app/assistantMethods/assistant_methods.dart';
+import 'package:users_food_app/widgets/items_avatar_carousel.dart';
 import 'package:users_food_app/widgets/my_drawer.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 
+import '../authentication/login.dart';
 import '../models/sellers.dart';
+import '../widgets/seller_avatar_carousel.dart';
 import '../widgets/design/sellers_design.dart';
 import '../widgets/user_info.dart';
 
@@ -19,6 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -30,33 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   flexibleSpace: Container(
-      //     decoration: const BoxDecoration(
-      //       gradient: LinearGradient(
-      //         begin: FractionalOffset(0.0, 0.0),
-      //         end: FractionalOffset(3.0, -1.0),
-      //         stops: [0.0, 1.0],
-      //         tileMode: TileMode.clamp,
-      //         colors: [
-      //           Color(0xFF004B8D),
-      //           Color(0xFFffffff),
-      //         ],
-      //       ),
-      //     ),
-      //   ),
-      //   title: const Text(
-      //     "Restourants",
-      //     style: TextStyle(
-      //       fontSize: 45,
-      //       fontFamily: "Signatra",
-      //       letterSpacing: 3,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   automaticallyImplyLeading: true,
-      // ),
       drawer: MyDrawer(),
       body: Container(
         decoration: const BoxDecoration(
@@ -102,10 +78,38 @@ class _HomeScreenState extends State<HomeScreen> {
                   centerTitle: false,
                 ),
               ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: GestureDetector(
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.amber,
+                      ),
+                      child: const Icon(Icons.exit_to_app),
+                    ),
+                    onTap: () {
+                      firebaseAuth.signOut().then((value) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (c) => const LoginScreen(),
+                          ),
+                        );
+                        _controller.clear();
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
-
+            //Carausel
             SliverToBoxAdapter(
-              child: UserInformation(),
+              child: Container(
+                child: UserInformation(),
+              ),
             ),
 
             SliverToBoxAdapter(
@@ -113,76 +117,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(5.0),
                 child: SizedBox(
                   //taking %20 height for the device
-                  height: MediaQuery.of(context).size.height * .3,
+                  height: MediaQuery.of(context).size.height * .2,
                   //taking max width for the device
                   width: MediaQuery.of(context).size.width,
-                  child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection("items")
-                        .snapshots(),
-                    builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot) {
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: circularProgress(),
-                        );
-                      }
-                      return CarouselSlider(
-                        options: CarouselOptions(
-                          height: MediaQuery.of(context).size.height * .2,
-                          aspectRatio: 16 / 9,
-                          viewportFraction: 0.9,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          autoPlay: true,
-                          autoPlayInterval: const Duration(seconds: 3),
-                          autoPlayAnimationDuration:
-                              const Duration(milliseconds: 500),
-                          autoPlayCurve: Curves.decelerate,
-                          enlargeCenterPage: true,
-                          scrollDirection: Axis.vertical,
-                        ),
-                        items: snapshot.data!.docs.map((document) {
-                          return Center(
-                            child: Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height / 4,
-                              margin: const EdgeInsets.symmetric(horizontal: 1),
-                              decoration: BoxDecoration(
-                                color: Colors.orange,
-                                borderRadius: BorderRadius.circular(10),
-                                gradient: const LinearGradient(
-                                  begin: FractionalOffset(0.0, 0.0),
-                                  end: FractionalOffset(3.0, -1.0),
-                                  colors: [
-                                    Color(0xFF004B8D),
-                                    Color(0xFFffffff),
-                                  ],
-                                ),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    blurRadius: 3,
-                                    offset: Offset(2, 2),
-                                  )
-                                ],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Image.network(
-                                    document['thumbnailUrl'],
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      );
-                    },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      SellerCarouselWidget(),
+                      ItemsAvatarCarousel(),
+                    ],
                   ),
                 ),
               ),
