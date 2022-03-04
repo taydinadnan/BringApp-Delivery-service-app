@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TextWidgetHeader extends SliverPersistentHeaderDelegate {
   String? title;
@@ -14,11 +15,11 @@ class TextWidgetHeader extends SliverPersistentHeaderDelegate {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
             colors: [
-              Color(0xFF004B8D),
-              Color(0xFFffffff),
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
             ],
           ),
         ),
@@ -29,12 +30,12 @@ class TextWidgetHeader extends SliverPersistentHeaderDelegate {
           title!,
           maxLines: 2,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontFamily: "Signatra",
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 3,
-            color: Colors.white,
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
       ),

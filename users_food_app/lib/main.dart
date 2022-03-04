@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         title: 'Users App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.amber,
         ),
         home: const SplashScreen(),
       ),

@@ -18,7 +18,7 @@ class _SellersDesignWidgetState extends State<SellersDesignWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(horizontal: 1),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -26,57 +26,51 @@ class _SellersDesignWidgetState extends State<SellersDesignWidget> {
           BoxShadow(
             color: Colors.grey,
             blurRadius: 3,
-            offset: Offset(2, 2),
+            offset: Offset(1, 1),
           )
         ],
       ),
       child: InkWell(
-        splashColor: Colors.orange,
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          margin: const EdgeInsets.symmetric(horizontal: 1),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 3,
-                offset: Offset(2, 2),
-              )
-            ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(5),
-            child: SizedBox(
-              height: 200,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  Image.network(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: SizedBox(
+            height: 90,
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Image.network(
                     widget.model!.sellerAvatarUrl!,
                     height: 150,
+                    width: 100,
                     fit: BoxFit.cover,
                   ),
-                  const SizedBox(height: 1),
-                  Text(
-                    widget.model!.sellerName!,
-                    style: const TextStyle(
-                      color: Colors.orange,
-                      fontSize: 20,
-                      fontFamily: "Acme",
+                ),
+                const SizedBox(width: 20),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.model!.sellerName!,
+                      style: const TextStyle(
+                        color: Colors.orange,
+                        fontSize: 25,
+                        fontFamily: "Acme",
+                      ),
                     ),
-                  ),
-                  Text(
-                    widget.model!.sellerEmail!,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12,
-                      fontFamily: "Acme",
+                    Text(
+                      widget.model!.sellerEmail!,
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                        fontFamily: "Acme",
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

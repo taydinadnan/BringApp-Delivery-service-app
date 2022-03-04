@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -15,6 +16,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../global/global.dart';
 import '../widgets/header_widget.dart';
+import 'login.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -410,6 +412,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {
                       signUpFormValidation();
                     },
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      const TextSpan(text: "Already have an account? "),
+                      TextSpan(
+                        text: 'Login',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()));
+                          },
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/assistant_methods.dart';
 import 'package:users_food_app/assistantMethods/total_amount.dart';
@@ -45,11 +46,11 @@ class _CartScreenState extends State<CartScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              begin: FractionalOffset(-2.0, 0.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
@@ -100,14 +101,6 @@ class _CartScreenState extends State<CartScreen> {
             clearCartNow(context);
           },
         ),
-        title: const Text(
-          "iFood",
-          style: TextStyle(
-            fontSize: 50,
-            color: Colors.white,
-            fontFamily: "Signatra",
-          ),
-        ),
         centerTitle: true,
         automaticallyImplyLeading: true,
         elevation: 0,
@@ -126,7 +119,7 @@ class _CartScreenState extends State<CartScreen> {
                 "Clear Cart",
                 style: TextStyle(fontSize: 16),
               ),
-              backgroundColor: Colors.orangeAccent,
+              backgroundColor: Colors.amber,
               icon: const Icon(Icons.clear_all),
               onPressed: () {
                 clearCartNow(context);
@@ -146,7 +139,7 @@ class _CartScreenState extends State<CartScreen> {
                 "Check Out",
                 style: TextStyle(fontSize: 16),
               ),
-              backgroundColor: Colors.orangeAccent,
+              backgroundColor: Colors.amber,
               icon: const Icon(Icons.navigate_next),
               onPressed: () {
                 Navigator.push(
@@ -163,93 +156,110 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ],
       ),
-      body: CustomScrollView(
-        slivers: [
-          //overall total price
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: TextWidgetHeader(title: "My Cart List"),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-1.0, 0.0),
+            end: FractionalOffset(2.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
           ),
+        ),
+        child: CustomScrollView(
+          slivers: [
+            //overall total price
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: TextWidgetHeader(title: "My Cart List"),
+            ),
 
-          SliverToBoxAdapter(
-            child: Consumer2<TotalAmount, CartItemCounter>(
-                builder: (context, amountProvider, cartProvider, c) {
-              return Padding(
-                padding: const EdgeInsets.all(8),
-                child: Center(
-                  child: cartProvider.count == 0
-                      ? Container()
-                      : Text(
-                          "Total Price: ${"\$" + amountProvider.tAmount.toString()}",
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
+            SliverToBoxAdapter(
+              child: Consumer2<TotalAmount, CartItemCounter>(
+                  builder: (context, amountProvider, cartProvider, c) {
+                return Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Center(
+                    child: cartProvider.count == 0
+                        ? Container()
+                        : Text(
+                            "Total Price: ${"\$" + amountProvider.tAmount.toString()}",
+                            style: GoogleFonts.lato(
+                              textStyle: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                  ),
+                );
+              }),
+            ),
+
+            //display cart items with quantity numbers
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection("items")
+                  .where("itemID", whereIn: separateItemIDs())
+                  .orderBy("publishedDate", descending: true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                return !snapshot.hasData
+                    ? SliverToBoxAdapter(
+                        child: Center(
+                          child: circularProgress(),
                         ),
-                ),
-              );
-            }),
-          ),
-
-          //display cart items with quantity numbers
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection("items")
-                .where("itemID", whereIn: separateItemIDs())
-                .orderBy("publishedDate", descending: true)
-                .snapshots(),
-            builder: (context, snapshot) {
-              return !snapshot.hasData
-                  ? SliverToBoxAdapter(
-                      child: Center(
-                        child: circularProgress(),
-                      ),
-                    )
-                  //if length = 0 no data
-                  // : snapshot.data!.docs.length == 0
-                  //     ? Container()
-                  : SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (context, index) {
-                          Items model = Items.fromJson(
-                            snapshot.data!.docs[index].data()!
-                                as Map<String, dynamic>,
-                          );
-
-                          //calculating total price in cart list
-                          if (index == 0) {
-                            totalAmount = 0;
-                            totalAmount = totalAmount +
-                                (model.price! *
-                                    separateItemQuantityList![index]);
-                          } else {
-                            totalAmount = totalAmount +
-                                (model.price! *
-                                    separateItemQuantityList![index]);
-                          }
-                          //update in real time
-                          if (snapshot.data!.docs.length - 1 == index) {
-                            WidgetsBinding.instance!.addPostFrameCallback(
-                              (timeStamp) {
-                                Provider.of<TotalAmount>(context, listen: false)
-                                    .displayTotalAmount(totalAmount.toDouble());
-                              },
+                      )
+                    //if length = 0 no data
+                    // : snapshot.data!.docs.length == 0
+                    //     ? Container()
+                    : SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, index) {
+                            Items model = Items.fromJson(
+                              snapshot.data!.docs[index].data()!
+                                  as Map<String, dynamic>,
                             );
-                          }
 
-                          return CartItemDesign(
-                            model: model,
-                            context: context,
-                            quanNumber: separateItemQuantityList![index],
-                          );
-                        },
-                        childCount:
-                            snapshot.hasData ? snapshot.data!.docs.length : 0,
-                      ),
-                    );
-            },
-          ),
-        ],
+                            //calculating total price in cart list
+                            if (index == 0) {
+                              totalAmount = 0;
+                              totalAmount = totalAmount +
+                                  (model.price! *
+                                      separateItemQuantityList![index]);
+                            } else {
+                              totalAmount = totalAmount +
+                                  (model.price! *
+                                      separateItemQuantityList![index]);
+                            }
+                            //update in real time
+                            if (snapshot.data!.docs.length - 1 == index) {
+                              WidgetsBinding.instance!.addPostFrameCallback(
+                                (timeStamp) {
+                                  Provider.of<TotalAmount>(context,
+                                          listen: false)
+                                      .displayTotalAmount(
+                                          totalAmount.toDouble());
+                                },
+                              );
+                            }
+
+                            return CartItemDesign(
+                              model: model,
+                              context: context,
+                              quanNumber: separateItemQuantityList![index],
+                            );
+                          },
+                          childCount:
+                              snapshot.hasData ? snapshot.data!.docs.length : 0,
+                        ),
+                      );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

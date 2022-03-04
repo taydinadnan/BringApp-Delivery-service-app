@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/address_changer.dart';
 import 'package:users_food_app/maps/maps.dart';
@@ -33,15 +34,12 @@ class _AddressDesignState extends State<AddressDesign> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.symmetric(horizontal: 1),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: Colors.grey,
-              blurRadius: 3,
-              offset: Offset(2, 2),
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 5,
+              offset: Offset(1, 2),
             )
           ],
         ),
@@ -52,7 +50,7 @@ class _AddressDesignState extends State<AddressDesign> {
                 .displayResult(widget.value);
           },
           child: Card(
-            color: Colors.blueGrey.withOpacity(0.4),
+            color: Colors.white.withOpacity(0.9),
             child: Column(
               children: [
                 //address info
@@ -61,7 +59,7 @@ class _AddressDesignState extends State<AddressDesign> {
                     Radio(
                       groupValue: widget.currentIndex!,
                       value: widget.value!,
-                      activeColor: Colors.orangeAccent,
+                      activeColor: Colors.green,
                       onChanged: (val) {
                         //provider
                         Provider.of<AddressChanger>(context, listen: false)
@@ -78,85 +76,144 @@ class _AddressDesignState extends State<AddressDesign> {
                             children: [
                               TableRow(
                                 children: [
-                                  const Text(
+                                  Text(
                                     "Name: ",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                    style: GoogleFonts.lato(
+                                      textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                   Text(
                                     widget.model!.name.toString(),
+                                    style: GoogleFonts.lato(
+                                      textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                               TableRow(
                                 children: [
-                                  const Text(
+                                  Text(
                                     "Phone Number: ",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                    style: GoogleFonts.lato(
+                                      textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                   Text(
                                     widget.model!.phoneNumber.toString(),
-                                  ),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text(
-                                    "Flat Number: ",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                    style: GoogleFonts.lato(
+                                      textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
-                                  Text(
-                                    widget.model!.flatNumber.toString(),
-                                  ),
                                 ],
                               ),
+                              // TableRow(
+                              //   children: [
+                              //     Text(
+                              //       "Flat Number: ",
+                              //       style: GoogleFonts.lato(
+                              //         textStyle: const TextStyle(
+                              //           fontSize: 15,
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Colors.black,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     Text(
+                              //       widget.model!.flatNumber.toString(),
+                              //       style: GoogleFonts.lato(
+                              //         textStyle: const TextStyle(
+                              //           fontSize: 15,
+                              //           fontWeight: FontWeight.normal,
+                              //           color: Colors.black,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // TableRow(
+                              //   children: [
+                              //     Text(
+                              //       "City: ",
+                              //       style: GoogleFonts.lato(
+                              //         textStyle: const TextStyle(
+                              //           fontSize: 15,
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Colors.black,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     Text(
+                              //       widget.model!.city.toString(),
+                              //       style: GoogleFonts.lato(
+                              //         textStyle: const TextStyle(
+                              //           fontSize: 15,
+                              //           fontWeight: FontWeight.normal,
+                              //           color: Colors.black,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
+                              // TableRow(
+                              //   children: [
+                              //     Text(
+                              //       "State: ",
+                              //       style: GoogleFonts.lato(
+                              //         textStyle: const TextStyle(
+                              //           fontSize: 15,
+                              //           fontWeight: FontWeight.bold,
+                              //           color: Colors.black,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //     Text(
+                              //       widget.model!.state.toString(),
+                              //       style: GoogleFonts.lato(
+                              //         textStyle: const TextStyle(
+                              //           fontSize: 15,
+                              //           fontWeight: FontWeight.normal,
+                              //           color: Colors.black,
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                               TableRow(
                                 children: [
-                                  const Text(
-                                    "City: ",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
                                   Text(
-                                    widget.model!.city.toString(),
-                                  ),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text(
-                                    "State: ",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.model!.state.toString(),
-                                  ),
-                                ],
-                              ),
-                              TableRow(
-                                children: [
-                                  const Text(
                                     "Full Address: ",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
+                                    style: GoogleFonts.lato(
+                                      textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                   Text(
                                     widget.model!.fullAddress.toString(),
+                                    style: GoogleFonts.lato(
+                                      textStyle: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -180,7 +237,7 @@ class _AddressDesignState extends State<AddressDesign> {
                   },
                   child: const Text("Check on Maps"),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black54,
+                    primary: Colors.amber,
                   ),
                 ),
                 //button

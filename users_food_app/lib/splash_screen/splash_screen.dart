@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:users_food_app/authentication/login.dart';
 
-import '../authentication/auth_screen.dart';
 import '../global/global.dart';
 import '../screens/home_screen.dart';
 
@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
         //if not send to auth screen
         else {
           Navigator.push(
-              context, MaterialPageRoute(builder: (c) => const AuthScreen()));
+              context, MaterialPageRoute(builder: (c) => const LoginScreen()));
         }
       },
     );

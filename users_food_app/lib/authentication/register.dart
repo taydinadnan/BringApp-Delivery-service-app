@@ -2,16 +2,19 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 // ignore: library_prefixes
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:users_food_app/authentication/login.dart';
 
 import '../global/global.dart';
 import '../screens/home_screen.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/error_dialog.dart';
+import '../widgets/header_widget.dart';
 import '../widgets/loading_dialog.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -177,92 +180,183 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const SizedBox(height: 10),
-          InkWell(
-            onTap: () {
-              _getImage();
-            },
-            child: CircleAvatar(
-              radius: MediaQuery.of(context).size.width * 0.20,
-              backgroundColor: Colors.white,
-              backgroundImage: imageXFile == null
-                  ? null
-                  : FileImage(
-                      File(imageXFile!.path),
+    return Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    height: 150,
+                    child: const HeaderWidget(
+                      150,
+                      false,
+                      Icons.add,
                     ),
-              child: imageXFile == null
-                  ? Icon(
-                      Icons.add_photo_alternate,
-                      size: MediaQuery.of(context).size.width * 0.20,
-                      color: Colors.grey,
-                    )
-                  : null,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                CustomTextField(
-                  data: Icons.person,
-                  controller: nameController,
-                  hintText: "Name",
-                  isObsecre: false,
-                ),
-                CustomTextField(
-                  data: Icons.email,
-                  controller: emailController,
-                  hintText: "Email",
-                  isObsecre: false,
-                ),
-                CustomTextField(
-                  data: Icons.lock,
-                  controller: passwordController,
-                  hintText: "Password",
-                  isObsecre: true,
-                ),
-                CustomTextField(
-                  data: Icons.lock,
-                  controller: confirmpasswordController,
-                  hintText: "Confirm password",
-                  isObsecre: true,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 15),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 30),
-            child: ElevatedButton(
-              onPressed: () {
-                signUpFormValidation();
-              },
-              child: const Text(
-                'Sign Up',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 20,
+                          offset: const Offset(0, 5),
+                        )
+                      ],
+                    ),
+                    margin: const EdgeInsets.fromLTRB(25, 50, 25, 10),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    alignment: Alignment.center,
+                    child: InkWell(
+                      onTap: () {
+                        _getImage();
+                      },
+                      child: CircleAvatar(
+                        radius: MediaQuery.of(context).size.width * 0.20,
+                        backgroundColor: Colors.white,
+                        backgroundImage: imageXFile == null
+                            ? null
+                            : FileImage(
+                                File(imageXFile!.path),
+                              ),
+                        child: imageXFile == null
+                            ? Icon(
+                                Icons.person_add_alt_1,
+                                size: MediaQuery.of(context).size.width * 0.20,
+                                color: Colors.grey,
+                              )
+                            : null,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      data: Icons.person,
+                      controller: nameController,
+                      hintText: "Name",
+                      isObsecre: false,
+                    ),
+                    CustomTextField(
+                      data: Icons.email,
+                      controller: emailController,
+                      hintText: "Email",
+                      isObsecre: false,
+                    ),
+                    CustomTextField(
+                      data: Icons.lock,
+                      controller: passwordController,
+                      hintText: "Password",
+                      isObsecre: true,
+                    ),
+                    CustomTextField(
+                      data: Icons.lock,
+                      controller: confirmpasswordController,
+                      hintText: "Confirm password",
+                      isObsecre: true,
+                    ),
+                  ],
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                primary: Colors.orange,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 20,
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(0, 4),
+                          blurRadius: 5.0)
+                    ],
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      stops: [0.0, 1.0],
+                      colors: [
+                        Colors.amber,
+                        Colors.black,
+                      ],
+                    ),
+                    color: Colors.deepPurple.shade300,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(50, 50)),
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      shadowColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                      child: Text(
+                        'Sign Up'.toUpperCase(),
+                        style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                    onPressed: () {
+                      signUpFormValidation();
+                    },
+                  ),
                 ),
               ),
-            ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      const TextSpan(text: "Already have an account? "),
+                      TextSpan(
+                        text: 'Login',
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const LoginScreen()));
+                          },
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

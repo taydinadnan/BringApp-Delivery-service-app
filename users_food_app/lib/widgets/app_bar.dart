@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:users_food_app/assistantMethods/cart_item_counter.dart';
 import 'package:users_food_app/screens/cart_screen.dart';
@@ -24,11 +25,11 @@ class _MyAppBarState extends State<MyAppBar> {
       flexibleSpace: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
             colors: [
-              Color(0xFF004B8D),
-              Color(0xFFffffff),
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
             ],
           ),
         ),
@@ -66,9 +67,11 @@ class _MyAppBarState extends State<MyAppBar> {
                           builder: (context, counter, c) {
                         return Text(
                           counter.count.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 13,
+                          style: GoogleFonts.lato(
+                            textStyle: const TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
                           ),
                         );
                       }),
@@ -86,15 +89,6 @@ class _MyAppBarState extends State<MyAppBar> {
           Navigator.pop(context);
         },
       ),
-      title: const Text(
-        "iFood",
-        style: TextStyle(
-          fontSize: 50,
-          color: Colors.white,
-          fontFamily: "Signatra",
-        ),
-      ),
-      centerTitle: true,
       automaticallyImplyLeading: true,
       elevation: 0,
     );

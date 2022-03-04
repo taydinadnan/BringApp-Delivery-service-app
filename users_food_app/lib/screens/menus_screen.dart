@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:users_food_app/assistantMethods/assistant_methods.dart';
 import 'package:users_food_app/widgets/design/menus_design.dart';
 
@@ -29,11 +30,11 @@ class _MenusScreenState extends State<MenusScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              begin: FractionalOffset(-2.0, 0.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
@@ -53,61 +54,73 @@ class _MenusScreenState extends State<MenusScreen> {
             Fluttertoast.showToast(msg: "Cart has been cleared.");
           },
         ),
-        title: const Text(
-          "iFood",
-          style: TextStyle(
-            fontSize: 45,
-            color: Colors.white,
-            fontFamily: "Signatra",
+        title: Text(
+          widget.model!.sellerName.toString() + " Menus",
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
         elevation: 0,
       ),
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: TextWidgetHeader(
-                title: widget.model!.sellerName.toString() + " Menus"),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
           ),
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection("sellers")
-                .doc(widget.model!.sellerUID)
-                .collection("menus")
-                //ordering menus and items by publishing date (descending)
-                .orderBy("publishedDate", descending: true)
-                .snapshots(),
-            builder: (context, snapshot) {
-              return !snapshot.hasData
-                  ? SliverToBoxAdapter(
-                      child: Center(
-                        child: circularProgress(),
-                      ),
-                    )
-                  : SliverStaggeredGrid.countBuilder(
-                      staggeredTileBuilder: (c) => const StaggeredTile.fit(2),
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 4,
-                      itemBuilder: (context, index) {
-                        Menus model = Menus.fromJson(snapshot.data!.docs[index]
-                            .data()! as Map<String, dynamic>);
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: MenusDesignWidget(
-                            model: model,
-                            context: context,
-                          ),
-                        );
-                      },
-                      itemCount: snapshot.data!.docs.length,
-                    );
-            },
-          ),
-        ],
+        ),
+        child: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(child: SizedBox(height: 20)),
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection("sellers")
+                  .doc(widget.model!.sellerUID)
+                  .collection("menus")
+                  //ordering menus and items by publishing date (descending)
+                  .orderBy("publishedDate", descending: true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                return !snapshot.hasData
+                    ? SliverToBoxAdapter(
+                        child: Center(
+                          child: circularProgress(),
+                        ),
+                      )
+                    : SliverStaggeredGrid.countBuilder(
+                        staggeredTileBuilder: (c) =>
+                            const StaggeredTile.count(1, 1.5),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 1,
+                        crossAxisSpacing: 0,
+                        itemBuilder: (context, index) {
+                          Menus model = Menus.fromJson(
+                              snapshot.data!.docs[index].data()!
+                                  as Map<String, dynamic>);
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: MenusDesignWidget(
+                              model: model,
+                              context: context,
+                            ),
+                          );
+                        },
+                        itemCount: snapshot.data!.docs.length,
+                      );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

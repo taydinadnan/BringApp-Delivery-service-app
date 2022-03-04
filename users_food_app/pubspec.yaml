@@ -46,6 +46,8 @@ dependencies:
   flutter_carousel_slider: ^1.0.8
   url_launcher: ^6.0.18
   intl: ^0.17.0 
+  google_fonts: ^2.3.1
+  hexcolor: ^2.0.6
 
   image_picker: ^0.8.4+4
   geolocator: ^8.0.1

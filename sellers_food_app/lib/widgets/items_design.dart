@@ -58,17 +58,6 @@ class _ItemsDesignState extends State<ItemsDesign> {
                     ),
                   ),
                 ),
-                // const SizedBox(width: 5),
-                // Text(
-                //   "\$" + widget.model!.price.toString(),
-                //   style: GoogleFonts.lato(
-                //     textStyle: const TextStyle(
-                //       fontSize: 15,
-                //       fontWeight: FontWeight.bold,
-                //       color: Colors.black,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

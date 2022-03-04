@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:users_food_app/models/menus.dart';
 import 'package:users_food_app/screens/items_screen.dart';
 
@@ -15,64 +16,58 @@ class MenusDesignWidget extends StatefulWidget {
 class _MenusDesignWidgetState extends State<MenusDesignWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.symmetric(horizontal: 1),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.grey,
-            blurRadius: 3,
-            offset: Offset(2, 2),
-          )
-        ],
-      ),
-      child: InkWell(
-        splashColor: Colors.orange,
-        child: Padding(
-          padding: const EdgeInsets.all(5),
-          child: SizedBox(
-            height: 270,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: [
-                Image.network(
+    return InkWell(
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: SizedBox(
+          height: 260,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(height: 1),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.network(
                   widget.model!.thumbnailUrl!,
-                  height: 210,
+                  height: 200,
+                  width: 200,
                   fit: BoxFit.cover,
                 ),
-                const SizedBox(height: 1),
-                Text(
-                  widget.model!.menuTitle!,
-                  style: const TextStyle(
-                    color: Colors.orange,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                widget.model!.menuTitle!,
+                style: GoogleFonts.lato(
+                  textStyle: const TextStyle(
                     fontSize: 20,
-                    fontFamily: "Acme",
+                    fontWeight: FontWeight.bold,
+                    color: Colors.orange,
                   ),
                 ),
-                Text(
-                  widget.model!.menuInfo!,
-                  style: const TextStyle(
-                    color: Colors.grey,
+              ),
+              Text(
+                widget.model!.menuInfo!,
+                style: GoogleFonts.lato(
+                  textStyle: const TextStyle(
                     fontSize: 12,
-                    fontFamily: "Acme",
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (c) => ItemsScreen(model: widget.model),
-            ),
-          );
-        },
       ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (c) => ItemsScreen(model: widget.model),
+          ),
+        );
+      },
     );
   }
 }

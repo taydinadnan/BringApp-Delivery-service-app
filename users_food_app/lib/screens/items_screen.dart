@@ -24,50 +24,68 @@ class _ItemsScreenState extends State<ItemsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(sellerUID: widget.model!.sellerUID),
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: TextWidgetHeader(
-              title: "Items of " + widget.model!.menuTitle.toString(),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
+        child: CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: TextWidgetHeader(
+                title: widget.model!.menuTitle.toString().toUpperCase() +
+                    "'s Menu Items",
+              ),
             ),
-          ),
-          StreamBuilder<QuerySnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection("sellers")
-                .doc(widget.model!.sellerUID)
-                .collection("menus")
-                .doc(widget.model!.menuID)
-                .collection("items")
-                .orderBy("publishedDate", descending: true)
-                .snapshots(),
-            builder: (context, snapshot) {
-              return !snapshot.hasData
-                  ? SliverToBoxAdapter(
-                      child: Center(
-                        child: circularProgress(),
-                      ),
-                    )
-                  : SliverStaggeredGrid.countBuilder(
-                      staggeredTileBuilder: (c) => const StaggeredTile.fit(2),
-                      crossAxisCount: 4,
-                      mainAxisSpacing: 8,
-                      crossAxisSpacing: 4,
-                      itemBuilder: (context, index) {
-                        Items model = Items.fromJson(snapshot.data!.docs[index]
-                            .data()! as Map<String, dynamic>);
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ItemsDesignWidget(
-                            model: model,
-                          ),
-                        );
-                      },
-                      itemCount: snapshot.data!.docs.length,
-                    );
-            },
-          ),
-        ],
+            const SliverToBoxAdapter(
+              child: Divider(color: Colors.white, thickness: 2),
+            ),
+            StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection("sellers")
+                  .doc(widget.model!.sellerUID)
+                  .collection("menus")
+                  .doc(widget.model!.menuID)
+                  .collection("items")
+                  .orderBy("publishedDate", descending: true)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                return !snapshot.hasData
+                    ? SliverToBoxAdapter(
+                        child: Center(
+                          child: circularProgress(),
+                        ),
+                      )
+                    : SliverStaggeredGrid.countBuilder(
+                        staggeredTileBuilder: (c) =>
+                            const StaggeredTile.count(1, 1.5),
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 1,
+                        crossAxisSpacing: 0,
+                        itemBuilder: (context, index) {
+                          Items model = Items.fromJson(
+                              snapshot.data!.docs[index].data()!
+                                  as Map<String, dynamic>);
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ItemsDesignWidget(
+                              model: model,
+                            ),
+                          );
+                        },
+                        itemCount: snapshot.data!.docs.length,
+                      );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

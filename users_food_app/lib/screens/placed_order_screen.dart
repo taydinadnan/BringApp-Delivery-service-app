@@ -87,11 +87,11 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
+            begin: FractionalOffset(-1.0, 0.0),
+            end: FractionalOffset(4.0, -1.0),
             colors: [
-              Color(0xFF004B8D),
-              Color(0xFFffffff),
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
             ],
           ),
         ),
@@ -100,14 +100,51 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
           children: [
             Image.asset("images/delivery.jpg"),
             const SizedBox(height: 12),
-            ElevatedButton(
-              onPressed: () {
-                //check
-                addOrderDetails();
-              },
-              child: const Text("Place Order"),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.orangeAccent,
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0, 4),
+                      blurRadius: 5.0)
+                ],
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: [0.0, 1.0],
+                  colors: [
+                    Colors.amber,
+                    Colors.black,
+                  ],
+                ),
+                color: Colors.deepPurple.shade300,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
+                  minimumSize: MaterialStateProperty.all(const Size(50, 50)),
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.transparent),
+                  shadowColor: MaterialStateProperty.all(Colors.transparent),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  child: Text(
+                    'Place Order'.toUpperCase(),
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+                onPressed: () {
+                  addOrderDetails();
+                },
               ),
             ),
           ],
