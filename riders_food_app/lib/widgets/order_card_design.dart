@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../models/items.dart';
 import '../screens/order_details_screen.dart';
@@ -33,18 +34,10 @@ class OrderCard extends StatelessWidget {
           borderRadius: BorderRadius.all(
             Radius.circular(5),
           ),
-          gradient: LinearGradient(
-            begin: FractionalOffset(0.0, 0.0),
-            end: FractionalOffset(3.0, -1.0),
-            colors: [
-              Colors.black54,
-              Colors.white54,
-            ],
-          ),
         ),
         padding: const EdgeInsets.all(4),
         margin: const EdgeInsets.all(8),
-        height: itemCount! * 125,
+        height: itemCount! * 100,
         child: ListView.builder(
           itemCount: itemCount,
           physics: const NeverScrollableScrollPhysics(),
@@ -63,91 +56,105 @@ class OrderCard extends StatelessWidget {
 Widget placedOrderDesignWidget(
     Items model, BuildContext context, seperateQuantitiesList) {
   return Container(
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(30),
+      boxShadow: const [
+        BoxShadow(
+          color: Colors.grey,
+          blurRadius: 3,
+          offset: Offset(2, 2),
+        ),
+      ],
+    ),
     width: MediaQuery.of(context).size.width,
-    height: 120,
-    color: Colors.grey[200],
-    child: Row(children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xff7c94b6),
-            border: Border.all(
-              color: Colors.black,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              model.thumbnailUrl!,
-              width: 120,
-            ),
+    height: 80,
+    child: Row(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: Image.network(
+            model.thumbnailUrl!,
+            width: 120,
           ),
         ),
-      ),
-      const SizedBox(width: 10),
-      Expanded(
+        const SizedBox(width: 10),
+        Expanded(
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 20),
-
-          Row(
-            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Expanded(
-                child: Text(
-                  model.title!,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontFamily: "Acme",
+              const SizedBox(height: 10),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Text(
+                      model.title!,
+                      style: GoogleFonts.lato(
+                        textStyle: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  const SizedBox(width: 10),
+                  Text(
+                    "\$ ",
+                    style: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    model.price.toString() + "   ",
+                    style: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  )
+                ],
               ),
-              const SizedBox(width: 10),
-              const Text(
-                "\$ ",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.blue,
-                ),
-              ),
-              Text(
-                model.price.toString() + "   ",
-                style: const TextStyle(
-                  color: Colors.blue,
-                  fontSize: 18,
-                ),
+              const SizedBox(height: 5),
+              //total number
+              Row(
+                children: [
+                  Text(
+                    "x ",
+                    style: GoogleFonts.lato(
+                      textStyle: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      seperateQuantitiesList,
+                      style: GoogleFonts.lato(
+                        textStyle: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               )
             ],
           ),
-          const SizedBox(height: 20),
-          //total number
-          Row(
-            children: [
-              const Text(
-                "x ",
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 14,
-                ),
-              ),
-              Expanded(
-                  child: Text(
-                seperateQuantitiesList,
-                style: const TextStyle(
-                  color: Colors.black54,
-                  fontSize: 30,
-                  fontFamily: "Acme",
-                ),
-              ))
-            ],
-          )
-        ],
-      ))
-    ]),
+        )
+      ],
+    ),
   );
 }

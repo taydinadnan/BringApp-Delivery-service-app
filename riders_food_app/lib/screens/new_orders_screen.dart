@@ -14,12 +14,22 @@ class NewOrdersScreen extends StatefulWidget {
 class _NewOrdersScreenState extends State<NewOrdersScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: SimpleAppBar(
-          title: "New Orders",
+    return Scaffold(
+      appBar: SimpleAppBar(
+        title: "New Orders",
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-1.0, 0.0),
+            end: FractionalOffset(4.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
         ),
-        body: StreamBuilder<QuerySnapshot>(
+        child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection("orders")
               .where("status", isEqualTo: "normal")

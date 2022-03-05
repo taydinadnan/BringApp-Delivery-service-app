@@ -1,16 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:riders_food_app/assistantMethods/get_current_location.dart';
+import 'package:riders_food_app/authentication/login.dart';
 import 'package:riders_food_app/screens/earnings_screen.dart';
 import 'package:riders_food_app/screens/history_screen.dart';
 import 'package:riders_food_app/screens/new_orders_screen.dart';
 import 'package:riders_food_app/screens/not_yet_delivered_screen.dart';
 import 'package:riders_food_app/screens/parcel_in_progress_screen.dart';
-import 'package:riders_food_app/widgets/user_info.dart';
 
-import '../authentication/auth_screen.dart';
 import '../global/global.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -102,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: ((context) => const AuthScreen())));
+                        builder: ((context) => const LoginScreen())));
               });
             }
           },
