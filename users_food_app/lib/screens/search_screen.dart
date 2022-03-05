@@ -27,11 +27,11 @@ class _SearchScreenState extends State<SearchScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              begin: FractionalOffset(-2.0, 0.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
@@ -46,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
           },
           decoration: InputDecoration(
             hintText: "Search Restaurant here",
-            hintStyle: const TextStyle(color: Colors.white54),
+            hintStyle: const TextStyle(color: Colors.black),
             border: InputBorder.none,
             suffixIcon: IconButton(
               onPressed: () {
@@ -54,7 +54,7 @@ class _SearchScreenState extends State<SearchScreen> {
               },
               icon: const Icon(
                 Icons.search,
-                color: Colors.white,
+                color: Colors.black,
               ),
             ),
           ),
@@ -63,23 +63,37 @@ class _SearchScreenState extends State<SearchScreen> {
             fontSize: 16,
           ),
         ),
+        elevation: 0,
       ),
-      body: FutureBuilder<QuerySnapshot>(
-        future: restaurantsDocumentsList,
-        builder: (context, snapshot) {
-          return snapshot.hasData
-              ? ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    Sellers model = Sellers.fromJson(snapshot.data!.docs[index]
-                        .data()! as Map<String, dynamic>);
-                    return SellersDesignWidget(
-                      model: model,
-                      context: context,
-                    );
-                  })
-              : const Center(child: Text("No Record Found"));
-        },
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
+        child: FutureBuilder<QuerySnapshot>(
+          future: restaurantsDocumentsList,
+          builder: (context, snapshot) {
+            return snapshot.hasData
+                ? ListView.builder(
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      Sellers model = Sellers.fromJson(
+                          snapshot.data!.docs[index].data()!
+                              as Map<String, dynamic>);
+                      return SellersDesignWidget(
+                        model: model,
+                        context: context,
+                      );
+                    })
+                : const Center(child: Text("No Record Found"));
+          },
+        ),
       ),
     );
   }

@@ -14,12 +14,22 @@ class HistoryScreen extends StatefulWidget {
 class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: SimpleAppBar(
-          title: "History",
+    return Scaffold(
+      appBar: SimpleAppBar(
+        title: "History",
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
         ),
-        body: StreamBuilder<QuerySnapshot>(
+        child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
               .collection("users")
               .doc(sharedPreferences!.getString("uid"))
