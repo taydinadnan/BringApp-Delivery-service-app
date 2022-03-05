@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:riders_food_app/assistantMethods/get_current_location.dart';
 import 'package:riders_food_app/screens/earnings_screen.dart';
 import 'package:riders_food_app/screens/history_screen.dart';
 import 'package:riders_food_app/screens/new_orders_screen.dart';
 import 'package:riders_food_app/screens/not_yet_delivered_screen.dart';
 import 'package:riders_food_app/screens/parcel_in_progress_screen.dart';
+import 'package:riders_food_app/widgets/user_info.dart';
 
 import '../authentication/auth_screen.dart';
 import '../global/global.dart';
@@ -22,18 +25,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Card makeDashboardItem(String title, IconData iconData, int index) {
     return Card(
-      elevation: 2,
+      elevation: 5,
       margin: const EdgeInsets.all(8),
       child: Container(
         decoration: index == 0 || index == 3 || index == 4
             ? BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 gradient: const LinearGradient(
-                  begin: FractionalOffset(0.0, 0.0),
-                  end: FractionalOffset(3.0, -1.0),
+                  begin: FractionalOffset(1.0, -1.0),
+                  end: FractionalOffset(-1.0, -1.0),
                   colors: [
-                    Color(0xFF004B8D),
-                    Color(0xFFffffff),
+                    Colors.amber,
+                    Colors.orangeAccent,
                   ],
                 ),
                 boxShadow: const [
@@ -47,10 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
             : BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 gradient: const LinearGradient(
-                  begin: FractionalOffset(0.0, 0.0),
-                  end: FractionalOffset(3.0, -1.0),
+                  begin: FractionalOffset(-1.0, 0.0),
+                  end: FractionalOffset(5.0, -1.0),
                   colors: [
-                    Colors.cyan,
+                    Colors.orangeAccent,
                     Colors.amber,
                   ],
                 ),
@@ -171,28 +174,76 @@ class _HomeScreenState extends State<HomeScreen> {
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: FractionalOffset(0.0, 0.0),
-              end: FractionalOffset(3.0, -1.0),
+              begin: FractionalOffset(-2.0, 0.0),
+              end: FractionalOffset(5.0, -1.0),
               colors: [
-                Color(0xFF004B8D),
-                Color(0xFFffffff),
+                Color(0xFFFFFFFF),
+                Color(0xFFFAC898),
               ],
             ),
           ),
         ),
         title: Text(
-          "Welcome " + sharedPreferences!.getString("name")!,
-          style: const TextStyle(
-            fontSize: 40,
-            color: Colors.white,
-            fontFamily: "Signatra",
-            letterSpacing: 2,
+          "Welcome " + sharedPreferences!.getString("name")!.toUpperCase(),
+          style: GoogleFonts.lato(
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
           ),
         ),
         centerTitle: true,
         automaticallyImplyLeading: false,
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: GestureDetector(
+              onTap: () {},
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Material(
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(80),
+                  ),
+                  elevation: 10,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.amber.withOpacity(1),
+                          offset: const Offset(-1, 2),
+                          blurRadius: 20,
+                        )
+                      ],
+                    ),
+                    width: 60,
+                    height: 60,
+                    child: CircleAvatar(
+                      //we get the profile image from sharedPreferences (global.dart)
+                      backgroundImage: NetworkImage(
+                        sharedPreferences!.getString("photoUrl")!,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
       body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: FractionalOffset(-2.0, 0.0),
+            end: FractionalOffset(5.0, -1.0),
+            colors: [
+              Color(0xFFFFFFFF),
+              Color(0xFFFAC898),
+            ],
+          ),
+        ),
         padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 1),
         child: GridView.count(
           crossAxisCount: 2,

@@ -40,6 +40,9 @@ dependencies:
   firebase_storage: ^10.2.5
   shared_preferences: ^2.0.11
   url_launcher: ^6.0.20
+  google_fonts: ^2.3.1
+  hexcolor: ^2.0.6
+
 
   image_picker: ^0.8.4+4
   geolocator: ^8.0.1
