@@ -118,7 +118,7 @@ class _SplashScreenState extends State<SplashScreen>
                     opacity: animateCafeText ? 1 : 0,
                     duration: const Duration(seconds: 1),
                     child: Text(
-                      'Order Food'.toUpperCase(),
+                      'Order FOOD'.toUpperCase(),
                       style: GoogleFonts.lato(
                         fontSize: 27,
                         fontWeight: FontWeight.bold,
