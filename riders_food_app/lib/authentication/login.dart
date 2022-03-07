@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: HeaderWidget(
                   _headerHeight,
                   true,
-                  Icons.food_bank,
+                  Icons.motorcycle,
                 ), //let's create a common header widget
               ),
               const SizedBox(height: 50),

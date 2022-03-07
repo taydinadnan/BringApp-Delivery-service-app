@@ -43,6 +43,7 @@ dependencies:
   fluttertoast: ^8.0.8
   google_fonts: ^2.3.1
   hexcolor: ^2.0.6
+  lottie: ^1.2.2
 
   image_picker: ^0.8.4+4
   geolocator: ^8.0.1
