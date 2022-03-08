@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:bringapp_admin_web_portal/authentication/login_screen.dart';
+import 'package:bringapp_admin_web_portal/riders/activate_riders_screen.dart';
+import 'package:bringapp_admin_web_portal/riders/deactivate_riders_screen.dart';
+import 'package:bringapp_admin_web_portal/sellers/deactivate_sellers_screen.dart';
 import 'package:bringapp_admin_web_portal/users/active_users_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../sellers/activate_sellers_screen.dart';
 import '../users/deactivate_users_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -194,7 +198,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   //activate seller
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const ActiveSellersScreen()),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.person_add,
                       color: Color.fromARGB(255, 117, 190, 119),
@@ -216,7 +227,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(width: 10),
                   //deactivate user
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const DeactiveSellersScreen()),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.block,
                       color: Colors.redAccent,
@@ -246,7 +264,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   //activate seller
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => ActiveRidersScreen()),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.person_add,
                       color: Color.fromARGB(255, 117, 190, 119),
@@ -268,7 +293,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(width: 10),
                   //deactivate user
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => DeactiveRidersScreen()),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.block,
                       color: Colors.redAccent,
