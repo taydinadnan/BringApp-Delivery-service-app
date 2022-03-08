@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:bringapp_admin_web_portal/authentication/login_screen.dart';
+import 'package:bringapp_admin_web_portal/users/active_users_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../users/deactivate_users_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -57,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: const Color(0xff1b232A),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -125,13 +129,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   //activate user
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const ActiveUsersScreen()),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.person_add,
                       color: Color.fromARGB(255, 117, 190, 119),
                     ),
                     label: Text(
-                      "Activate".toUpperCase() + "\n  " + "Users".toUpperCase(),
+                      "All Active".toUpperCase() +
+                          "\n  " +
+                          "Users".toUpperCase(),
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -145,7 +158,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(width: 10),
                   //deactivate user
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const DeactiveUsersScreen()),
+                        ),
+                      );
+                    },
                     icon: const Icon(
                       Icons.block_flipped,
                       color: Colors.redAccent,
@@ -180,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Color.fromARGB(255, 117, 190, 119),
                     ),
                     label: Text(
-                      "Activate".toUpperCase() +
+                      "All Active".toUpperCase() +
                           "\n " +
                           "Sellers".toUpperCase(),
                       style: const TextStyle(
@@ -203,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     label: Text(
                       "Deactivate".toUpperCase() +
-                          "\n  " +
+                          "\n    " +
                           "Sellers".toUpperCase(),
                       style: const TextStyle(
                         fontSize: 16,
@@ -232,8 +252,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Color.fromARGB(255, 117, 190, 119),
                     ),
                     label: Text(
-                      "Activate".toUpperCase() +
-                          "\n  " +
+                      "All Active".toUpperCase() +
+                          "\n   " +
                           "Riders".toUpperCase(),
                       style: const TextStyle(
                         fontSize: 16,
