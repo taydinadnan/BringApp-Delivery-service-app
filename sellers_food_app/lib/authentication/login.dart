@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sellers_food_app/authentication/register.dart';
 import 'package:sellers_food_app/global/global.dart';
@@ -90,20 +91,27 @@ class _LoginScreenState extends State<LoginScreen> {
       (snapshot) async {
         //check if the user is seller
         if (snapshot.exists) {
-          await sharedPreferences!.setString("uid", currentUser.uid);
-          await sharedPreferences!
-              .setString("email", snapshot.data()!["sellerEmail"]);
-          await sharedPreferences!
-              .setString("name", snapshot.data()!["sellerName"]);
-          await sharedPreferences!
-              .setString("photoUrl", snapshot.data()!["sellerAvatarUrl"]);
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (c) => const HomeScreen(),
-            ),
-          );
+          if (snapshot.data()!["status"] == "approved") {
+            await sharedPreferences!.setString("uid", currentUser.uid);
+            await sharedPreferences!
+                .setString("email", snapshot.data()!["sellerEmail"]);
+            await sharedPreferences!
+                .setString("name", snapshot.data()!["sellerName"]);
+            await sharedPreferences!
+                .setString("photoUrl", snapshot.data()!["sellerAvatarUrl"]);
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (c) => const HomeScreen(),
+              ),
+            );
+          } else {
+            firebaseAuth.signOut();
+            Navigator.pop(context);
+
+            Fluttertoast.showToast(msg: "Your Account has been blocked");
+          }
         }
         //if user is not a seller
         else {
