@@ -163,6 +163,41 @@ class _ActiveRidersScreenState extends State<ActiveRidersScreen> {
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
+                        primary: Colors.green,
+                      ),
+                      onPressed: () {
+                        SnackBar snackBar = SnackBar(
+                          content: Text(
+                            "Earnings: ".toUpperCase() +
+                                "\$" +
+                                allusers!.docs[i].get("earnings").toString(),
+                            style: const TextStyle(
+                              fontSize: 36,
+                              color: Colors.black,
+                            ),
+                          ),
+                          backgroundColor: Colors.green,
+                          duration: const Duration(seconds: 2),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                      icon: const Icon(Icons.monetization_on),
+                      label: Text(
+                        "\$" + allusers!.docs[i].get("earnings").toString(),
+                        style: GoogleFonts.lato(
+                          textStyle: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            letterSpacing: 3,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
                         primary: Colors.red,
                       ),
                       onPressed: () {

@@ -66,7 +66,7 @@ class _DeactiveRidersScreenState extends State<DeactiveRidersScreen> {
                           builder: ((context) => const HomeScreen())));
                   SnackBar snackBar = const SnackBar(
                     content: Text(
-                      "Rider has been unBlocked",
+                      "User has been unBlocked",
                       style: TextStyle(
                         fontSize: 36,
                         color: Colors.black,
@@ -158,6 +158,41 @@ class _DeactiveRidersScreenState extends State<DeactiveRidersScreen> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.amber,
+                      ),
+                      onPressed: () {
+                        SnackBar snackBar = SnackBar(
+                          content: Text(
+                            "Earnings: ".toUpperCase() +
+                                "\$" +
+                                allusers!.docs[i].get("earnings").toString(),
+                            style: const TextStyle(
+                              fontSize: 36,
+                              color: Colors.black,
+                            ),
+                          ),
+                          backgroundColor: Colors.green,
+                          duration: const Duration(seconds: 2),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                      icon: const Icon(Icons.monetization_on),
+                      label: Text(
+                        "\$" + allusers!.docs[i].get("earnings").toString(),
+                        style: GoogleFonts.lato(
+                          textStyle: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.white,
+                            letterSpacing: 3,
+                          ),
+                        ),
                       ),
                     ),
                   ),
