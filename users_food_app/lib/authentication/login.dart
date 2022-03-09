@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:users_food_app/authentication/register.dart';
 
@@ -90,25 +91,30 @@ class _LoginScreenState extends State<LoginScreen> {
       (snapshot) async {
         //check if the user is user
         if (snapshot.exists) {
-          await sharedPreferences!.setString("uid", currentUser.uid);
-          await sharedPreferences!
-              .setString("email", snapshot.data()!["email"]);
-          await sharedPreferences!.setString("name", snapshot.data()!["name"]);
-          await sharedPreferences!
-              .setString("photoUrl", snapshot.data()!["photoUrl"]);
+          if (snapshot.data()!["status"] == "approved") {
+            await sharedPreferences!.setString("uid", currentUser.uid);
+            await sharedPreferences!
+                .setString("email", snapshot.data()!["email"]);
+            await sharedPreferences!
+                .setString("name", snapshot.data()!["name"]);
+            await sharedPreferences!
+                .setString("photoUrl", snapshot.data()!["photoUrl"]);
+            List<String> userCartList =
+                snapshot.data()!["userCart"].cast<String>();
+            await sharedPreferences!.setStringList("userCart", userCartList);
 
-          //get cart list from firebase
-          List<String> userCartList =
-              snapshot.data()!["userCart"].cast<String>();
-          await sharedPreferences!.setStringList("userCart", userCartList);
-
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (c) => HomeScreen(),
-            ),
-          );
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (c) => HomeScreen(),
+              ),
+            );
+          } else {
+            firebaseAuth.signOut();
+            Navigator.pop(context);
+            Fluttertoast.showToast(msg: "Your account has been blocked!");
+          }
         }
         //if user is not a user
         else {
