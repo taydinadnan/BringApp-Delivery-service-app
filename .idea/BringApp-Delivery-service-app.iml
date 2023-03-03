@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration />
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/users_food_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/users_food_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/users_food_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/sellers_food_app/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/sellers_food_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/sellers_food_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/bringapp_admin_web_portal/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/bringapp_admin_web_portal/build" />
+      <excludeFolder url="file://$MODULE_DIR$/bringapp_admin_web_portal/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/riders_food_app/build" />
+      <excludeFolder url="file://$MODULE_DIR$/riders_food_app/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/riders_food_app/.pub" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 33, extension level 4 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Dart SDK" level="project" />
+    <orderEntry type="library" name="Dart Packages" level="project" />
+  </component>
+</module>
