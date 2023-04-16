@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,7 +16,7 @@ import '../widgets/error_dialog.dart';
 class ItemsUploadScreen extends StatefulWidget {
   final Menus? model;
 
-  ItemsUploadScreen({this.model});
+  const ItemsUploadScreen({Key? key, this.model}) : super(key: key);
 
   @override
   _ItemsUploadScreenState createState() => _ItemsUploadScreenState();
@@ -413,7 +415,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
         showDialog(
           context: context,
           builder: (c) {
-            return ErrorDialog(
+            return const ErrorDialog(
               message: "Please write title and info for menu.",
             );
           },
@@ -423,7 +425,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
       showDialog(
         context: context,
         builder: (c) {
-          return ErrorDialog(
+          return const ErrorDialog(
             message: "Please pick an image for menu.",
           );
         },

@@ -1,3 +1,5 @@
+// ignore_for_file: library_prefixes
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -378,7 +380,7 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
         showDialog(
           context: context,
           builder: (c) {
-            return ErrorDialog(
+            return const ErrorDialog(
               message: "Please write title and info for menu.",
             );
           },
@@ -388,7 +390,7 @@ class _MenusUploadScreenState extends State<MenusUploadScreen> {
       showDialog(
         context: context,
         builder: (c) {
-          return ErrorDialog(
+          return const ErrorDialog(
             message: "Please pick an image for menu.",
           );
         },

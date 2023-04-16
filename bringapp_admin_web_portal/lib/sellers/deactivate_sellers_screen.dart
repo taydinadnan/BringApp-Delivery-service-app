@@ -165,7 +165,7 @@ class _DeactiveSellersScreenState extends State<DeactiveSellersScreen> {
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.amber,
+                        backgroundColor: Colors.amber,
                       ),
                       onPressed: () {
                         SnackBar snackBar = SnackBar(
@@ -200,7 +200,7 @@ class _DeactiveSellersScreenState extends State<DeactiveSellersScreen> {
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
+                        backgroundColor: Colors.green,
                       ),
                       onPressed: () {
                         displayDialogBoxForUnBlockingAccount(
@@ -246,7 +246,7 @@ class _DeactiveSellersScreenState extends State<DeactiveSellersScreen> {
         title: "All Deactivated Sellers",
       ),
       body: Center(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * .5,
           child: displayDeactiveUsersDesign(),
         ),

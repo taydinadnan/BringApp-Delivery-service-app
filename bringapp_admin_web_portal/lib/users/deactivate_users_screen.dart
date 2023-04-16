@@ -165,7 +165,7 @@ class _DeactiveUsersScreenState extends State<DeactiveUsersScreen> {
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
+                        backgroundColor: Colors.green,
                       ),
                       onPressed: () {
                         displayDialogBoxForUnBlockingAccount(
@@ -211,7 +211,7 @@ class _DeactiveUsersScreenState extends State<DeactiveUsersScreen> {
         title: "All Deactivated Users",
       ),
       body: Center(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * .5,
           child: displayDeactiveUsersDesign(),
         ),

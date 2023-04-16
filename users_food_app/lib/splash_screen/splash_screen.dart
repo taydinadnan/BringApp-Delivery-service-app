@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (c) => HomeScreen(),
+              builder: (c) => const HomeScreen(),
             ),
           );
         }
@@ -189,7 +189,7 @@ class _BottomPart extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => LoginScreen())));
+                              builder: ((context) => const LoginScreen())));
                     },
                     child: Container(
                       height: 85.0,

@@ -60,8 +60,10 @@ class _ActiveRidersScreenState extends State<ActiveRidersScreen> {
                     .doc(userDocumentID)
                     .update(userDataMap)
                     .then((value) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => HomeScreen())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const HomeScreen())));
                   SnackBar snackBar = const SnackBar(
                     content: Text(
                       "Rider has been Blocked",
@@ -163,7 +165,7 @@ class _ActiveRidersScreenState extends State<ActiveRidersScreen> {
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green,
+                        backgroundColor: Colors.green,
                       ),
                       onPressed: () {
                         SnackBar snackBar = SnackBar(
@@ -198,7 +200,7 @@ class _ActiveRidersScreenState extends State<ActiveRidersScreen> {
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
+                        backgroundColor: Colors.red,
                       ),
                       onPressed: () {
                         displayDialogBoxForBlockingAccount(
@@ -244,7 +246,7 @@ class _ActiveRidersScreenState extends State<ActiveRidersScreen> {
         title: "All Active Riders",
       ),
       body: Center(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * .5,
           child: displayActiveUsersDesign(),
         ),

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -19,6 +21,8 @@ class SaveAddressScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   List<Placemark>? placemarks;
   Position? position;
+
+  SaveAddressScreen({Key? key}) : super(key: key);
 
   getUserLocationAddress() async {
     //get current location
@@ -112,7 +116,7 @@ class SaveAddressScreen extends StatelessWidget {
                 color: Colors.red,
                 size: 35,
               ),
-              title: Container(
+              title: SizedBox(
                 width: 250,
                 child: TextField(
                   style: const TextStyle(

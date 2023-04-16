@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:url_launcher/url_launcher.dart';
 
 class MapsUtils {

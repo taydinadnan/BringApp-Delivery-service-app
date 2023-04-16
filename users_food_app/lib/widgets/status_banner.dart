@@ -5,7 +5,8 @@ class StatusBanner extends StatelessWidget {
   final bool? status;
   final String? orderStatus;
 
-  StatusBanner({this.status, this.orderStatus});
+  const StatusBanner({Key? key, this.status, this.orderStatus})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     String? message;
@@ -31,8 +32,10 @@ class StatusBanner extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => HomeScreen())));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const HomeScreen())));
             },
             child: const Icon(
               Icons.arrow_back,

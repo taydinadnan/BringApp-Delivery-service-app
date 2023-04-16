@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, library_prefixes
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -88,6 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         '${pMark.thoroughfare}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea}, ${pMark.country}';
 
     locationController.text = completeAddress;
+    return null;
   }
 
 //function for getting image
@@ -109,7 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           showDialog(
             context: context,
             builder: (c) {
-              return ErrorDialog(
+              return const ErrorDialog(
                 message: "Please select an image",
               );
             },
@@ -128,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           showDialog(
             context: context,
             builder: (c) {
-              return LoadingDialog(
+              return const LoadingDialog(
                 message: "Registering Account",
               );
             },
@@ -155,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           showDialog(
             context: context,
             builder: (c) {
-              return ErrorDialog(
+              return const ErrorDialog(
                 message: "Please fill the required info for Registration. ",
               );
             },
@@ -166,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         showDialog(
           context: context,
           builder: (c) {
-            return ErrorDialog(
+            return const ErrorDialog(
               message: "Password do not match",
             );
           },
@@ -254,9 +257,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Stack(
                 children: [
-                  Container(
+                  const SizedBox(
                     height: 150,
-                    child: const HeaderWidget(
+                    child: HeaderWidget(
                       150,
                       false,
                       Icons.add,

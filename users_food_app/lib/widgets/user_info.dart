@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../global/global.dart';
 
 class UserInformation extends StatefulWidget {
+  const UserInformation({Key? key}) : super(key: key);
+
   @override
   State<UserInformation> createState() => _UserInformationState();
 }
@@ -54,11 +56,9 @@ class _UserInformationState extends State<UserInformation> {
                     padding: const EdgeInsets.all(5),
                     child: Row(
                       children: [
-                        Container(
-                          child: Image.asset(
-                            "images/user.png",
-                            height: 30,
-                          ),
+                        Image.asset(
+                          "images/user.png",
+                          height: 30,
                         ),
                         const SizedBox(width: 15),
                         Text(

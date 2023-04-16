@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_types_as_parameter_names, must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_food_app/assistantMethods/get_current_location.dart';
@@ -14,13 +16,14 @@ class ParcelPickingScreen extends StatefulWidget {
   double? purchaserLng;
 
   ParcelPickingScreen({
+    Key? key,
     this.purchaserId,
     this.sellerId,
     this.getOrderID,
     this.purchaserAddress,
     this.purchaserLat,
     this.purchaserLng,
-  });
+  }) : super(key: key);
 
   @override
   _ParcelPickingScreenState createState() => _ParcelPickingScreenState();
@@ -35,6 +38,7 @@ class _ParcelPickingScreenState extends State<ParcelPickingScreen> {
         .collection("sellers")
         .doc(widget.sellerId)
         .get()
+        // ignore: non_constant_identifier_names
         .then((DocumentSnapshot) {
       sellerLat = DocumentSnapshot.data()!["lat"];
       sellerLng = DocumentSnapshot.data()!["lng"];
@@ -84,7 +88,7 @@ class _ParcelPickingScreenState extends State<ParcelPickingScreen> {
           const SizedBox(height: 5),
           GestureDetector(
             onTap: () {
-              //TODO: show location from rider current location towards seller location
+              // show location from rider current location towards seller location
               MapUtils.launchMapFromSourceToDestination(position!.latitude,
                   position!.longitude, sellerLat, sellerLng);
             },
@@ -118,7 +122,7 @@ class _ParcelPickingScreenState extends State<ParcelPickingScreen> {
             child: Center(
               child: InkWell(
                 onTap: () {
-                  //TODO: confirm that rider has picked order
+                  // confirm that rider has picked order
                   UserLocation uLocation = UserLocation();
                   uLocation.getCurrenLocation();
 

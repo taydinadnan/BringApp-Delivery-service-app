@@ -8,6 +8,8 @@ import '../widgets/progress_bar.dart';
 import '../widgets/simple_app_bar.dart';
 
 class ParcelInProgressScreen extends StatefulWidget {
+  const ParcelInProgressScreen({Key? key}) : super(key: key);
+
   @override
   _ParcelInProgressScreenState createState() => _ParcelInProgressScreenState();
 }

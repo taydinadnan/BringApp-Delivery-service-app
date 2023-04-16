@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../global/global.dart';
 
 class RiderInformation extends StatefulWidget {
+  const RiderInformation({Key? key}) : super(key: key);
+
   @override
   State<RiderInformation> createState() => _RiderInformationState();
 }
@@ -54,11 +56,9 @@ class _RiderInformationState extends State<RiderInformation> {
                     padding: const EdgeInsets.all(5),
                     child: Row(
                       children: [
-                        Container(
-                          child: Image.asset(
-                            "images/user.png",
-                            height: 30,
-                          ),
+                        Image.asset(
+                          "images/user.png",
+                          height: 30,
                         ),
                         const SizedBox(width: 15),
                         Text(

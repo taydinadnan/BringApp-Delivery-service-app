@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sellers_food_app/global/global.dart';
 
 class SellerInfo extends StatefulWidget {
+  const SellerInfo({Key? key}) : super(key: key);
+
   @override
   State<SellerInfo> createState() => _SellerInfoState();
 }
@@ -73,11 +75,9 @@ class _SellerInfoState extends State<SellerInfo> {
                     padding: const EdgeInsets.all(5),
                     child: Row(
                       children: [
-                        Container(
-                          child: Image.asset(
-                            "images/restaurant.png",
-                            height: 30,
-                          ),
+                        Image.asset(
+                          "images/restaurant.png",
+                          height: 30,
                         ),
                         const SizedBox(width: 5),
                         Text(
@@ -168,11 +168,9 @@ class _SellerInfoState extends State<SellerInfo> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                child: Image.asset(
-                  "images/menu.png",
-                  height: 30,
-                ),
+              Image.asset(
+                "images/menu.png",
+                height: 30,
               ),
               Text(
                 "Menus",

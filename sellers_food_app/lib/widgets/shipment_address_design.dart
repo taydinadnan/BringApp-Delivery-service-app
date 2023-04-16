@@ -10,13 +10,14 @@ class ShipmentAddressDesign extends StatelessWidget {
   final String? sellerId;
   final String? orderByUser;
 
-  ShipmentAddressDesign({
+  const ShipmentAddressDesign({
+    Key? key,
     this.model,
     this.orderStatus,
     this.orderId,
     this.sellerId,
     this.orderByUser,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

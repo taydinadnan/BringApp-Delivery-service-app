@@ -8,6 +8,8 @@ import '../widgets/progress_bar.dart';
 import '../widgets/simple_app_bar.dart';
 
 class HistoryScreen extends StatefulWidget {
+  const HistoryScreen({Key? key}) : super(key: key);
+
   @override
   _HistoryScreenState createState() => _HistoryScreenState();
 }

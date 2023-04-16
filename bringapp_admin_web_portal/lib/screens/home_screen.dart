@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final String liveTime = formatCurrentLiveTime(timeNow);
     final String liveDate = formatCurrentDate(timeNow);
 
-    if (this.mounted) {
+    if (mounted) {
       setState(() {
         timeText = liveTime;
         dateText = liveDate;
@@ -90,263 +90,262 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          dateText,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.white70,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.normal,
-                          ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        dateText,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.white70,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.normal,
                         ),
-                        const SizedBox(height: 5),
-                        Text(
-                          timeText,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.white70,
-                            letterSpacing: 3,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 50),
-
-              // user activate and deactivate accounts ui
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //activate user
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => const ActiveUsersScreen()),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.person_add,
-                      color: Color.fromARGB(255, 117, 190, 119),
-                    ),
-                    label: Text(
-                      "All Active".toUpperCase() +
-                          "\n  " +
-                          "Users".toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        letterSpacing: 3,
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(30),
-                        primary: Colors.amber),
-                  ),
-                  const SizedBox(width: 10),
-                  //deactivate user
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => const DeactiveUsersScreen()),
+                      const SizedBox(height: 5),
+                      Text(
+                        timeText,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.white70,
+                          letterSpacing: 3,
+                          fontWeight: FontWeight.bold,
                         ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.block_flipped,
-                      color: Colors.redAccent,
-                    ),
-                    label: Text(
-                      "Deactivate".toUpperCase() +
-                          "\n    " +
-                          "Users".toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        letterSpacing: 3,
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(30),
-                        primary: Colors.white),
-                  )
-                ],
-              ),
-              const SizedBox(height: 20),
-
-              //sellers activate and deactivate account
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //activate seller
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => const ActiveSellersScreen()),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.person_add,
-                      color: Color.fromARGB(255, 117, 190, 119),
-                    ),
-                    label: Text(
-                      "All Active".toUpperCase() +
-                          "\n " +
-                          "Sellers".toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        letterSpacing: 3,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(30),
-                        primary: Colors.white),
-                  ),
-                  const SizedBox(width: 10),
-                  //deactivate user
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => const DeactiveSellersScreen()),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.block,
-                      color: Colors.redAccent,
-                    ),
-                    label: Text(
-                      "Deactivate".toUpperCase() +
-                          "\n    " +
-                          "Sellers".toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        letterSpacing: 3,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(30),
-                        primary: Colors.amber),
-                  )
-                ],
-              ),
-
-              const SizedBox(height: 20),
-
-              //riders activate and deactivate account
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  //activate seller
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => ActiveRidersScreen()),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.person_add,
-                      color: Color.fromARGB(255, 117, 190, 119),
-                    ),
-                    label: Text(
-                      "All Active".toUpperCase() +
-                          "\n   " +
-                          "Riders".toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        letterSpacing: 3,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(30),
-                        primary: Colors.amber),
-                  ),
-                  const SizedBox(width: 10),
-                  //deactivate user
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: ((context) => DeactiveRidersScreen()),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.block,
-                      color: Colors.redAccent,
-                    ),
-                    label: Text(
-                      "Deactivate".toUpperCase() +
-                          "\n   " +
-                          "Riders".toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        letterSpacing: 3,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(30),
-                        primary: Colors.white),
-                  )
-                ],
-              ),
-              const SizedBox(height: 50),
-
-              //Logout
-              ElevatedButton.icon(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => LoginScreen())));
-                },
-                icon: const Icon(
-                  Icons.exit_to_app,
-                  color: Colors.grey,
-                ),
-                label: Text(
-                  "Logout".toUpperCase(),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                    letterSpacing: 3,
+                    ],
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(30), primary: Colors.white),
-              )
-            ],
-          ),
+              ],
+            ),
+
+            const SizedBox(height: 50),
+
+            // user activate and deactivate accounts ui
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //activate user
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => const ActiveUsersScreen()),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.person_add,
+                    color: Color.fromARGB(255, 117, 190, 119),
+                  ),
+                  label: Text(
+                    "All Active".toUpperCase() + "\n  " + "Users".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(30),
+                      backgroundColor: Colors.amber),
+                ),
+                const SizedBox(width: 10),
+                //deactivate user
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => const DeactiveUsersScreen()),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.block_flipped,
+                    color: Colors.redAccent,
+                  ),
+                  label: Text(
+                    "Deactivate".toUpperCase() +
+                        "\n    " +
+                        "Users".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(30),
+                      backgroundColor: Colors.white),
+                )
+              ],
+            ),
+            const SizedBox(height: 20),
+
+            //sellers activate and deactivate account
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //activate seller
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => const ActiveSellersScreen()),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.person_add,
+                    color: Color.fromARGB(255, 117, 190, 119),
+                  ),
+                  label: Text(
+                    "All Active".toUpperCase() +
+                        "\n " +
+                        "Sellers".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(30),
+                      backgroundColor: Colors.white),
+                ),
+                const SizedBox(width: 10),
+                //deactivate user
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => const DeactiveSellersScreen()),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.block,
+                    color: Colors.redAccent,
+                  ),
+                  label: Text(
+                    "Deactivate".toUpperCase() +
+                        "\n    " +
+                        "Sellers".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(30),
+                      backgroundColor: Colors.amber),
+                )
+              ],
+            ),
+
+            const SizedBox(height: 20),
+
+            //riders activate and deactivate account
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //activate seller
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => const ActiveRidersScreen()),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.person_add,
+                    color: Color.fromARGB(255, 117, 190, 119),
+                  ),
+                  label: Text(
+                    "All Active".toUpperCase() +
+                        "\n   " +
+                        "Riders".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(30),
+                      backgroundColor: Colors.amber),
+                ),
+                const SizedBox(width: 10),
+                //deactivate user
+                ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: ((context) => const DeactiveRidersScreen()),
+                      ),
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.block,
+                    color: Colors.redAccent,
+                  ),
+                  label: Text(
+                    "Deactivate".toUpperCase() +
+                        "\n   " +
+                        "Riders".toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      letterSpacing: 3,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.all(30),
+                      backgroundColor: Colors.white),
+                )
+              ],
+            ),
+            const SizedBox(height: 50),
+
+            //Logout
+            ElevatedButton.icon(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => const LoginScreen())));
+              },
+              icon: const Icon(
+                Icons.exit_to_app,
+                color: Colors.grey,
+              ),
+              label: Text(
+                "Logout".toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  letterSpacing: 3,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.all(30),
+                  backgroundColor: Colors.white),
+            )
+          ],
         ),
       ),
     );

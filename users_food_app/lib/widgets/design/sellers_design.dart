@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:users_food_app/screens/menus_screen.dart';
 
@@ -7,7 +9,7 @@ class SellersDesignWidget extends StatefulWidget {
   Sellers? model;
   BuildContext? context;
 
-  SellersDesignWidget({this.context, this.model});
+  SellersDesignWidget({Key? key, this.context, this.model}) : super(key: key);
 
   @override
   _SellersDesignWidgetState createState() => _SellersDesignWidgetState();

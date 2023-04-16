@@ -42,5 +42,6 @@ class UserLocation {
 
     completeAddress =
         '${pMark.thoroughfare}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea}, ${pMark.country}';
+    return null;
   }
 }

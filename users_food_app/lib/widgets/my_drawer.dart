@@ -11,6 +11,8 @@ import 'package:users_food_app/screens/search_screen.dart';
 class MyDrawer extends StatelessWidget {
   final TextEditingController _controller = TextEditingController();
 
+  MyDrawer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -105,7 +107,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => HomeScreen()),
+                          builder: ((context) => const HomeScreen()),
                         ),
                       );
                     },
@@ -130,7 +132,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (c) => MyOrdersScreen(),
+                          builder: (c) => const MyOrdersScreen(),
                         ),
                       );
                     },
@@ -155,7 +157,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => HistoryScreen()),
+                          builder: ((context) => const HistoryScreen()),
                         ),
                       );
                     },
@@ -180,7 +182,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => SearchScreen()),
+                          builder: ((context) => const SearchScreen()),
                         ),
                       );
                     },
@@ -205,7 +207,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => AddressScreen()),
+                          builder: ((context) => const AddressScreen()),
                         ),
                       );
                     },

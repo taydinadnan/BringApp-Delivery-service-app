@@ -3,10 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:users_food_app/models/items.dart';
 import 'package:users_food_app/screens/item_detail_screen.dart';
 
+// ignore: must_be_immutable
 class ItemsDesignWidget extends StatefulWidget {
   Items? model;
 
-  ItemsDesignWidget({this.model});
+  ItemsDesignWidget({Key? key, this.model}) : super(key: key);
 
   @override
   _ItemsDesignWidgetState createState() => _ItemsDesignWidgetState();

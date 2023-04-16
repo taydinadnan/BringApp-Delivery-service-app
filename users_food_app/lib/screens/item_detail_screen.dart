@@ -8,7 +8,7 @@ import '../widgets/app_bar.dart';
 
 class ItemDetailsScreen extends StatefulWidget {
   final Items? model;
-  ItemDetailsScreen({this.model});
+  const ItemDetailsScreen({Key? key, this.model}) : super(key: key);
 
   @override
   _ItemDetailsScreenState createState() => _ItemDetailsScreenState();

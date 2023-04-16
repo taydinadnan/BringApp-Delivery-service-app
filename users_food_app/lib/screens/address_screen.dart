@@ -15,10 +15,11 @@ class AddressScreen extends StatefulWidget {
   final double? totalAmount;
   final String? sellerUID;
 
-  AddressScreen({
+  const AddressScreen({
+    Key? key,
     this.sellerUID,
     this.totalAmount,
-  });
+  }) : super(key: key);
 
   @override
   State<AddressScreen> createState() => _AddressScreenState();
@@ -102,7 +103,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           ? Center(
                               child: circularProgress(),
                             )
-                          : snapshot.data!.docs.length == 0
+                          : snapshot.data!.docs.isEmpty
                               ? Container()
                               : ListView.builder(
                                   itemCount: snapshot.data!.docs.length,

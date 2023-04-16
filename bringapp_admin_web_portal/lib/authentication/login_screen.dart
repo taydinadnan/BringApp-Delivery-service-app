@@ -74,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
           } else {
             SnackBar snackBar = const SnackBar(
               content: Text(
-                "No record found!" + "\n" + "You are not an Admin!",
+                "No record found!" "\n" "You are not an Admin!",
                 style: TextStyle(
                   fontSize: 36,
                   color: Colors.black,
@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Center(
             child: SingleChildScrollView(
-              child: Container(
+              child: SizedBox(
                 width: MediaQuery.of(context).size.width * .5,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

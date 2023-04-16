@@ -89,6 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         '${pMark.thoroughfare}, ${pMark.locality}, ${pMark.subAdministrativeArea}, ${pMark.administrativeArea}, ${pMark.country}';
 
     locationController.text = completeAddress;
+    return null;
   }
 
 //function for getting image
@@ -256,9 +257,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Stack(
                 children: [
-                  Container(
+                  const SizedBox(
                     height: 150,
-                    child: const HeaderWidget(
+                    child: HeaderWidget(
                       150,
                       false,
                       Icons.add,

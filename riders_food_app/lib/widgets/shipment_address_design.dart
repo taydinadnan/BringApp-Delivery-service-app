@@ -14,13 +14,14 @@ class ShipmentAddressDesign extends StatelessWidget {
   final String? sellerId;
   final String? orderByUser;
 
-  ShipmentAddressDesign({
+  const ShipmentAddressDesign({
+    Key? key,
     this.model,
     this.orderStatus,
     this.orderId,
     this.sellerId,
     this.orderByUser,
-  });
+  }) : super(key: key);
 
   confirmedParcelShipment(BuildContext context, String getOrderID,
       String sellerId, String purchaserId) {
@@ -35,7 +36,7 @@ class ShipmentAddressDesign extends StatelessWidget {
       },
     );
 
-    //TODO: send rider to shipment screen
+    // send rider to shipment screen
 
     Navigator.push(
       context,
@@ -156,7 +157,7 @@ class ShipmentAddressDesign extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: ((context) => SplashScreen()),
+                    builder: ((context) => const SplashScreen()),
                   ),
                 );
               },

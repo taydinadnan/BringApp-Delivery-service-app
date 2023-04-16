@@ -12,7 +12,7 @@ import '../widgets/text_widget_header.dart';
 
 class ItemsScreen extends StatefulWidget {
   final Menus? model;
-  ItemsScreen({this.model});
+  const ItemsScreen({Key? key, this.model}) : super(key: key);
 
   @override
   _ItemsScreenState createState() => _ItemsScreenState();

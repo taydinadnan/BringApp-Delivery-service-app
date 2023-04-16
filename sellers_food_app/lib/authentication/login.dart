@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
       showDialog(
         context: context,
         builder: (c) {
-          return ErrorDialog(
+          return const ErrorDialog(
             message: "Please enter email/password.",
           );
         },
@@ -49,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
     showDialog(
       context: context,
       builder: (c) {
-        return LoadingDialog(
+        return const LoadingDialog(
           message: "Checking Credentials...",
         );
       },
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
           showDialog(
             context: context,
             builder: (c) {
-              return ErrorDialog(
+              return const ErrorDialog(
                 message: "No record exist.",
               );
             },
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Container(
+              SizedBox(
                 height: _headerHeight,
                 child: HeaderWidget(
                   _headerHeight,

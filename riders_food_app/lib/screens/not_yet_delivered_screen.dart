@@ -8,6 +8,8 @@ import '../widgets/progress_bar.dart';
 import '../widgets/simple_app_bar.dart';
 
 class NotYetDeliveredScreen extends StatefulWidget {
+  const NotYetDeliveredScreen({Key? key}) : super(key: key);
+
   @override
   _NotYetDeliveredScreenState createState() => _NotYetDeliveredScreenState();
 }

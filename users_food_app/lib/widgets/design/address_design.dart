@@ -14,14 +14,15 @@ class AddressDesign extends StatefulWidget {
   final double? totalAmount;
   final String? sellerUID;
 
-  AddressDesign({
+  const AddressDesign({
+    Key? key,
     this.model,
     this.currentIndex,
     this.value,
     this.addressID,
     this.totalAmount,
     this.sellerUID,
-  });
+  }) : super(key: key);
 
   @override
   _AddressDesignState createState() => _AddressDesignState();
@@ -39,7 +40,7 @@ class _AddressDesignState extends State<AddressDesign> {
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               blurRadius: 5,
-              offset: Offset(1, 2),
+              offset: const Offset(1, 2),
             )
           ],
         ),
@@ -237,7 +238,7 @@ class _AddressDesignState extends State<AddressDesign> {
                   },
                   child: const Text("Check on Maps"),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.amber,
+                    backgroundColor: Colors.amber,
                   ),
                 ),
                 //button
@@ -259,7 +260,7 @@ class _AddressDesignState extends State<AddressDesign> {
                         },
                         child: const Text("Proceed"),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
+                          backgroundColor: Colors.green,
                         ),
                       )
                     : Container()

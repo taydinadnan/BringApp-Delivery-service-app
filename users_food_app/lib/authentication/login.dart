@@ -107,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (c) => HomeScreen(),
+                builder: (c) => const HomeScreen(),
               ),
             );
           } else {
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Container(
+              SizedBox(
                 height: _headerHeight,
                 child: HeaderWidget(
                   _headerHeight,

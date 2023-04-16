@@ -10,7 +10,6 @@ import 'package:users_food_app/widgets/design/cart_item_design.dart';
 import 'package:users_food_app/widgets/progress_bar.dart';
 
 import '../assistantMethods/cart_item_counter.dart';
-import '../assistantMethods/total_amount.dart';
 import '../models/items.dart';
 import '../widgets/text_widget_header.dart';
 import 'address_screen.dart';
@@ -18,7 +17,7 @@ import 'address_screen.dart';
 class CartScreen extends StatefulWidget {
   final String? sellerUID;
 
-  CartScreen({this.sellerUID});
+  const CartScreen({Key? key, this.sellerUID}) : super(key: key);
 
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -236,7 +235,7 @@ class _CartScreenState extends State<CartScreen> {
                             }
                             //update in real time
                             if (snapshot.data!.docs.length - 1 == index) {
-                              WidgetsBinding.instance!.addPostFrameCallback(
+                              WidgetsBinding.instance.addPostFrameCallback(
                                 (timeStamp) {
                                   Provider.of<TotalAmount>(context,
                                           listen: false)

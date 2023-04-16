@@ -7,6 +7,8 @@ import 'package:users_food_app/widgets/progress_bar.dart';
 import 'package:users_food_app/widgets/simple_app_bar.dart';
 
 class MyOrdersScreen extends StatefulWidget {
+  const MyOrdersScreen({Key? key}) : super(key: key);
+
   @override
   _MyOrdersScreenState createState() => _MyOrdersScreenState();
 }

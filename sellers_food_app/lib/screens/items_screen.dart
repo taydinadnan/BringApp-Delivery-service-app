@@ -13,7 +13,7 @@ import '../widgets/progress_bar.dart';
 
 class ItemsScreen extends StatefulWidget {
   final Menus? model;
-  ItemsScreen({this.model});
+  const ItemsScreen({Key? key, this.model}) : super(key: key);
 
   @override
   _ItemsScreenState createState() => _ItemsScreenState();
@@ -72,7 +72,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (c) => ItemsUploadScreen(),
+                          builder: (c) => const ItemsUploadScreen(),
                         ),
                       );
                     },

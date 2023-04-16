@@ -15,6 +15,8 @@ import '../widgets/design/sellers_design.dart';
 import '../widgets/user_info.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -106,10 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             //Carausel
-            SliverToBoxAdapter(
-              child: Container(
-                child: UserInformation(),
-              ),
+            const SliverToBoxAdapter(
+              child: UserInformation(),
             ),
 
             SliverToBoxAdapter(

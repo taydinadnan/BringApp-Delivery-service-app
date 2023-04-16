@@ -3,6 +3,8 @@ import 'package:riders_food_app/global/global.dart';
 import 'package:riders_food_app/splash_screen/splash_screen.dart';
 
 class EarningsScreen extends StatefulWidget {
+  const EarningsScreen({Key? key}) : super(key: key);
+
   @override
   _EarningsScreenState createState() => _EarningsScreenState();
 }

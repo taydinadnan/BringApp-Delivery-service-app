@@ -6,6 +6,7 @@ import '../assistantMethods/get_current_location.dart';
 import '../global/global.dart';
 import '../maps/map_utils.dart';
 
+// ignore: must_be_immutable
 class ParcelDeliveringScreen extends StatefulWidget {
   String? purchaserId;
   String? purchaserAddress;
@@ -15,13 +16,14 @@ class ParcelDeliveringScreen extends StatefulWidget {
   String? getOrderId;
 
   ParcelDeliveringScreen({
+    Key? key,
     this.purchaserId,
     this.purchaserAddress,
     this.purchaserLat,
     this.purchaserLng,
     this.sellerId,
     this.getOrderId,
-  });
+  }) : super(key: key);
   @override
   _ParcelDeliveringScreenState createState() => _ParcelDeliveringScreenState();
 }
@@ -122,7 +124,7 @@ class _ParcelDeliveringScreenState extends State<ParcelDeliveringScreen> {
           const SizedBox(height: 5),
           GestureDetector(
             onTap: () {
-              //TODO: show location from rider current location towards seller location
+              // show location from rider current location towards seller location
               MapUtils.launchMapFromSourceToDestination(
                   position!.latitude,
                   position!.longitude,
@@ -159,7 +161,7 @@ class _ParcelDeliveringScreenState extends State<ParcelDeliveringScreen> {
             child: Center(
               child: InkWell(
                 onTap: () {
-                  //TODO: confirm that rider has picked order
+                  // confirm that rider has picked order
                   //rider location updates
                   UserLocation uLocation = UserLocation();
                   uLocation.getCurrenLocation();

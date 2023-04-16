@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:users_food_app/models/items.dart';
@@ -8,10 +10,11 @@ class CartItemDesign extends StatefulWidget {
   final int? quanNumber;
 
   CartItemDesign({
+    Key? key,
     this.model,
     this.context,
     this.quanNumber,
-  });
+  }) : super(key: key);
 
   @override
   _CartItemDesignState createState() => _CartItemDesignState();

@@ -13,7 +13,7 @@ class SellerCarouselWidget extends StatefulWidget {
 class _SellerCarouselWidgetState extends State<SellerCarouselWidget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       width: 200,
       child: StreamBuilder(

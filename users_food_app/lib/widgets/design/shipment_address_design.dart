@@ -5,7 +5,7 @@ import 'package:users_food_app/splash_screen/splash_screen.dart';
 class ShipmentAddressDesign extends StatelessWidget {
   final Address? model;
 
-  ShipmentAddressDesign({this.model});
+  const ShipmentAddressDesign({Key? key, this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class ShipmentAddressDesign extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: ((context) => SplashScreen()),
+                    builder: ((context) => const SplashScreen()),
                   ),
                 );
               },

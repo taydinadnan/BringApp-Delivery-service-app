@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:bringapp_admin_web_portal/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   String? title;
-  SimpleAppBar({this.bottom, this.title});
+  SimpleAppBar({super.key, this.bottom, this.title});
 
   @override
   Size get preferredSize => bottom == null

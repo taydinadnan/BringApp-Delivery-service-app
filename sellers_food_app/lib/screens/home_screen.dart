@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             // this is where seller info is displayed
-            SliverToBoxAdapter(
+            const SliverToBoxAdapter(
               child: SellerInfo(),
             ),
             StreamBuilder<QuerySnapshot>(

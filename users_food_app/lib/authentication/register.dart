@@ -149,7 +149,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       saveDataToFirestore(currentUser!).then((value) {
         Navigator.pop(context);
         //send user to Home Screen
-        Route newRoute = MaterialPageRoute(builder: (c) => HomeScreen());
+        Route newRoute = MaterialPageRoute(builder: (c) => const HomeScreen());
         Navigator.pushReplacement(context, newRoute);
       });
     }
@@ -199,9 +199,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             children: [
               Stack(
                 children: [
-                  Container(
+                  const SizedBox(
                     height: 150,
-                    child: const HeaderWidget(
+                    child: HeaderWidget(
                       150,
                       false,
                       Icons.add,

@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,32 +69,38 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: () {
             if (index == 0) {
               //new orders
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => NewOrdersScreen())));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const NewOrdersScreen())));
             }
             if (index == 1) {
               //Parcels in progress
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ParcelInProgressScreen()));
+                      builder: (context) => const ParcelInProgressScreen()));
             }
             if (index == 2) {
               //not yet delivered
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => NotYetDeliveredScreen()));
+                      builder: (context) => const NotYetDeliveredScreen()));
             }
             if (index == 3) {
               //history
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HistoryScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HistoryScreen()));
             }
             if (index == 4) {
               //total earnings
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => EarningsScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const EarningsScreen()));
             }
             if (index == 5) {
               //logout

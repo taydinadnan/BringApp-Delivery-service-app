@@ -139,7 +139,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (c) => NewOrdersScreen(),
+                          builder: (c) => const NewOrdersScreen(),
                         ),
                       );
                     },
@@ -168,7 +168,7 @@ class MyDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (c) => HistoryScreen(),
+                          builder: (c) => const HistoryScreen(),
                         ),
                       );
                     },

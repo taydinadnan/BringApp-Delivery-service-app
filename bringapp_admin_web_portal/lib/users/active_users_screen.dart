@@ -60,8 +60,10 @@ class _ActiveUsersScreenState extends State<ActiveUsersScreen> {
                     .doc(userDocumentID)
                     .update(userDataMap)
                     .then((value) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => HomeScreen())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const HomeScreen())));
                   SnackBar snackBar = const SnackBar(
                     content: Text(
                       "User has been Blocked",
@@ -163,7 +165,7 @@ class _ActiveUsersScreenState extends State<ActiveUsersScreen> {
                     padding: const EdgeInsets.all(20.0),
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.red,
+                        backgroundColor: Colors.red,
                       ),
                       onPressed: () {
                         displayDialogBoxForBlockingAccount(
@@ -209,7 +211,7 @@ class _ActiveUsersScreenState extends State<ActiveUsersScreen> {
         title: "All Active Users",
       ),
       body: Center(
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * .5,
           child: displayActiveUsersDesign(),
         ),

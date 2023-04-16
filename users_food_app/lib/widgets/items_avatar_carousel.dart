@@ -13,7 +13,7 @@ class ItemsAvatarCarousel extends StatefulWidget {
 class _ItemsAvatarCarouselState extends State<ItemsAvatarCarousel> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       width: 200,
       child: StreamBuilder(

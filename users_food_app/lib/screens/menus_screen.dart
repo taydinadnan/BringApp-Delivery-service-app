@@ -11,11 +11,10 @@ import '../models/menus.dart';
 import '../models/sellers.dart';
 import '../splash_screen/splash_screen.dart';
 import '../widgets/progress_bar.dart';
-import '../widgets/text_widget_header.dart';
 
 class MenusScreen extends StatefulWidget {
   final Sellers? model;
-  MenusScreen({this.model});
+  const MenusScreen({Key? key, this.model}) : super(key: key);
 
   @override
   _MenusScreenState createState() => _MenusScreenState();

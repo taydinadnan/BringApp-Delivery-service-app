@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
       ),
       home: FirebaseAuth.instance.currentUser == null
-          ? LoginScreen()
-          : HomeScreen(),
+          ? const LoginScreen()
+          : const HomeScreen(),
     );
   }
 }
