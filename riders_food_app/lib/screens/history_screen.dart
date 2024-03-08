@@ -18,8 +18,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: "Delivery History",
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: SimpleAppBar(
+          title: "Delivery History",
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(

@@ -18,8 +18,11 @@ class _NotYetDeliveredScreenState extends State<NotYetDeliveredScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: "Not Yet Delivered",
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: SimpleAppBar(
+          title: "Not Yet Delivered",
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(

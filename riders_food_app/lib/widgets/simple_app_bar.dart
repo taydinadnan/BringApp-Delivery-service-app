@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
-class SimpleAppBar extends StatelessWidget with PreferredSizeWidget {
+class SimpleAppBar extends StatelessWidget {
   final PreferredSizeWidget? bottom;
   String? title;
   SimpleAppBar({Key? key, this.bottom, this.title}) : super(key: key);

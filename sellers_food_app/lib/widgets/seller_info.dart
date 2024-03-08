@@ -123,7 +123,7 @@ class _SellerInfoState extends State<SellerInfo> {
                       Padding(
                         padding: const EdgeInsets.all(5),
                         child: Text(
-                          "\$" + sellerTotalEarnings.toString(),
+                          "\R" + sellerTotalEarnings.toString(),
                           style: GoogleFonts.lato(
                             textStyle: TextStyle(
                                 fontSize: 25,

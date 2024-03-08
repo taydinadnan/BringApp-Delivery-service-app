@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 // ignore: library_prefixes
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:users_food_app/authentication/login.dart';
+import '../authentication/login.dart';
 
 import '../global/global.dart';
 import '../screens/home_screen.dart';

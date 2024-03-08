@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color(0xFFFAC898),
+      backgroundColor: Color.fromARGB(255, 49, 47, 45),
       body: Stack(
         children: [
           // White Container top half
@@ -118,7 +118,7 @@ class _SplashScreenState extends State<SplashScreen>
                     opacity: animateCafeText ? 1 : 0,
                     duration: const Duration(seconds: 1),
                     child: Text(
-                      'Sellers App'.toUpperCase(),
+                      'Sellers App - Neomond'.toUpperCase(),
                       style: GoogleFonts.lato(
                         fontSize: 27,
                         fontWeight: FontWeight.bold,

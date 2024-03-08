@@ -17,8 +17,11 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: "My Orders",
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: SimpleAppBar(
+          title: "My Orders",
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(

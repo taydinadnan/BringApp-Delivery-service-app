@@ -56,8 +56,11 @@ class SaveAddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: "iFood",
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: SimpleAppBar(
+          title: "iFood",
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

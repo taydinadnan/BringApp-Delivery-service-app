@@ -2,107 +2,74 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../global/global.dart';
 
-//productIDs
-separateOrderItemIDs(orderIDs) {
-  List<String> separateItemIDsList = [], defaultItemList = [];
-  int i = 0;
+List<String> separateOrderItemIDs(List<String> orderIDs) {
+  List<String> separateItemIDsList = [];
 
-  defaultItemList = List<String>.from(orderIDs);
-
-  for (i; i < defaultItemList.length; i++) {
-    //this format => 34567654:7
-    String item = defaultItemList[i].toString();
-    var pos = item.lastIndexOf(":");
-
-    //to this format => 34567654
-    String getItemId = (pos != -1) ? item.substring(0, pos) : item;
-
+  for (String orderID in orderIDs) {
+    int pos = orderID.lastIndexOf(":");
+    String getItemId = (pos != -1) ? orderID.substring(0, pos) : orderID;
     separateItemIDsList.add(getItemId);
   }
 
   return separateItemIDsList;
 }
 
-//returns items id(specific keys without quantity)
-separateItemIDs() {
-  List<String> separateItemIDsList = [], defaultItemList = [];
-  int i = 0;
+List<String> separateItemIDs() {
+  List<String> separateItemIDsList = [];
+  List<String>? defaultItemList = sharedPreferences!.getStringList("userCart");
 
-  defaultItemList = sharedPreferences!.getStringList("userCart")!;
-
-  for (i; i < defaultItemList.length; i++) {
-    //this format => 34567654:7
-    String item = defaultItemList[i].toString();
-    var pos = item.lastIndexOf(":");
-
-    //to this format => 34567654
-    String getItemId = (pos != -1) ? item.substring(0, pos) : item;
-
-    separateItemIDsList.add(getItemId);
+  if (defaultItemList != null) {
+    for (String item in defaultItemList) {
+      int pos = item.lastIndexOf(":");
+      String getItemId = (pos != -1) ? item.substring(0, pos) : item;
+      separateItemIDsList.add(getItemId);
+    }
   }
 
   return separateItemIDsList;
 }
 
-separateOrderItemQuantities(orderIDs) {
+List<String> separateOrderItemQuantities(List<String> orderIDs) {
   List<String> separateItemQuantityList = [];
-  List<String> defaultItemList = [];
-  int i = 1;
 
-  defaultItemList = List<String>.from(orderIDs);
-
-  for (i; i < defaultItemList.length; i++) {
-    //this format => 34567654:7
-    String item = defaultItemList[i].toString();
-
-    //to this format => 7
-    List<String> listItemCharacters = item.split(":").toList();
-
-    //converting to int
-    var quanNumber = int.parse(listItemCharacters[1].toString());
-
+  for (int i = 1; i < orderIDs.length; i++) {
+    String item = orderIDs[i];
+    List<String> listItemCharacters = item.split(":");
+    int quanNumber = int.tryParse(listItemCharacters[1]) ?? 0;
     separateItemQuantityList.add(quanNumber.toString());
   }
 
   return separateItemQuantityList;
 }
 
-//returns items quantity without item id(specific keys)
-separateItemQuantities() {
+List<int> separateItemQuantities() {
   List<int> separateItemQuantityList = [];
-  List<String> defaultItemList = [];
-  int i = 1;
+  List<String>? defaultItemList = sharedPreferences!.getStringList("userCart");
 
-//get cart list and sing it
-  defaultItemList = sharedPreferences!.getStringList("userCart")!;
-
-  for (i; i < defaultItemList.length; i++) {
-    //this format => 34567654:7
-    String item = defaultItemList[i].toString();
-
-    //to this format => 7
-    List<String> listItemCharacters = item.split(":").toList();
-
-    //converting to int
-    var quanNumber = int.parse(listItemCharacters[1].toString());
-
-    separateItemQuantityList.add(quanNumber);
+  if (defaultItemList != null) {
+    for (int i = 1; i < defaultItemList.length; i++) {
+      String item = defaultItemList[i];
+      List<String> listItemCharacters = item.split(":");
+      int quanNumber = int.tryParse(listItemCharacters[1]) ?? 0;
+      separateItemQuantityList.add(quanNumber);
+    }
   }
 
   return separateItemQuantityList;
 }
 
-//Clear Cart
-clearCartNow(context) {
+void clearCartNow(context) {
   sharedPreferences!.setStringList("userCart", ['garbageValue']);
   List<String>? emptyList = sharedPreferences!.getStringList("userCart");
 
-  //first we update it in firestore
-  FirebaseFirestore.instance
-      .collection("users")
-      .doc(firebaseAuth.currentUser!.uid)
-      .update({"userCart": emptyList}).then((value) {
-    //then in local
-    sharedPreferences!.setStringList("userCart", emptyList!);
-  });
+  if (emptyList != null) {
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(firebaseAuth.currentUser!.uid)
+        .update({"userCart": emptyList}).then((value) {
+      sharedPreferences!.setStringList("userCart", emptyList);
+    }).catchError((error) {
+      // Handle error
+    });
+  }
 }
