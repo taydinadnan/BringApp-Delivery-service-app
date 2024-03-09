@@ -42,8 +42,11 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: sharedPreferences!.getString("name"),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: SimpleAppBar(
+          title: sharedPreferences!.getString("name"),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -211,10 +214,22 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   // Remove the incomplete code block
+// }

@@ -120,9 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: MediaQuery.of(context).size.height * .2,
                   //taking max width for the device
                   width: MediaQuery.of(context).size.width,
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
+                    children: [
                       SellerCarouselWidget(),
                       ItemsAvatarCarousel(),
                     ],

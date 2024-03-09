@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:users_food_app/assistantMethods/address_changer.dart';
-import 'package:users_food_app/screens/save_address_screen.dart';
-import 'package:users_food_app/widgets/design/address_design.dart';
-import 'package:users_food_app/widgets/progress_bar.dart';
-import 'package:users_food_app/widgets/simple_app_bar.dart';
+import '../assistantMethods/address_changer.dart';
+import '../screens/save_address_screen.dart';
+import '../widgets/design/address_design.dart';
+import '../widgets/progress_bar.dart';
+import '/widgets/simple_app_bar.dart';
 
 import '../global/global.dart';
 import '../models/address.dart';
@@ -29,8 +29,11 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: "Address",
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: SimpleAppBar(
+          title: "Address",
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: Text(

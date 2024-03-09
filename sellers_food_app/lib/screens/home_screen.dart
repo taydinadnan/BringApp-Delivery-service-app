@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
             end: FractionalOffset(5.0, -1.0),
             colors: [
               Color(0xFFFFFFFF),
-              Color(0xFFFAC898),
+              Color.fromARGB(255, 116, 112, 108),
             ],
           ),
         ),
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SliverAppBar(
               elevation: 1,
               pinned: true,
-              backgroundColor: const Color(0xFFFAC898),
+              backgroundColor: Color.fromARGB(255, 92, 89, 86),
               foregroundColor: Colors.black,
               expandedHeight: 50,
               flexibleSpace: Container(
@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     end: FractionalOffset(4.0, -1.0),
                     colors: [
                       Color(0xFFFFFFFF),
-                      Color(0xFFFAC898),
+                      Color.fromARGB(255, 66, 64, 62),
                     ],
                   ),
                 ),
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(8),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.amber,
+                        color: Color.fromARGB(255, 44, 43, 41),
                       ),
                       child: const Icon(Icons.add),
                     ),

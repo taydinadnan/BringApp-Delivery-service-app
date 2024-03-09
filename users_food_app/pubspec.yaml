@@ -34,10 +34,8 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  firebase_core: ^1.11.0
-  firebase_auth: ^3.3.5
-  cloud_firestore: ^3.1.6
-  firebase_storage: ^10.2.5
+
+  
   shared_preferences: ^2.0.11
   carousel_slider: ^4.0.0
   number_inc_dec: ^0.8.0
@@ -46,15 +44,22 @@ dependencies:
   flutter_carousel_slider: ^1.0.8
   url_launcher: ^6.0.18
   intl: ^0.17.0 
-  google_fonts: ^2.3.1
-  hexcolor: ^2.0.6
+
+  hexcolor: ^3.0.1
   lottie: ^1.2.2
 
 
   image_picker: ^0.8.4+4
-  geolocator: ^8.0.1
-  geocoding: ^2.0.1
+  geolocator: ^11.0.0
+  geocoding: ^2.2.0
   flutter_staggered_grid_view: ^0.4.1
+  cloud_firestore: ^4.15.6
+  firebase_auth: ^4.17.6
+  firebase_core: ^2.25.5
+  # google_fonts: ^6.2.0
+  firebase_storage: ^11.6.7
+  google_fonts: 6.1.0
+  firebase_analytics: ^10.8.8
 
 
 
@@ -73,6 +78,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter.
+
 flutter:
 
   # The following line ensures that the Material Icons font is

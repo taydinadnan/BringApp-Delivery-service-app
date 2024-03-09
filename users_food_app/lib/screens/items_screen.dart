@@ -23,7 +23,10 @@ class _ItemsScreenState extends State<ItemsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(sellerUID: widget.model!.sellerUID),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: MyAppBar(sellerUID: widget.model!.sellerUID),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(

@@ -34,22 +34,25 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  firebase_core: ^1.11.0
-  firebase_auth: ^3.3.5
-  cloud_firestore: ^3.1.6
-  firebase_storage: ^10.2.5
+  cloud_firestore: ^4.15.6
   shared_preferences: ^2.0.11
-  url_launcher: ^6.0.20
-  google_fonts: ^2.3.1
-  hexcolor: ^2.0.6
+  flutter_staggered_grid_view: ^0.4.1
+  fluttertoast: ^8.0.8
+  google_fonts: 4.0.4
+  hexcolor: ^3.0.1
   lottie: ^1.2.2
-
-
 
   image_picker: ^0.8.4+4
   geolocator: ^8.0.1
   geocoding: ^2.0.1
-
+  firebase_core: ^2.25.5
+  firebase_auth: ^4.17.6
+  firebase_storage: ^11.6.7
+  intl: ^0.19.0
+  url_launcher: ^6.2.5
+  file: ^7.0.0
+  win32: ^5.2.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -89,16 +92,20 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    # - family: Bebas
+      # fonts:
+      #   - asset: assets/fonts/BebasNeue-Regular.ttf
+    # - family: Lobster
+    #   fonts:
+    #     - asset: assets/fonts/Lobster-Regular.ttf
     - family: Signatra
       fonts:
         - asset: assets/fonts/Signatra.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+    # - family: VerelaRound
+    #   fonts:
+    #     - asset: assets/fonts/VarelaRound-Regular.ttf
+
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

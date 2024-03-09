@@ -18,8 +18,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: "Delivery History",
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: SimpleAppBar(
+          title: "Delivery History",
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -28,7 +31,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             end: FractionalOffset(5.0, -1.0),
             colors: [
               Color(0xFFFFFFFF),
-              Color(0xFFFAC898),
+              Color.fromARGB(255, 63, 61, 60),
             ],
           ),
         ),

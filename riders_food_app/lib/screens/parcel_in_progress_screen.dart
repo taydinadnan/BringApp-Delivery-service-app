@@ -18,8 +18,11 @@ class _ParcelInProgressScreenState extends State<ParcelInProgressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SimpleAppBar(
-        title: "Order in Progress",
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: SimpleAppBar(
+          title: "Order in Progress",
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(
