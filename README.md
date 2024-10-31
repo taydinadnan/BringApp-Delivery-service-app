@@ -1,5 +1,11 @@
 
 
+"Here's the latest update on my project; you can follow along at the link below:
+
+Building an Updated BringApp Food Vendor Clone App with Flutter."
+
+Let me know if you'd like any further adjustments!
+
 # Users APP
 
 
