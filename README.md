@@ -1,8 +1,9 @@
 
 
 "Here's the latest update on my project; you can follow along at the link below:
-
+https://medium.com/@adnanturgayaydin/building-an-updated-bringapp-food-vendor-clone-app-with-flutter-1-seller-app-setup-796607d0f0d1
 Building an Updated BringApp Food Vendor Clone App with Flutter."
+
 
 Let me know if you'd like any further adjustments!
 
